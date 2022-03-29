@@ -15,6 +15,7 @@ export class TeamMemberComponent implements OnInit, AfterViewInit {
   loadingIndicator: boolean = true;
   reorderable = true;
   teamMemberList : ITeamMember[] = [];
+
   // rows: ITeamMember[] = [{cod_matricula : 'T10592',nombre : "Richard"}, {cod_matricula : 'T10593',nombre : "Juan"}];
   // page: Page = new Page();
   // columns = [{ prop: 'cod_matricula', name: 'cod_matricula'},
