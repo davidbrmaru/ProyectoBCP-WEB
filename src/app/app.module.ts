@@ -48,6 +48,7 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -90,7 +91,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgxDatatableModule,
     ModalModule,
-    HttpClientModule 
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     {
