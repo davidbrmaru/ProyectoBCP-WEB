@@ -1,0 +1,237 @@
+<div class="fade-in">
+  <c-card class="mb-4">
+    <c-card-header>
+      Team Members
+    </c-card-header>
+    <c-card-body>
+      <c-row>
+        <c-col>
+          <button cButton
+                  class="me-1 btn btn-primary"
+                  (click)="openModal(template)">
+                  Nuevo 
+          </button>
+          <button cButton
+                  class="me-1 btn btn-secondary"
+                  >
+                  Exportar
+          </button>
+        </c-col>
+      </c-row>
+      <c-row>
+        <c-col>
+          <!-- <ngx-datatable   
+            [rows]="rows" 
+            [columns]="columns"
+            [count]="page.totalCount"
+                       [offset]="page.currentPage"
+                       [limit]="page.pageSize"
+                       >
+          </ngx-datatable> -->
+          <!-- <ng-template #indexTemplate let-row="row" let-rowIndex="rowIndex" let-value="value" let-i="index">
+            <strong>{{page.currentPageClient*page.pageSize + rowIndex+1}}</strong>
+          </ng-template> -->
+        </c-col>
+      </c-row>
+      <c-row>
+        <c-col>
+          <div style="overflow-x:auto;">
+            <table cTable>
+              <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Ap. Paterno</th>
+                <th scope="col">Ap. Materno</th>
+                <th scope="col">Chapter Lead</th>
+                <th scope="col">Tipo Proveedor</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Rol Insourcing</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Fecha Ingreso</th>
+                <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let teamMember of teamMemberList; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{teamMember.cod_matricula}}</td>
+                <td>{{teamMember.nombre}}</td>
+                <td>{{teamMember.apallido_paterno}}</td>
+                <td>{{teamMember.apellido_materno}}</td>
+                <td>{{teamMember.id_chapter_leader}}</td>
+                <td>{{teamMember.tipo_proveedor}}</td>
+                <td>{{teamMember.empresa}}</td>
+                <td>{{teamMember.rol}}</td>
+                <td>{{teamMember.rol_insourcing}}</td>
+                <td>{{teamMember.especialidad}}</td>
+                <td>{{teamMember.fec_ingresa}}</td>
+                <td><span class="glyphicon glyphicon-pencil"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </c-col>
+      </c-row>
+    </c-card-body>
+  </c-card>
+  
+  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button> -->
+
+  <!-- <div>
+    <h1>NGX DataTable</h1>
+</div>
+<div class="border-top" style="margin-bottom: 1rem !important;">
+</div>
+<div class="col-md-12 mb-3" style="margin-top: 10px;">
+    <ngx-datatable class="material container striped" [rows]="rows" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto">
+        <ngx-datatable-column name="#" [flexGrow]="0.5">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                {{(rowIndex + 1)}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Name" [flexGrow]="2">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row?.name | titlecase }}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Age" [flexGrow]="2">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row?.age}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Town" [flexGrow]="2">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row?.town}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Country" [flexGrow]="2">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row?.country}}
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div> -->
+
+<ng-template #template>
+   <div class="modal-header">
+      <h4 class="modal-title pull-left">Nuevo Team Member</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+         <span aria-hidden="true">×</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form cForm>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="nombre">Nombre</label>
+              <input class="form-control" id="nombre" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="apellidoPaterno">Apellido Paterno</label>
+              <input class="form-control" id="apellidoPaterno" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="apellidoMaterno">Apellido Materno</label>
+              <input class="form-control" id="apellidoMaterno" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="chapterLead">Chapter Lead</label>
+              <select class="form-select" id="chapterLead">
+                <option>--Seleccione--</option>
+                <option value="1">Chapter Lead 1</option>
+                <option value="2">Chapter Lead 2</option>
+                <option value="3">Chapter Lead 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="tipoProveedor">Tipo Proveedor</label>
+              <select class="form-select" id="tipoProveedor">
+                <option>--Seleccione--</option>
+                <option value="1">Proveedor 1</option>
+                <option value="2">Proveedor 2</option>
+                <option value="3">Proveedor 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="empresa">Empresa</label>
+              <select class="form-select" id="empresa">
+                <option>--Seleccione--</option>
+                <option value="1">Empresa 1</option>
+                <option value="2">Empresa 2</option>
+                <option value="3">Empresa 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="rol">Rol</label>
+              <select class="form-select" id="rol">
+                <option>--Seleccione--</option>
+                <option value="1">Rol 1</option>
+                <option value="2">Rol 2</option>
+                <option value="3">Rol 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="rolInsourcing">Rol Insourcing</label>
+              <select class="form-select" id="rolInsourcing">
+                <option>--Seleccione--</option>
+                <option value="1">Rol Insourcing 1</option>
+                <option value="2">Rol Insourcing 2</option>
+                <option value="3">Rol Insourcing 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="especialidad">Especialidad</label>
+              <select class="form-select" id="especialidad">
+                <option>--Seleccione--</option>
+                <option value="1">Especialidad 1</option>
+                <option value="2">Especialidad 2</option>
+                <option value="3">Especialidad 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="fechaIngreso">Fecha Ingreso</label>
+              <input class="form-control" id="fechaIngreso" type="date" />
+            </div>
+          </div>
+        </div>
+      </form>
+    
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="agregar()">Agregar</button>
+   </div>
+</ng-template>
+</div>
+

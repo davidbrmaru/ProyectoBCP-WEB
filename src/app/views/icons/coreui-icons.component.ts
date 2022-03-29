@@ -32,6 +32,7 @@ export class CoreUIIconsComponent implements OnInit {
       prefix = 'cif';
     }
     this.icons = this.getIconsView(prefix);
+    debugger;
   }
 
   toKebabCase(str: string) {
