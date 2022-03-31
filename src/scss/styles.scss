@@ -30,3 +30,12 @@ $enable-rtl: true;
 @import '~@swimlane/ngx-datatable/themes/dark.scss';
 @import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
 @import '~@swimlane/ngx-datatable/assets/icons.css';
+
+.alert{
+    position: relative;
+    color: red;
+    font-size: 13px;
+    border: 1px solid var(--cui-alert-border-color, transparent);
+    padding: 0;
+    margin: 0;
+}

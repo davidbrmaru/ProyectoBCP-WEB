@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -48,7 +48,8 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
+import { BasicComponent } from './components/modal/basic/basic.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -61,11 +62,13 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS],
+  declarations: [AppComponent, ...APP_CONTAINERS, BasicComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     AvatarModule,
     BreadcrumbModule,
     FooterModule,
@@ -92,7 +95,17 @@ const APP_CONTAINERS = [
     NgxDatatableModule,
     ModalModule,
     HttpClientModule,
-    FontAwesomeModule
+    SimpleModalModule.forRoot({ container: 'modal-container' }, {
+      ...defaultSimpleModalOptions, ...{
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        wrapperDefaultClasses: 'o-modal o-modal--fade',
+        wrapperClass: 'o-modal--fade-in',
+        animationDuration: 300,
+        autoFocus: true,
+        draggable: true
+      }
+    })
   ],
   providers: [
     {

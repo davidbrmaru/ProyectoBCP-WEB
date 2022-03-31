@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule, TableModule, ButtonModule } from '@coreui/angular';
+import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule, TableModule, ButtonModule, ModalModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 
-import { TeamMemberComponent, MantenimientosTeamMemberComponent } from './teammember.component';
+import { TeamMemberComponent } from './teammember.component';
 
 // Theme Routing
 import { MantenimientosRoutingModule } from './mantenimientos-routing.module';
+import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     MantenimientosRoutingModule,
     CardModule,
     GridModule,
@@ -20,11 +23,13 @@ import { MantenimientosRoutingModule } from './mantenimientos-routing.module';
     NavModule,
     TabsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    NgxDatatableModule,
+    ModalModule
   ],
   declarations: [
     TeamMemberComponent,
-    MantenimientosTeamMemberComponent,
+    //MantenimientosTeamMemberComponent,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

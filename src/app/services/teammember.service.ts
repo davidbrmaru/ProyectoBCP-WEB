@@ -15,12 +15,19 @@ export class TeamMemberService {
   
     getAllTeamMembers(): Observable<ITeamMember[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      debugger;
-      return this.http.get<ITeamMember[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');    
+      return this.http.get<ITeamMember[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
     }
   
-    // executeChange(input : IChangeInput): Observable<IChangeOutput> {
-    //   return this.http.post<IChangeOutput>(environment.apiUrl + '/api/coin/executeChange',input);
-    // }
+    saveTeamMember(input : ITeamMember): Observable<ITeamMember> {
+      return this.http.post<ITeamMember>(environment.apiUrl + '/api/.../..', input);
+    }
+
+    updateTeamMember(input : ITeamMember): Observable<ITeamMember> {
+      return this.http.put<ITeamMember>(environment.apiUrl + '/api/.../..', input);
+    }
+
+    deleteTeamMember(id : string): Observable<ITeamMember> {
+      return this.http.patch<ITeamMember>(environment.apiUrl + '/api/.../..', id);
+    }
   
   }

@@ -6,89 +6,117 @@ import { TeamMemberService } from 'src/app/services/teammember.service';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
    templateUrl: 'teammember.component.html',
 })
-export class TeamMemberComponent implements OnInit, AfterViewInit {
+export class TeamMemberComponent implements OnInit {
 
-  loadingIndicator: boolean = true;
+  loadingIndicator: boolean;
   reorderable = true;
   teamMemberList : ITeamMember[] = [];
-
-  // rows: ITeamMember[] = [{cod_matricula : 'T10592',nombre : "Richard"}, {cod_matricula : 'T10593',nombre : "Juan"}];
-  // page: Page = new Page();
-  // columns = [{ prop: 'cod_matricula', name: 'cod_matricula'},
-  // { prop: 'nombre', name: 'nombre'}]
+  nombre :string;
+  columns = [{prop:'' , name:''}];
+  teammember : ITeamMember;
+  page: Page = new Page();
+  NewEdit:string;
+  @ViewChild('registerForm') registerForm: NgForm;
 
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
-    private teamMemberService: TeamMemberService
+    private teamMemberService: TeamMemberService,
+    private SimpleModalService: SimpleModalService
   ) {
-    // this.page.pageSize = 10;
-    //     this.page.currentPage = 1;
+    this.page.pageSize = 10;
+    this.page.currentPage = 1;
+    this.page.totalCount = 50;
   }
 
-  // setPage(pageInfo) {
-  //   this.page.currentPage = pageInfo.offset;
-  // }
+  setPage(pageInfo : any) {
+    this.page.currentPage = pageInfo.offset;
+    this.cargarTeamMembers();
+  }
  
   modalRef: BsModalRef;
 
-  openModal(template: TemplateRef<any>) {
-     this.modalRef = this.modalService.show(template);
+  openModalNewEdit(template: TemplateRef<any>, teamMember?: ITeamMember) {
+    this.teammember = new ITeamMember;
+    this.NewEdit = "Nuevo";
+    if(teamMember != undefined){
+      this.NewEdit = "Editar";
+      this.teammember = teamMember;
+    }
+    this.modalService.show(template);
   }
 
-  agregar(){
+  cerrarModal(){
+    this.modalService.hide();
+  }
+
+  agregarTeamMember(a: NgForm){
+    this.registerForm.value;
+    debugger;
+    
+      this.teamMemberService.saveTeamMember(this.teammember).subscribe(
+        res => {
+          this.cerrarModal();
+          this.cargarTeamMembers();
+        },
+        err =>{
+          this.cerrarModal();
+        }
+      )
     
   }
 
-  nuevo(){
-    alert("Hola");
-  }
-
-  ngOnInit(): void {
-    debugger;
-    this.teamMemberService.getAllTeamMembers().subscribe(
+  editarTeamMember(item: ITeamMember){
+    this.teamMemberService.updateTeamMember(item).subscribe(
       res => {
-        debugger;
-        this.teamMemberList = res;
+        this.cerrarModal();
+        this.cargarTeamMembers();
       },
       err =>{
-        debugger;
+        this.cerrarModal();
       }
     )
   }
 
-  ngAfterViewInit(): void {
-    
+  openModalDelete(template: TemplateRef<any>, teamMember: ITeamMember){
+    debugger;
+    this.teammember = teamMember; 
+    this.modalService.show(template);
   }
-}
 
-@Component({
-  selector: 'app-mantenimientos-teammember',
-  template: `
-    <c-col xl='2' md='4' sm='6' xs='12' class='my-4 ms-4'>
-      <div [ngClass]='colorClasses' style='padding-top: 75%;'></div>
-      <ng-content></ng-content>
-    </c-col>
-  `
-})
-export class MantenimientosTeamMemberComponent implements OnInit {
-  @Input() color = '';
-
-  public colorClasses = {
-    'theme-color w-75 rounded mb-3': true
-  };
-
-  @HostBinding('style.display') display = 'contents';
+  eliminarTeamMember(){
+    this.teamMemberService.deleteTeamMember(this.teammember.id).subscribe(
+      res => {
+        this.cerrarModal();
+        this.cargarTeamMembers();
+      },
+      err =>{
+        this.cerrarModal();
+      }
+    )
+  }
 
   ngOnInit(): void {
-    this.colorClasses = {
-      ...this.colorClasses,
-      [`bg-${this.color}`]: !!this.color
-    };
+    this.cargarTeamMembers();
+  }
+
+  cargarTeamMembers(){
+    this.loadingIndicator = true;
+    this.teamMemberService.getAllTeamMembers().subscribe(
+      res => {
+        this.teamMemberList = res;
+        this.loadingIndicator = false;
+      },
+      err =>{
+        this.loadingIndicator = false;
+      }
+    )
   }
 }
-
