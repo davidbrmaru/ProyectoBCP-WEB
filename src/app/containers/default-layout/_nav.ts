@@ -20,6 +20,21 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-drop' }
   },
   {
+    name: 'Chapter Area Lead',
+    url: '/mantenimientos/chapterarealead',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    name: 'Chapter Lead',
+    url: '/mantenimientos/chapterlead',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    name: 'Application',
+    url: '/mantenimientos/application',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
     title: true,
     name: 'Theme'
   },

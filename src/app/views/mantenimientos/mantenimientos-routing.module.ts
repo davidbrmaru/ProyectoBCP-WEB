@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TeamMemberComponent } from './teammember.component';
+import { ChapterAreaLeadComponent } from './chapterarealead.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,13 @@ const routes: Routes = [
       {
         path: 'teammember',
         component: TeamMemberComponent,
+        data: {
+          title: 'TeamMember',
+        },
+      },
+      {
+        path: 'chapterarealead',
+        component: ChapterAreaLeadComponent,
         data: {
           title: 'TeamMember',
         },

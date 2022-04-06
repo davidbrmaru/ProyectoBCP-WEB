@@ -2,25 +2,25 @@ import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ITeamMember } from 'src/app/models/teammember.model';
-import { TeamMemberService } from 'src/app/services/teammember.service';
+import { ChapterAreaLeadService } from 'src/app/services/chapterarealead.service';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
+import { IChapterAreaLead } from 'src/app/models/chapterarealead.model';
 
 @Component({
-   templateUrl: 'teammember.component.html',
+   templateUrl: 'chapterarealead.component.html',
 })
-export class TeamMemberComponent implements OnInit {
+export class ChapterAreaLeadComponent implements OnInit {
 
   loadingIndicator: boolean;
   reorderable = true;
-  teamMemberList : ITeamMember[] = [];
+  chapterAreaLeadList : IChapterAreaLead[] = [];
   nombre :string;
-  columns = [{prop:'' , name:''}];
-  teammember : ITeamMember;
+  chapterAreaLead : IChapterAreaLead;
   page: Page = new Page();
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
@@ -28,7 +28,7 @@ export class TeamMemberComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
-    private teamMemberService: TeamMemberService,
+    private chapterAreaLeadService: ChapterAreaLeadService,
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
@@ -38,17 +38,17 @@ export class TeamMemberComponent implements OnInit {
 
   setPage(pageInfo : any) {
     this.page.currentPage = pageInfo.offset;
-    this.cargarTeamMembers();
+    this.cargarChapterAreaLeads();
   }
  
   modalRef: BsModalRef;
 
-  openModalNewEdit(template: TemplateRef<any>, teamMember?: ITeamMember) {
-    this.teammember = new ITeamMember;
+  openModalNewEdit(template: TemplateRef<any>, chapterAreaLead?: IChapterAreaLead) {
+    this.chapterAreaLead = new IChapterAreaLead;
     this.NewEdit = "Nuevo";
-    if(teamMember != undefined){
+    if(chapterAreaLead != undefined){
       this.NewEdit = "Editar";
-      this.teammember = teamMember;
+      this.chapterAreaLead = chapterAreaLead;
     }
     this.modalService.show(template);
   }
@@ -57,11 +57,11 @@ export class TeamMemberComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarTeamMember(a: NgForm){    
-      this.teamMemberService.saveTeamMember(this.teammember).subscribe(
+  agregarChapterAreaLead(a: NgForm){    
+      this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarTeamMembers();
+          this.cargarChapterAreaLeads();
         },
         err =>{
           this.cerrarModal();
@@ -70,11 +70,11 @@ export class TeamMemberComponent implements OnInit {
     
   }
 
-  editarTeamMember(item: ITeamMember){
-    this.teamMemberService.updateTeamMember(item).subscribe(
+  editarChapterAreaLead(item: IChapterAreaLead){
+    this.chapterAreaLeadService.updateChapterAreaLead(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarTeamMembers();
+        this.cargarChapterAreaLeads();
       },
       err =>{
         this.cerrarModal();
@@ -82,17 +82,17 @@ export class TeamMemberComponent implements OnInit {
     )
   }
 
-  openModalDelete(template: TemplateRef<any>, teamMember: ITeamMember){
+  openModalDelete(template: TemplateRef<any>, chapterAreaLead: IChapterAreaLead){
     debugger;
-    this.teammember = teamMember; 
+    this.chapterAreaLead = chapterAreaLead; 
     this.modalService.show(template);
   }
 
-  eliminarTeamMember(){
-    this.teamMemberService.deleteTeamMember(this.teammember.id).subscribe(
+  eliminarChapterAreaLead(){
+    this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead.id).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarTeamMembers();
+        this.cargarChapterAreaLeads();
       },
       err =>{
         this.cerrarModal();
@@ -101,14 +101,14 @@ export class TeamMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarTeamMembers();
+    this.cargarChapterAreaLeads();
   }
 
-  cargarTeamMembers(){
+  cargarChapterAreaLeads(){
     this.loadingIndicator = true;
-    this.teamMemberService.getAllTeamMembers().subscribe(
+    this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
       res => {
-        this.teamMemberList = res;
+        this.chapterAreaLeadList = res;
         this.loadingIndicator = false;
       },
       err =>{
