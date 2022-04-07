@@ -60,10 +60,12 @@ export class ChapterAreaLeadComponent implements OnInit {
   agregarChapterAreaLead(a: NgForm){    
       this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
+          debugger;
           this.cerrarModal();
           this.cargarChapterAreaLeads();
         },
-        err =>{
+        err => {
+          debugger;
           this.cerrarModal();
         }
       )
@@ -108,10 +110,12 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.loadingIndicator = true;
     this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
       res => {
+        
         this.chapterAreaLeadList = res;
         this.loadingIndicator = false;
       },
-      err =>{
+      err => {
+        
         this.loadingIndicator = false;
       }
     )

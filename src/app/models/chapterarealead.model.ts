@@ -1,12 +1,13 @@
 export class IChapterAreaLead {
     constructor () {}
     id:number;
-    cod_matricula: number;
+    codMatricula: string;
     nombres: string;
-    apellido_paterno: string;
-    apellido_materno: string;
-    fec_ingreso: Date;
-    fec_actualiza: Date;
-    usuario_actualiza: string;
-    flg_activo: boolean;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    fecIngreso: Date;
+    usuarioIngresa: string;
+    fecActualiza: Date;
+    usuarioActualiza: string;
+    flgActivo: number;
 }
