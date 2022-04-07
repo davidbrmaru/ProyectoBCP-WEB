@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TeamMemberComponent } from './teammember.component';
 import { ChapterAreaLeadComponent } from './chapterarealead.component';
+import { ChapterLeadComponent } from './chapterlead.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,14 @@ const routes: Routes = [
         path: 'chapterarealead',
         component: ChapterAreaLeadComponent,
         data: {
-          title: 'TeamMember',
+          title: 'ChapterAreaLead',
+        },
+      },
+      {
+        path: 'chapterlead',
+        component: ChapterLeadComponent,
+        data: {
+          title: 'ChapterLead',
         },
       },
     ],
