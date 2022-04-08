@@ -31,9 +31,9 @@ export class ChapterAreaLeadComponent implements OnInit {
     private chapterAreaLeadService: ChapterAreaLeadService,
     private SimpleModalService: SimpleModalService
   ) {
-    this.page.pageSize = 10;
+    this.page.pageSize = 200;
     this.page.currentPage = 1;
-    this.page.totalCount = 50;
+    this.page.totalCount = 200;
   }
 
   setPage(pageInfo : any) {
@@ -57,8 +57,10 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarChapterAreaLead(a: NgForm){    
-      this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
+  agregarChapterAreaLead(a: NgForm) {
+    debugger;
+    this.chapterAreaLead.usuarioIngresa = "S61121";
+    this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
           debugger;
           this.cerrarModal();

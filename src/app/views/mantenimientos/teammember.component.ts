@@ -57,7 +57,8 @@ export class TeamMemberComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarTeamMember(a: NgForm){    
+  agregarTeamMember(a: NgForm) {
+    debugger;
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
         res => {
           this.cerrarModal();
