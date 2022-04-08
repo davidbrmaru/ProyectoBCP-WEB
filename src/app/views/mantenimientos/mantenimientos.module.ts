@@ -7,6 +7,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { TeamMemberComponent } from './teammember.component';
 import { ChapterAreaLeadComponent } from './chapterarealead.component';
 import { ChapterLeadComponent } from './chapterlead.component';
+import { ApplicationComponent } from './application.component';
 
 // Theme Routing
 import { MantenimientosRoutingModule } from './mantenimientos-routing.module';
@@ -32,7 +33,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   declarations: [
     TeamMemberComponent,
     ChapterAreaLeadComponent,
-    ChapterLeadComponent
+    ChapterLeadComponent,
+    ApplicationComponent
     //MantenimientosTeamMemberComponent,
   ],
   schemas:[

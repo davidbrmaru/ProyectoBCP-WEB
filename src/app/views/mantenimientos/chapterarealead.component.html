@@ -81,58 +81,57 @@
     </c-card>
   
     <ng-template #templateNewEdit>
-      <div class="modal-header">
-          <h4 class="modal-title pull-left">{{NewEdit}} Chapter Area Lead</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
-            <span aria-hidden="true">×</span>
-          </button>
-      </div>
-      <div class="modal-body">
-          <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterAreaLead(registerForm)" novalidate>
-            <div class="row">
-              <div class="col-6">
-                <div class="mb-1">
-                  <label cLabel for="matricula">Matricula</label>
-                  
-                </div>
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterAreaLead(registerForm)" novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">{{NewEdit}} Chapter Area Lead</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+              <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="matricula">Matricula</label>
+                
               </div>
-              <div class="col-6">
-                <div class="mb-1">
-                  <label cLabel for="nombre">Nombre</label>
-                  <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterAreaLead.nombres" name="nombre" #nombre="ngModel" required />
-                  <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                    <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
-                  </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="nombre">Nombre</label>
+                <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterAreaLead.nombres" name="nombre" #nombre="ngModel" required />
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+                  <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="mb-1">
-                  <label cLabel for="apellidoPaterno">Apellido Paterno</label>
-                  <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoPaterno" name="apellido_paterno" #apellido_paterno="ngModel" required />
-                  <div *ngIf="apellido_paterno.invalid && (apellido_paterno.dirty || apellido_paterno.touched)" class="alert">
-                    <div *ngIf="apellido_paterno.errors?.['required']">Apellido paterno es obligatorio.</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="mb-1">
-                  <label cLabel for="apellidoMaterno">Apellido Materno</label>
-                  <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoMaterno" name="apellido_materno" #apellido_materno="ngModel" required />
-                  <div *ngIf="apellido_materno.invalid && (apellido_materno.dirty || apellido_materno.touched)" class="alert">
-                    <div *ngIf="apellido_materno.errors?.['required']">Apellido materno es obligatorio.</div>
-                  </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="apellidoPaterno">Apellido Paterno</label>
+                <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoPaterno" name="apellido_paterno" #apellido_paterno="ngModel" required />
+                <div *ngIf="apellido_paterno.invalid && (apellido_paterno.dirty || apellido_paterno.touched)" class="alert">
+                  <div *ngIf="apellido_paterno.errors?.['required']">Apellido paterno es obligatorio.</div>
                 </div>
               </div>
             </div>
-          </form>
-        
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
-      </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="apellidoMaterno">Apellido Materno</label>
+                <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoMaterno" name="apellido_materno" #apellido_materno="ngModel" required />
+                <div *ngIf="apellido_materno.invalid && (apellido_materno.dirty || apellido_materno.touched)" class="alert">
+                  <div *ngIf="apellido_materno.errors?.['required']">Apellido materno es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+        </div>
+      </form>
     </ng-template>
   
     <ng-template #templateDelete>

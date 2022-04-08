@@ -2,25 +2,25 @@ import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ITeamMember } from 'src/app/models/teammember.model';
-import { ChapterLeadService } from 'src/app/services/chapterlead.service';
+import { ApplicationService } from 'src/app/services/application.service';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
-import { IChapterLead } from 'src/app/models/chapterlead.model';
+import { IApplication } from 'src/app/models/application.model';
 
 @Component({
-   templateUrl: 'chapterlead.component.html',
+   templateUrl: 'application.component.html',
 })
-export class ChapterLeadComponent implements OnInit {
+export class ApplicationComponent implements OnInit {
 
   loadingIndicator: boolean;
   reorderable = true;
-  chapterLeadList : IChapterLead[] = [];
+  applicationList : IApplication[] = [];
   nombre :string;
-  chapterLead : IChapterLead;
+  application : IApplication;
   page: Page = new Page();
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
@@ -28,7 +28,7 @@ export class ChapterLeadComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
-    private chapterLeadService: ChapterLeadService,
+    private applicationService: ApplicationService,
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
@@ -38,17 +38,17 @@ export class ChapterLeadComponent implements OnInit {
 
   setPage(pageInfo : any) {
     this.page.currentPage = pageInfo.offset;
-    this.cargarChapterLeads();
+    this.cargarApplications();
   }
  
   modalRef: BsModalRef;
 
-  openModalNewEdit(template: TemplateRef<any>, chapterAreaLead?: IChapterLead) {
-    this.chapterLead = new IChapterLead;
+  openModalNewEdit(template: TemplateRef<any>, application?: IApplication) {
+    this.application = new IApplication;
     this.NewEdit = "Nuevo";
-    if(chapterAreaLead != undefined){
+    if(application != undefined){
       this.NewEdit = "Editar";
-      this.chapterLead = chapterAreaLead;
+      this.application = application;
     }
     this.modalService.show(template);
   }
@@ -57,11 +57,11 @@ export class ChapterLeadComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarChapterLead(a: NgForm){  
-      this.chapterLeadService.saveChapterLead(this.chapterLead).subscribe(
+  agregarApplication(a: NgForm){    
+      this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarChapterLeads();
+          this.cargarApplications();
         },
         err =>{
           this.cerrarModal();
@@ -70,11 +70,11 @@ export class ChapterLeadComponent implements OnInit {
     
   }
 
-  editarChapterLead(item: IChapterLead){
-    this.chapterLeadService.updateChapterLead(item).subscribe(
+  editarApplication(item: IApplication){
+    this.applicationService.updateApplication(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterLeads();
+        this.cargarApplications();
       },
       err =>{
         this.cerrarModal();
@@ -82,17 +82,17 @@ export class ChapterLeadComponent implements OnInit {
     )
   }
 
-  openModalDelete(template: TemplateRef<any>, chapterLead: IChapterLead){
+  openModalDelete(template: TemplateRef<any>, application: IApplication){
     debugger;
-    this.chapterLead = chapterLead; 
+    this.application = application; 
     this.modalService.show(template);
   }
 
-  eliminarChapterLead(){
-    this.chapterLeadService.deleteChapterLead(this.chapterLead.id).subscribe(
+  eliminarApplication(){
+    this.applicationService.deleteApplication(this.application.id).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterLeads();
+        this.cargarApplications();
       },
       err =>{
         this.cerrarModal();
@@ -101,14 +101,14 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarChapterLeads();
+    this.cargarApplications();
   }
 
-  cargarChapterLeads(){
+  cargarApplications(){
     this.loadingIndicator = true;
-    this.chapterLeadService.getAllChapterLeads().subscribe(
+    this.applicationService.getAllApplications().subscribe(
       res => {
-        this.chapterLeadList = res;
+        this.applicationList = res;
         this.loadingIndicator = false;
       },
       err =>{

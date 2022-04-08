@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TeamMemberComponent } from './teammember.component';
 import { ChapterAreaLeadComponent } from './chapterarealead.component';
 import { ChapterLeadComponent } from './chapterlead.component';
+import { ApplicationComponent } from './application.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,13 @@ const routes: Routes = [
         component: ChapterLeadComponent,
         data: {
           title: 'ChapterLead',
+        },
+      },
+      {
+        path: 'application',
+        component: ApplicationComponent,
+        data: {
+          title: 'Application',
         },
       },
     ],
