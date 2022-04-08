@@ -93,7 +93,10 @@
             <div class="col-6">
               <div class="mb-1">
                 <label cLabel for="matricula">Matricula</label>
-                
+                <input class="form-control" id="matricula" type="text" [(ngModel)]="chapterAreaLead.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
+                  <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
+                    <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+                  </div>
               </div>
             </div>
             <div class="col-6">
