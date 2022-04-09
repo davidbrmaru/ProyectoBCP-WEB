@@ -3,11 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\models",
-    "\\src\\app\\services",
-    "\\src\\app\\views",
+    "\\src\\app\\containers",
+    "\\src\\app\\containers\\default-layout",
     "\\src\\app\\views\\mantenimientos"
   ],
-  "SelectedNode": "\\src\\app\\views\\mantenimientos\\teammember.component.ts",
+  "SelectedNode": "\\src\\app\\containers\\default-layout\\_nav.ts",
   "PreviewInSolutionExplorer": false
 }
