@@ -5,6 +5,8 @@ import { TeamMemberComponent } from './teammember.component';
 import { ChapterAreaLeadComponent } from './chapterarealead.component';
 import { ChapterLeadComponent } from './chapterlead.component';
 import { ApplicationComponent } from './application.component';
+import { TribeComponent } from './tribe.component';
+import { SquadComponent } from './squad.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,20 @@ const routes: Routes = [
         component: ApplicationComponent,
         data: {
           title: 'Application',
+        },
+      },
+      {
+        path: 'tribe',
+        component: TribeComponent,
+        data: {
+          title: 'Tribe',
+        },
+      },
+      {
+        path: 'squad',
+        component: SquadComponent,
+        data: {
+          title: 'Squad',
         },
       },
     ],

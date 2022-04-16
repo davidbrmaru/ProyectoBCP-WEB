@@ -35,6 +35,16 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-drop' }
   },
   {
+    name: 'Tribe',
+    url: '/mantenimientos/tribe',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    name: 'Squad',
+    url: '/mantenimientos/squad',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
     title: true,
     name: 'Theme'
   },
