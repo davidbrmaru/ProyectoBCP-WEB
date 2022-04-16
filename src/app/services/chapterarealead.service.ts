@@ -15,19 +15,19 @@ export class ChapterAreaLeadService {
   
     getAllChapterAreaLeads(): Observable<IChapterAreaLead[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IChapterAreaLead[]>('https://localhost:5001/api/ChapterArea');
+      return this.http.get<IChapterAreaLead[]>('https://localhost:44389/api/ChapterArea');
     }
   
     saveChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {
-      return this.http.post<IChapterAreaLead>('https://localhost:5001/api/ChapterArea', input);
+      return this.http.post<IChapterAreaLead>('https://localhost:44389/api/ChapterArea', input);
     }
 
     updateChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {
-      return this.http.put<IChapterAreaLead>(environment.apiUrl + 'https://localhost:5001/api/ChapterArea', input);
+      return this.http.put<IChapterAreaLead>(environment.apiUrl + 'https://localhost:44389/api/ChapterArea', input);
     }
 
     deleteChapterAreaLead(id : number): Observable<IChapterAreaLead> {
-      return this.http.patch<IChapterAreaLead>(environment.apiUrl + 'https://localhost:5001/api/ChapterArea', id);
+      return this.http.patch<IChapterAreaLead>(environment.apiUrl + 'https://localhost:44389/api/ChapterArea', id);
     }
   
   }

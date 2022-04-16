@@ -15,7 +15,7 @@ export class ApplicationService {
   
     getAllApplications(): Observable<IApplication[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IApplication[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
+      return this.http.get<IApplication[]>('https://localhost:44389/api/Application');
     }
   
     saveApplication(input : IApplication): Observable<IApplication> {

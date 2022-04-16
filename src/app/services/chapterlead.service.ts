@@ -15,7 +15,7 @@ export class ChapterLeadService {
   
     getAllChapterLeads(): Observable<IChapterLead[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IChapterLead[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
+      return this.http.get<IChapterLead[]>('https://localhost:44389/api/Chapter');
     }
   
     saveChapterLead(input : IChapterLead): Observable<IChapterLead> {

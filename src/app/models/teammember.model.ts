@@ -1,18 +1,19 @@
 export class ITeamMember {
     constructor () {}
-    cod_matricula: number;
+    codMatricula: number;
     nombre: string;
-    apallido_paterno: string;
-    apellido_materno: string;
-    id_chapter_leader: number;
-    tipo_proveedor: number;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    idChapterLeader: number;
+    tipoProveedor: number;
     empresa: string;
     rol: string;
-    rol_insourcing: string;
+    rolInsourcing: string;
     especialidad: string;
-    fec_ingresa: Date;
-    fec_actualiza: Date;
-    usuario_actualiza: string;
-    flg_activo: boolean;
-    id: string;
+    fecIngreso: Date;
+    usuarioIngresa: string;
+    fecActualiza: Date;
+    usuarioActualiza: string;
+    flgActivo: boolean;
+    id:number;
 }

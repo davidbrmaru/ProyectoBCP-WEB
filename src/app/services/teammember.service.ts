@@ -15,7 +15,7 @@ export class TeamMemberService {
   
     getAllTeamMembers(): Observable<ITeamMember[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ITeamMember[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
+      return this.http.get<ITeamMember[]>('https://localhost:44389/api/TeamMember');
     }
   
     saveTeamMember(input : ITeamMember): Observable<ITeamMember> {
@@ -26,7 +26,7 @@ export class TeamMemberService {
       return this.http.put<ITeamMember>(environment.apiUrl + '/api/.../..', input);
     }
 
-    deleteTeamMember(id : string): Observable<ITeamMember> {
+    deleteTeamMember(id: number): Observable<ITeamMember> {
       return this.http.patch<ITeamMember>(environment.apiUrl + '/api/.../..', id);
     }
   
