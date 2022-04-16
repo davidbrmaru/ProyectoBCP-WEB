@@ -15,7 +15,7 @@ export class TribeService {
   
     getAllTribes(): Observable<ITribe[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ITribe[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
+      return this.http.get<ITribe[]>(environment.apiUrl + '/api/.../..');
     }
   
     saveTribe(input : ITribe): Observable<ITribe> {

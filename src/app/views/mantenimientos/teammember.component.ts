@@ -58,7 +58,7 @@ export class TeamMemberComponent implements OnInit {
   }
 
   agregarTeamMember(a: NgForm) {
-    debugger;
+    if(this.NewEdit == "Nuevo"){
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
         res => {
           this.cerrarModal();
@@ -68,7 +68,10 @@ export class TeamMemberComponent implements OnInit {
           this.cerrarModal();
         }
       )
-    
+    }
+    else{
+      this.editarTeamMember(this.teammember);
+    }
   }
 
   editarTeamMember(item: ITeamMember){

@@ -44,6 +44,7 @@ export class TribeComponent implements OnInit {
   modalRef: BsModalRef;
 
   openModalNewEdit(template: TemplateRef<any>, tribe?: ITribe) {
+    debugger;
     this.tribe = new ITribe;
     this.NewEdit = "Nuevo";
     if(tribe != undefined){
@@ -58,7 +59,8 @@ export class TribeComponent implements OnInit {
   }
 
   agregarTribe(a: NgForm) {
-    debugger;
+    if(this.NewEdit == "Nuevo"){
+      debugger;
       this.tribeService.saveTribe(this.tribe).subscribe(
         res => {
           this.cerrarModal();
@@ -68,6 +70,11 @@ export class TribeComponent implements OnInit {
           this.cerrarModal();
         }
       )
+    }else{
+      debugger;
+      this.editarTeamMember(this.tribe);
+    }
+      
     
   }
 

@@ -15,7 +15,7 @@ export class ApplicationService {
   
     getAllApplications(): Observable<IApplication[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IApplication[]>('https://localhost:44389/api/Application');
+      return this.http.get<IApplication[]>(environment.apiUrl + 'api/Application');
     }
   
     saveApplication(input : IApplication): Observable<IApplication> {

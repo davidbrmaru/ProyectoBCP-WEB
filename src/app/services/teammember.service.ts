@@ -15,7 +15,7 @@ export class TeamMemberService {
   
     getAllTeamMembers(): Observable<ITeamMember[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ITeamMember[]>('https://localhost:44389/api/TeamMember');
+      return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/.../..');
     }
   
     saveTeamMember(input : ITeamMember): Observable<ITeamMember> {

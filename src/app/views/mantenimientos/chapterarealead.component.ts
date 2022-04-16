@@ -58,7 +58,7 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   agregarChapterAreaLead(a: NgForm) {
-    debugger;
+    if(this.NewEdit == "Nuevo"){
     this.chapterAreaLead.usuarioIngresa = "S61121";
     this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
@@ -71,7 +71,10 @@ export class ChapterAreaLeadComponent implements OnInit {
           this.cerrarModal();
         }
       )
-    
+    }
+    else{
+      this.editarChapterAreaLead(this.chapterAreaLead);
+    }
   }
 
   editarChapterAreaLead(item: IChapterAreaLead){

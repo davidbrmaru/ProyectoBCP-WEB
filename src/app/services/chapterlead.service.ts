@@ -15,7 +15,7 @@ export class ChapterLeadService {
   
     getAllChapterLeads(): Observable<IChapterLead[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IChapterLead[]>('https://localhost:44389/api/Chapter');
+      return this.http.get<IChapterLead[]>(environment.apiUrl + 'api/Chapter');
     }
   
     saveChapterLead(input : IChapterLead): Observable<IChapterLead> {

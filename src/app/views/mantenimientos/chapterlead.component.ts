@@ -57,7 +57,8 @@ export class ChapterLeadComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarChapterLead(a: NgForm){  
+  agregarChapterLead(a: NgForm){ 
+    if(this.NewEdit == "Nuevo"){ 
       this.chapterLeadService.saveChapterLead(this.chapterLead).subscribe(
         res => {
           this.cerrarModal();
@@ -67,7 +68,10 @@ export class ChapterLeadComponent implements OnInit {
           this.cerrarModal();
         }
       )
-    
+    }
+    else{
+      this.editarChapterLead(this.chapterLead);
+    }
   }
 
   editarChapterLead(item: IChapterLead){

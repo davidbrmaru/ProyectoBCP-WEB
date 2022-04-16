@@ -57,7 +57,8 @@ export class ApplicationComponent implements OnInit {
     this.modalService.hide();
   }
 
-  agregarApplication(a: NgForm){    
+  agregarApplication(a: NgForm){ 
+    if(this.NewEdit == "Nuevo"){   
       this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
@@ -67,7 +68,10 @@ export class ApplicationComponent implements OnInit {
           this.cerrarModal();
         }
       )
-    
+    }
+    else{
+      this.editarApplication(this.application);
+    }
   }
 
   editarApplication(item: IApplication){

@@ -15,7 +15,7 @@ export class SquadService {
   
     getAllSquads(): Observable<ISquad[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ISquad[]>('https://624244c9b6734894c14ef409.mockapi.io/api/v1/team_menber');
+      return this.http.get<ISquad[]>(environment.apiUrl + '/api/.../..');
     }
   
     saveSquad(input : ISquad): Observable<ISquad> {
