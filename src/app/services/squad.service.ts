@@ -15,19 +15,19 @@ export class SquadService {
   
     getAllSquads(): Observable<ISquad[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ISquad[]>(environment.apiUrl + '/api/.../..');
+      return this.http.get<ISquad[]>(environment.apiUrl + '/api/Squad');
     }
   
     saveSquad(input : ISquad): Observable<ISquad> {
-      return this.http.post<ISquad>(environment.apiUrl + '/api/.../..', input);
+      return this.http.post<ISquad>(environment.apiUrl + '/api/Squad', input);
     }
 
     updateSquad(input : ISquad): Observable<ISquad> {
-      return this.http.put<ISquad>(environment.apiUrl + '/api/.../..', input);
+      return this.http.put<ISquad>(environment.apiUrl + '/api/Squad', input);
     }
 
-    deleteSquad(id : string): Observable<ISquad> {
-      return this.http.patch<ISquad>(environment.apiUrl + '/api/.../..', id);
+    deleteSquad(input : ISquad): Observable<ISquad> {
+      return this.http.patch<ISquad>(environment.apiUrl + '/api/Squad/' + input.id, input);
     }
   
   }

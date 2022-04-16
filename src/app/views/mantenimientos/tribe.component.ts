@@ -97,7 +97,8 @@ export class TribeComponent implements OnInit {
   }
 
   eliminarTribe(){
-    this.tribeService.deleteTribe(this.tribe.id).subscribe(
+    this.tribe.usuario_actualiza = "T16587";
+    this.tribeService.deleteTribe(this.tribe).subscribe(
       res => {
         this.cerrarModal();
         this.cargarTribes();

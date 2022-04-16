@@ -93,7 +93,8 @@ export class SquadComponent implements OnInit {
   }
 
   eliminarSquad(){
-    this.squadService.deleteSquad(this.squad.id).subscribe(
+    this.squad.usuario_actualiza = "T16587";
+    this.squadService.deleteSquad(this.squad).subscribe(
       res => {
         this.cerrarModal();
         this.cargarSquads();

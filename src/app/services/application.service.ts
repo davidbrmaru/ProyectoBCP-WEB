@@ -14,20 +14,19 @@ export class ApplicationService {
     constructor(private http: HttpClient) { }
   
     getAllApplications(): Observable<IApplication[]> {
-      // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
       return this.http.get<IApplication[]>(environment.apiUrl + 'api/Application');
     }
   
     saveApplication(input : IApplication): Observable<IApplication> {
-      return this.http.post<IApplication>(environment.apiUrl + '/api/.../..', input);
+      return this.http.post<IApplication>(environment.apiUrl + '/api/Application', input);
     }
 
     updateApplication(input : IApplication): Observable<IApplication> {
-      return this.http.put<IApplication>(environment.apiUrl + '/api/.../..', input);
+      return this.http.put<IApplication>(environment.apiUrl + '/api/Application', input);
     }
 
-    deleteApplication(id : number): Observable<IApplication> {
-      return this.http.patch<IApplication>(environment.apiUrl + '/api/.../..', id);
+    deleteApplication(input : IApplication): Observable<IApplication> {
+      return this.http.patch<IApplication>(environment.apiUrl + '/api/Application/' + input.id, input);
     }
   
   }

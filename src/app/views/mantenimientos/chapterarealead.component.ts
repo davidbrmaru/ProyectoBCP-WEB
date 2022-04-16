@@ -96,7 +96,8 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   eliminarChapterAreaLead(){
-    this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead.id).subscribe(
+    this.chapterAreaLead.usuarioActualiza = "T16587";
+    this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead).subscribe(
       res => {
         this.cerrarModal();
         this.cargarChapterAreaLeads();

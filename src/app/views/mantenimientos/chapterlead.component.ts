@@ -93,7 +93,8 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   eliminarChapterLead(){
-    this.chapterLeadService.deleteChapterLead(this.chapterLead.id).subscribe(
+    this.chapterLead.usuarioActualiza = "T16587";
+    this.chapterLeadService.deleteChapterLead(this.chapterLead).subscribe(
       res => {
         this.cerrarModal();
         this.cargarChapterLeads();

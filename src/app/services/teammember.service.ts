@@ -15,19 +15,19 @@ export class TeamMemberService {
   
     getAllTeamMembers(): Observable<ITeamMember[]> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/.../..');
+      return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/TeamMember');
     }
   
     saveTeamMember(input : ITeamMember): Observable<ITeamMember> {
-      return this.http.post<ITeamMember>(environment.apiUrl + '/api/.../..', input);
+      return this.http.post<ITeamMember>(environment.apiUrl + '/api/TeamMember', input);
     }
 
     updateTeamMember(input : ITeamMember): Observable<ITeamMember> {
-      return this.http.put<ITeamMember>(environment.apiUrl + '/api/.../..', input);
+      return this.http.put<ITeamMember>(environment.apiUrl + '/api/TeamMember', input);
     }
 
-    deleteTeamMember(id: number): Observable<ITeamMember> {
-      return this.http.patch<ITeamMember>(environment.apiUrl + '/api/.../..', id);
+    deleteTeamMember(input: ITeamMember): Observable<ITeamMember> {
+      return this.http.patch<ITeamMember>(environment.apiUrl + '/api/TeamMember/' + input.id, input);
     }
   
   }

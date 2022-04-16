@@ -26,8 +26,8 @@ export class ChapterAreaLeadService {
       return this.http.put<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea', input);
     }
 
-    deleteChapterAreaLead(id : number): Observable<IChapterAreaLead> {
-      return this.http.patch<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea', id);
+    deleteChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {
+      return this.http.patch<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea/' + input.id, input);
     }
   
   }

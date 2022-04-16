@@ -93,7 +93,8 @@ export class ApplicationComponent implements OnInit {
   }
 
   eliminarApplication(){
-    this.applicationService.deleteApplication(this.application.id).subscribe(
+    this.application.usuarioActualiza = "T16587";
+    this.applicationService.deleteApplication(this.application).subscribe(
       res => {
         this.cerrarModal();
         this.cargarApplications();

@@ -93,7 +93,8 @@ export class TeamMemberComponent implements OnInit {
   }
 
   eliminarTeamMember(){
-    this.teamMemberService.deleteTeamMember(this.teammember.id).subscribe(
+    this.teammember.usuarioActualiza = "T16587";
+    this.teamMemberService.deleteTeamMember(this.teammember).subscribe(
       res => {
         this.cerrarModal();
         this.cargarTeamMembers();
