@@ -40,7 +40,7 @@
                 
                 <ngx-datatable-column name="Matricula">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.cod_matricula}}
+                    {{row.codMatricula}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Nombre">
@@ -51,22 +51,22 @@
               
                 <ngx-datatable-column name="Ap. Paterno">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.apallido_paterno}}
+                    {{row.apellidoPaterno}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Ap. Materno">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.apellido_materno}}
+                    {{row.apellidoMaterno}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Chapter Lead">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.id_chapter_leader}}
+                    {{row.idChapterLeader}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Tipo Proveedor">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.tipo_proveedor}}
+                    {{row.tipoProveedor}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Empresa">
@@ -81,7 +81,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Rol Insourcing">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.rol_insourcing}}
+                    {{row.rolInsourcing}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Especialidad">
@@ -91,7 +91,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Fecha Ingreso">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.fec_ingresa}}
+                    {{row.fecIngreso}}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Acciones">
@@ -132,9 +132,9 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="apellidoPaterno">Apellido Paterno</label>
-              <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="teammember.apallido_paterno" name="apallido_paterno" #apallido_paterno="ngModel" required/>
-              <div *ngIf="apallido_paterno.invalid && (apallido_paterno.dirty || apallido_paterno.touched)" class="alert">
-                <div *ngIf="apallido_paterno.errors?.['required']">Apellido paterno es obligatorio.</div>   
+              <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
+              <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
+                <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -143,22 +143,22 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="apellidoMaterno">Apellido Materno</label>
-              <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="teammember.apellido_materno" name="apellido_materno" #apellido_materno="ngModel" required/>
-              <div *ngIf="apellido_materno.invalid && (apellido_materno.dirty || apellido_materno.touched)" class="alert">
-                <div *ngIf="apellido_materno.errors?.['required']">Apellido materno es obligatorio.</div>   
+              <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
+              <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
+                <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="chapterLead">Chapter Lead</label>
-              <select class="form-select" id="chapterLead" [(ngModel)]="teammember.id_chapter_leader" name="id_chapter_leader" #id_chapter_leader="ngModel" required>
+              <select class="form-select" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
                 <option value="60555">60555</option>
                 <option value="2">Chapter Lead 2</option>
                 <option value="3">Chapter Lead 3</option>
               </select>
-              <div *ngIf="id_chapter_leader.invalid && (id_chapter_leader.dirty || id_chapter_leader.touched)" class="alert">
-                <div *ngIf="id_chapter_leader.errors?.['required']">Chapter leader es obligatorio.</div>   
+              <div *ngIf="idChapterLeader.invalid && (idChapterLeader.dirty || idChapterLeader.touched)" class="alert">
+                <div *ngIf="idChapterLeader.errors?.['required']">Chapter leader es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -167,13 +167,13 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="tipoProveedor">Tipo Proveedor</label>
-              <select class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipo_proveedor" name="tipo_proveedor" #tipo_proveedor="ngModel" required>
+              <select class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
                 <option value="44509">44509</option>
                 <option value="2">Proveedor 2</option>
                 <option value="3">Proveedor 3</option>
               </select>
-              <div *ngIf="tipo_proveedor.invalid && (tipo_proveedor.dirty || tipo_proveedor.touched)" class="alert">
-                <div *ngIf="tipo_proveedor.errors?.['required']">Tipo proveedor es obligatorio.</div>   
+              <div *ngIf="tipoProveedor.invalid && (tipoProveedor.dirty || tipoProveedor.touched)" class="alert">
+                <div *ngIf="tipoProveedor.errors?.['required']">Tipo proveedor es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -208,13 +208,13 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="rolInsourcing">Rol Insourcing</label>
-              <select class="form-select" id="rolInsourcing" [(ngModel)]="teammember.rol_insourcing" name="rol_insourcing" #rol_insourcing="ngModel" required>
+              <select class="form-select" id="rolInsourcing" [(ngModel)]="teammember.rolInsourcing" name="rolInsourcing" #rolInsourcing="ngModel" required>
                 <option value="quis">quis</option>
                 <option value="2">Rol Insourcing 2</option>
                 <option value="3">Rol Insourcing 3</option>
               </select>
-              <div *ngIf="rol_insourcing.invalid && (rol_insourcing.dirty || rol_insourcing.touched)" class="alert">
-                <div *ngIf="rol_insourcing.errors?.['required']">Rol insourcing es obligatorio.</div>   
+              <div *ngIf="rolInsourcing.invalid && (rolInsourcing.dirty || rolInsourcing.touched)" class="alert">
+                <div *ngIf="rolInsourcing.errors?.['required']">Rol insourcing es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -236,9 +236,9 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="fechaIngreso">Fecha Ingreso</label>
-              <input class="form-control" id="fechaIngreso" type="date" [ngModel]="teammember.fec_ingresa | date:'yyyy-MM-dd' : 'UTC'" name="fec_ingresa" #fec_ingresa="ngModel" required/>
-              <div *ngIf="fec_ingresa.invalid && (fec_ingresa.dirty || fec_ingresa.touched)" class="alert">
-                <div *ngIf="fec_ingresa.errors?.['required']">Fecha ingreso es obligatorio.</div>   
+              <input class="form-control" id="fechaIngreso" type="date" [ngModel]="teammember.fecIngreso | date:'yyyy-MM-dd' : 'UTC'" name="fecIngreso" #fecIngreso="ngModel" required/>
+              <div *ngIf="fecIngreso.invalid && (fecIngreso.dirty || fecIngreso.touched)" class="alert">
+                <div *ngIf="fecIngreso.errors?.['required']">Fecha ingreso es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -259,8 +259,8 @@
         </button>
     </div>
     <div class="modal-body">
-        <span cLabel>¿Estas seguro de eliminar a </span>{{teammember.nombre}} {{teammember.apallido_paterno}} {{teammember.apellido_materno}} - {{teammember.cod_matricula}} <span>?</span>
-      
+      <span cLabel>¿Estas seguro de eliminar a </span>{{teammember.nombre}} {{teammember.apellidoPaterno}} {{teammember.apellidoMaterno}} - {{teammember.codMatricula}} <span>?</span>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="cerrarModal()">No</button>
