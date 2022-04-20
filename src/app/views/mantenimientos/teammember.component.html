@@ -153,9 +153,11 @@
             <div class="mb-1">
               <label cLabel for="chapterLead">Chapter Lead</label>
               <select class="form-select" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
-                <option value="60555">60555</option>
+                <option value="1">Chapter Lead 1</option>
                 <option value="2">Chapter Lead 2</option>
                 <option value="3">Chapter Lead 3</option>
+                <option value="4">Chapter Lead 4</option>
+                <option value="5">Chapter Lead 5</option>
               </select>
               <div *ngIf="idChapterLeader.invalid && (idChapterLeader.dirty || idChapterLeader.touched)" class="alert">
                 <div *ngIf="idChapterLeader.errors?.['required']">Chapter leader es obligatorio.</div>   
@@ -168,9 +170,8 @@
             <div class="mb-1">
               <label cLabel for="tipoProveedor">Tipo Proveedor</label>
               <select class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
-                <option value="44509">44509</option>
-                <option value="2">Proveedor 2</option>
-                <option value="3">Proveedor 3</option>
+                <option value="PROVEEDOR">PROVEEDOR</option>
+                <option value="ORGÁNICO">ORGÁNICO</option>
               </select>
               <div *ngIf="tipoProveedor.invalid && (tipoProveedor.dirty || tipoProveedor.touched)" class="alert">
                 <div *ngIf="tipoProveedor.errors?.['required']">Tipo proveedor es obligatorio.</div>   
@@ -180,14 +181,22 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="empresa">Empresa</label>
+              <!--
               <select class="form-select" id="empresa" [(ngModel)]="teammember.empresa" name="empresa" #empresa="ngModel" required>
-                <option value="Botsford - Simonis">Botsford - Simonis</option>
+                <option value="EVERIS">Botsford - Simonis</option>
                 <option value="2">Empresa 2</option>
                 <option value="3">Empresa 3</option>
               </select>
               <div *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" class="alert">
-                <div *ngIf="empresa.errors?.['required']">Empresa es obligatorio.</div>   
+                <div *ngIf="empresa.errors?.['required']">Empresa es obligatorio.</div>
               </div>
+              -->
+
+              <input class="form-control" id="empresa" type="text" [(ngModel)]="teammember.empresa" name="empresa" #empresa="ngModel" required />
+              <div *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" class="alert">
+                <div *ngIf="empresa.errors?.['required']">Empresa es obligatorio.</div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -195,27 +204,42 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="rol">Rol</label>
+              <!--
               <select class="form-select" id="rol" [(ngModel)]="teammember.rol" name="rol" #rol="ngModel" required>
                 <option value="Gorgeous Metal Shoes">Gorgeous Metal Shoes</option>
                 <option value="2">Rol 2</option>
                 <option value="3">Rol 3</option>
               </select>
               <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert">
-                <div *ngIf="rol.errors?.['required']">Rol es obligatorio.</div>   
+                <div *ngIf="rol.errors?.['required']">Rol es obligatorio.</div>
               </div>
+              -->
+
+              <input class="form-control" id="rol" type="text" [(ngModel)]="teammember.rol" name="rol" #rol="ngModel" required />
+              <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert">
+                <div *ngIf="rol.errors?.['required']">Rol es obligatorio.</div>
+              </div>
+
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="rolInsourcing">Rol Insourcing</label>
+              <!--
               <select class="form-select" id="rolInsourcing" [(ngModel)]="teammember.rolInsourcing" name="rolInsourcing" #rolInsourcing="ngModel" required>
                 <option value="quis">quis</option>
                 <option value="2">Rol Insourcing 2</option>
                 <option value="3">Rol Insourcing 3</option>
               </select>
               <div *ngIf="rolInsourcing.invalid && (rolInsourcing.dirty || rolInsourcing.touched)" class="alert">
-                <div *ngIf="rolInsourcing.errors?.['required']">Rol insourcing es obligatorio.</div>   
+                <div *ngIf="rolInsourcing.errors?.['required']">Rol insourcing es obligatorio.</div>
+              </div>-->
+
+              <input class="form-control" id="rolInsourcing" type="text" [(ngModel)]="teammember.rolInsourcing" name="rolInsourcing" #rolInsourcing="ngModel" required />
+              <div *ngIf="rolInsourcing.invalid && (rolInsourcing.dirty || rolInsourcing.touched)" class="alert">
+                <div *ngIf="rolInsourcing.errors?.['required']">rolInsourcing es obligatorio.</div>
               </div>
+
             </div>
           </div>
         </div>
@@ -223,22 +247,39 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="especialidad">Especialidad</label>
-              <select class="form-select" id="especialidad" [(ngModel)]="teammember.especialidad" name="especialidad" #especialidad="ngModel" required>
-                <option value="cumque">cumque</option>
-                <option value="2">Especialidad 2</option>
-                <option value="3">Especialidad 3</option>
-              </select>
+              <!--
+      <select class="form-select" id="especialidad" [(ngModel)]="teammember.especialidad" name="especialidad" #especialidad="ngModel" required>
+        <option value="cumque">cumque</option>
+        <option value="2">Especialidad 2</option>
+        <option value="3">Especialidad 3</option>
+      </select>
+      <div *ngIf="especialidad.invalid && (especialidad.dirty || especialidad.touched)" class="alert">
+        <div *ngIf="especialidad.errors?.['required']">Especialidad es obligatorio.</div>
+      </div>-->
+
+              <input class="form-control" id="especialidad" type="text" [(ngModel)]="teammember.especialidad" name="especialidad" #especialidad="ngModel" required />
               <div *ngIf="especialidad.invalid && (especialidad.dirty || especialidad.touched)" class="alert">
-                <div *ngIf="especialidad.errors?.['required']">Especialidad es obligatorio.</div>   
+                <div *ngIf="especialidad.errors?.['required']">Especialidad es obligatorio.</div>
               </div>
+
             </div>
           </div>
+          <!--
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="fechaIngreso">Fecha Ingreso</label>
-              <input class="form-control" id="fechaIngreso" type="date" [ngModel]="teammember.fecIngreso | date:'yyyy-MM-dd' : 'UTC'" name="fecIngreso" #fecIngreso="ngModel" required/>
+              <input class="form-control" id="fechaIngreso" type="date" [ngModel]="teammember.fecIngreso | date:'yyyy-MM-dd' : 'UTC'" name="fecIngreso" #fecIngreso="ngModel" required />
               <div *ngIf="fecIngreso.invalid && (fecIngreso.dirty || fecIngreso.touched)" class="alert">
-                <div *ngIf="fecIngreso.errors?.['required']">Fecha ingreso es obligatorio.</div>   
+                <div *ngIf="fecIngreso.errors?.['required']">Fecha ingreso es obligatorio.</div>
+              </div>
+            </div>
+          </div>-->
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="matricula">Matricula</label>
+              <input class="form-control" id="matricula" type="text" [(ngModel)]="teammember.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
+              <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
+                <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
               </div>
             </div>
           </div>

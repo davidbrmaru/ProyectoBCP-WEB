@@ -62,12 +62,10 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.chapterAreaLead.usuarioIngresa = "S61121";
     this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
-          debugger;
           this.cerrarModal();
           this.cargarChapterAreaLeads();
         },
         err => {
-          debugger;
           this.cerrarModal();
         }
       )
@@ -77,13 +75,14 @@ export class ChapterAreaLeadComponent implements OnInit {
     }
   }
 
-  editarChapterAreaLead(item: IChapterAreaLead){
+  editarChapterAreaLead(item: IChapterAreaLead) {
+    this.chapterAreaLead.usuarioActualiza = "S61121";
     this.chapterAreaLeadService.updateChapterAreaLead(item).subscribe(
       res => {
         this.cerrarModal();
         this.cargarChapterAreaLeads();
       },
-      err =>{
+      err => {
         this.cerrarModal();
       }
     )
@@ -96,7 +95,7 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   eliminarChapterAreaLead(){
-    this.chapterAreaLead.usuarioActualiza = "T16587";
+    this.chapterAreaLead.usuarioActualiza = "S61121";
     this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead).subscribe(
       res => {
         this.cerrarModal();

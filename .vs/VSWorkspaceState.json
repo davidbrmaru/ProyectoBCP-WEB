@@ -8,6 +8,6 @@
     "\\src\\app\\views",
     "\\src\\app\\views\\mantenimientos"
   ],
-  "SelectedNode": "\\src\\app\\models\\teammember.model.ts",
+  "SelectedNode": "\\src\\app\\services\\chapterlead.service.ts",
   "PreviewInSolutionExplorer": false
 }

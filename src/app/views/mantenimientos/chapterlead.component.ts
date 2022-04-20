@@ -58,7 +58,8 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   agregarChapterLead(a: NgForm){ 
-    if(this.NewEdit == "Nuevo"){ 
+    if (this.NewEdit == "Nuevo") {
+      this.chapterLead.usuarioIngresa = "S61121";
       this.chapterLeadService.saveChapterLead(this.chapterLead).subscribe(
         res => {
           this.cerrarModal();
@@ -74,7 +75,8 @@ export class ChapterLeadComponent implements OnInit {
     }
   }
 
-  editarChapterLead(item: IChapterLead){
+  editarChapterLead(item: IChapterLead) {
+    this.chapterLead.usuarioActualiza = "S61121";
     this.chapterLeadService.updateChapterLead(item).subscribe(
       res => {
         this.cerrarModal();
@@ -93,7 +95,7 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   eliminarChapterLead(){
-    this.chapterLead.usuarioActualiza = "T16587";
+    this.chapterLead.usuarioActualiza = "S61121";
     this.chapterLeadService.deleteChapterLead(this.chapterLead).subscribe(
       res => {
         this.cerrarModal();

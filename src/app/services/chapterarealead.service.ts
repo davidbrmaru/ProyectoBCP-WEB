@@ -23,11 +23,13 @@ export class ChapterAreaLeadService {
     }
 
     updateChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {
-      return this.http.put<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea', input);
+      return this.http.put<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea/'+ input.id, input);
     }
 
     deleteChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {
-      return this.http.patch<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea/' + input.id, input);
+      return this.http.delete<IChapterAreaLead>(environment.apiUrl + 'api/ChapterArea/' + input.id, {
+        body: input
+      });
     }
   
   }

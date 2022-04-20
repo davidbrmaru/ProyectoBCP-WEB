@@ -92,19 +92,45 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
+                <label cLabel for="matricula">Matricula</label>
+                <input class="form-control" id="matricula" type="text" [(ngModel)]="chapterLead.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
+                <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
+                  <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="ChapterAreaLeader">Chapter Area Lead</label>
+                <select class="form-select" id="ChapterAreaLeader" [(ngModel)]="chapterLead.idChapterAreaLeader" name="idChapterAreaLeader" #idChapterAreaLeader="ngModel" required>
+                  <option value="1">Chapter Area Lead 1</option>
+                  <option value="2">Chapter Area Lead 2</option>
+                  <option value="3">Chapter Area Lead 3</option>
+                  <option value="4">Chapter Area Lead 4</option>
+                  <option value="5">Chapter Area Lead 5</option>
+                </select>
+                <div *ngIf="idChapterAreaLeader.invalid && (idChapterAreaLeader.dirty || idChapterAreaLeader.touched)" class="alert">
+                  <div *ngIf="idChapterAreaLeader.errors?.['required']">Chapter Area leader es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
                 <label cLabel for="nombre">Nombre</label>
-                <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterLead.nombres" name="nombre" #nombre="ngModel" required/>
+                <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterLead.nombres" name="nombre" #nombre="ngModel" required />
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                  <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
+                  <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="mb-1">
                 <label cLabel for="apellidoPaterno">Apellido Paterno</label>
-                <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterLead.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
+                <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterLead.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required />
                 <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
-                  <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>   
+                  <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>
                 </div>
               </div>
             </div>
@@ -113,9 +139,9 @@
             <div class="col-6">
               <div class="mb-1">
                 <label cLabel for="apellidoMaterno">Apellido Materno</label>
-                <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterLead.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
+                <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterLead.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required />
                 <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
-                  <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>   
+                  <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>
                 </div>
               </div>
             </div>

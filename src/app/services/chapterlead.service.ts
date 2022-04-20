@@ -19,15 +19,17 @@ export class ChapterLeadService {
     }
   
     saveChapterLead(input : IChapterLead): Observable<IChapterLead> {
-      return this.http.post<IChapterLead>(environment.apiUrl + '/api/Chapter', input);
+      return this.http.post<IChapterLead>(environment.apiUrl + 'api/Chapter', input);
     }
 
     updateChapterLead(input : IChapterLead): Observable<IChapterLead> {
-      return this.http.put<IChapterLead>(environment.apiUrl + '/api/Chapter', input);
+      return this.http.put<IChapterLead>(environment.apiUrl + 'api/Chapter/'+input.id, input);
     }
 
     deleteChapterLead(input : IChapterLead): Observable<IChapterLead> {
-      return this.http.patch<IChapterLead>(environment.apiUrl + '/api/Chapter/' + input.id, input);
+      return this.http.delete<IChapterLead>(environment.apiUrl + 'api/Chapter/' + input.id, {
+        body:input
+      });
     }
   
   }
