@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ITeamMember } from 'src/app/models/teammember.model';
 import { TeamMemberService } from 'src/app/services/teammember.service';
+import { ChapterLeadService } from 'src/app/services/chapterlead.service';
+import { IChapterLead } from 'src/app/models/chapterlead.model';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -17,10 +19,12 @@ export class TeamMemberComponent implements OnInit {
 
   loadingIndicator: boolean;
   reorderable = true;
-  teamMemberList : ITeamMember[] = [];
+  teamMemberList: ITeamMember[] = [];
+  chapterLeadList: IChapterLead[] = [];
   nombre :string;
   columns = [{prop:'' , name:''}];
-  teammember : ITeamMember;
+  teammember: ITeamMember;
+  
   page: Page = new Page();
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
@@ -29,6 +33,7 @@ export class TeamMemberComponent implements OnInit {
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
     private teamMemberService: TeamMemberService,
+    private chapterLeadService: ChapterLeadService,
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 20;
@@ -45,6 +50,7 @@ export class TeamMemberComponent implements OnInit {
 
   openModalNewEdit(template: TemplateRef<any>, teamMember?: ITeamMember) {
     this.teammember = new ITeamMember;
+    this.cargarChapterLeader();
     this.NewEdit = "Nuevo";
     if(teamMember != undefined){
       this.NewEdit = "Editar";
@@ -58,7 +64,6 @@ export class TeamMemberComponent implements OnInit {
   }
 
   agregarTeamMember(a: NgForm) {
-    debugger;
     if (this.NewEdit == "Nuevo") {
       this.teammember.usuarioIngresa = "S61121";
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
@@ -76,6 +81,18 @@ export class TeamMemberComponent implements OnInit {
     }
   }
 
+  cargarChapterLeader() {
+    this.chapterLeadService.getAllChapterLeads().subscribe(
+      res => {
+        this.chapterLeadList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
   editarTeamMember(item: ITeamMember) {
     this.teammember.usuarioActualiza = "S61121";
     this.teamMemberService.updateTeamMember(item).subscribe(
@@ -90,7 +107,6 @@ export class TeamMemberComponent implements OnInit {
   }
 
   openModalDelete(template: TemplateRef<any>, teamMember: ITeamMember){
-    debugger;
     this.teammember = teamMember; 
     this.modalService.show(template);
   }
@@ -117,6 +133,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.getAllTeamMembers().subscribe(
       res => {
         this.teamMemberList = res;
+        this.page.totalCount = this.teamMemberList.length;
         this.loadingIndicator = false;
       },
       err => {

@@ -89,7 +89,6 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   openModalDelete(template: TemplateRef<any>, chapterAreaLead: IChapterAreaLead){
-    debugger;
     this.chapterAreaLead = chapterAreaLead; 
     this.modalService.show(template);
   }
@@ -115,8 +114,8 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.loadingIndicator = true;
     this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
       res => {
-        
         this.chapterAreaLeadList = res;
+        this.page.totalCount = this.chapterAreaLeadList.length;
         this.loadingIndicator = false;
       },
       err => {

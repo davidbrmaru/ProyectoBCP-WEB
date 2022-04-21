@@ -103,11 +103,7 @@
               <div class="mb-1">
                 <label cLabel for="ChapterAreaLeader">Chapter Area Lead</label>
                 <select class="form-select" id="ChapterAreaLeader" [(ngModel)]="chapterLead.idChapterAreaLeader" name="idChapterAreaLeader" #idChapterAreaLeader="ngModel" required>
-                  <option value="1">Chapter Area Lead 1</option>
-                  <option value="2">Chapter Area Lead 2</option>
-                  <option value="3">Chapter Area Lead 3</option>
-                  <option value="4">Chapter Area Lead 4</option>
-                  <option value="5">Chapter Area Lead 5</option>
+                  <option value={{chapterAreaLead.id}} *ngFor="let chapterAreaLead of chapterAreaLeadList">{{chapterAreaLead.nombres + ' '+ chapterAreaLead.apellidoPaterno}}</option>
                 </select>
                 <div *ngIf="idChapterAreaLeader.invalid && (idChapterAreaLeader.dirty || idChapterAreaLeader.touched)" class="alert">
                   <div *ngIf="idChapterAreaLeader.errors?.['required']">Chapter Area leader es obligatorio.</div>

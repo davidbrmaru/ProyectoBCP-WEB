@@ -3,13 +3,14 @@ import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ITeamMember } from 'src/app/models/teammember.model';
 import { ChapterLeadService } from 'src/app/services/chapterlead.service';
-
+import { ChapterAreaLeadService } from 'src/app/services/chapterarealead.service';
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
 import { IChapterLead } from 'src/app/models/chapterlead.model';
+import { IChapterAreaLead } from 'src/app/models/chapterarealead.model';
 
 @Component({
    templateUrl: 'chapterlead.component.html',
@@ -18,7 +19,8 @@ export class ChapterLeadComponent implements OnInit {
 
   loadingIndicator: boolean;
   reorderable = true;
-  chapterLeadList : IChapterLead[] = [];
+  chapterLeadList: IChapterLead[] = [];
+  chapterAreaLeadList: IChapterAreaLead[] = [];
   nombre :string;
   chapterLead : IChapterLead;
   page: Page = new Page();
@@ -29,6 +31,7 @@ export class ChapterLeadComponent implements OnInit {
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
     private chapterLeadService: ChapterLeadService,
+    private chapterAreaLeadService: ChapterAreaLeadService,
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
@@ -45,6 +48,7 @@ export class ChapterLeadComponent implements OnInit {
 
   openModalNewEdit(template: TemplateRef<any>, chapterAreaLead?: IChapterLead) {
     this.chapterLead = new IChapterLead;
+    this.cargarChapterAreaLeads();
     this.NewEdit = "Nuevo";
     if(chapterAreaLead != undefined){
       this.NewEdit = "Editar";
@@ -116,9 +120,23 @@ export class ChapterLeadComponent implements OnInit {
     this.chapterLeadService.getAllChapterLeads().subscribe(
       res => {
         this.chapterLeadList = res;
+        this.page.totalCount = this.chapterLeadList.length;
         this.loadingIndicator = false;
       },
       err =>{
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarChapterAreaLeads() {
+    this.loadingIndicator = true;
+    this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
+      res => {
+        this.chapterAreaLeadList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
         this.loadingIndicator = false;
       }
     )
