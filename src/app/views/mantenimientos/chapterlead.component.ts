@@ -35,13 +35,12 @@ export class ChapterLeadComponent implements OnInit {
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
-    this.page.currentPage = 1;
-    this.page.totalCount = 50;
+    this.page.currentPage = 0;
   }
 
   setPage(pageInfo : any) {
-    this.page.currentPage = pageInfo.offset;
-    this.cargarChapterLeads();
+    this.page.currentPage = pageInfo.offset + 1;
+    this.cargarChapterLeads(this.page);
   }
  
   modalRef: BsModalRef;
@@ -67,7 +66,7 @@ export class ChapterLeadComponent implements OnInit {
       this.chapterLeadService.saveChapterLead(this.chapterLead).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarChapterLeads();
+          this.cargarChapterLeads(this.page);
         },
         err =>{
           this.cerrarModal();
@@ -84,7 +83,7 @@ export class ChapterLeadComponent implements OnInit {
     this.chapterLeadService.updateChapterLead(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterLeads();
+        this.cargarChapterLeads(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -103,7 +102,7 @@ export class ChapterLeadComponent implements OnInit {
     this.chapterLeadService.deleteChapterLead(this.chapterLead).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterLeads();
+        this.cargarChapterLeads(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -112,15 +111,18 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarChapterLeads();
+    this.setPage({ offset: 0 });
+    this.page.currentPage = 1;
   }
 
-  cargarChapterLeads(){
+  cargarChapterLeads(page: Page){
     this.loadingIndicator = true;
-    this.chapterLeadService.getAllChapterLeads().subscribe(
+    this.chapterLeadService.getChapterLeads(this.page).subscribe(
       res => {
-        this.chapterLeadList = res;
-        this.page.totalCount = this.chapterLeadList.length;
+        debugger;
+        this.page.currentPage = this.page.currentPage - 1;
+        this.chapterLeadList = res.chapterLeaders;
+        this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;
       },
       err =>{

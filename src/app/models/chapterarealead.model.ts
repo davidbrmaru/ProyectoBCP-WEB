@@ -11,3 +11,7 @@ export class IChapterAreaLead {
     usuarioActualiza: string;
     flgActivo: number;
 }
+export class IChapterAreaLeadResponse {
+  totalRows: number;
+  chapterAreaLeaders: IChapterAreaLead[];
+}

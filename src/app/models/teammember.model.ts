@@ -15,5 +15,9 @@ export class ITeamMember {
     fecActualiza: Date;
     usuarioActualiza: string;
     flgActivo: boolean;
-    id:number;
+    id: number;
+}
+export class ITeamMemberResponse {
+  totalRows: number;
+  teamMembers: ITeamMember[];
 }

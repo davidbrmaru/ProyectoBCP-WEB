@@ -2,6 +2,7 @@ import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ITeamMember } from 'src/app/models/teammember.model';
+import { ITeamMemberResponse } from 'src/app/models/teammember.model';
 import { TeamMemberService } from 'src/app/services/teammember.service';
 import { ChapterLeadService } from 'src/app/services/chapterlead.service';
 import { IChapterLead } from 'src/app/models/chapterlead.model';
@@ -36,14 +37,13 @@ export class TeamMemberComponent implements OnInit {
     private chapterLeadService: ChapterLeadService,
     private SimpleModalService: SimpleModalService
   ) {
-    this.page.pageSize = 20;
-    this.page.currentPage = 1;
-    this.page.totalCount = 50;
+    this.page.pageSize = 10;
+    this.page.currentPage = 0;
   }
 
-  setPage(pageInfo : any) {
-    this.page.currentPage = pageInfo.offset;
-    this.cargarTeamMembers();
+  setPage(pageInfo: any) {
+    this.page.currentPage = pageInfo.offset+1;
+    this.cargarTeamMembers(this.page);
   }
  
   modalRef: BsModalRef;
@@ -69,7 +69,7 @@ export class TeamMemberComponent implements OnInit {
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarTeamMembers();
+          //this.cargarTeamMembers();
         },
         err => {
           this.cerrarModal();
@@ -98,7 +98,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.updateTeamMember(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarTeamMembers();
+        //this.cargarTeamMembers();
       },
       err => {
         this.cerrarModal();
@@ -116,7 +116,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.deleteTeamMember(this.teammember).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarTeamMembers();
+        //this.cargarTeamMembers();
       },
       err => {
         this.cerrarModal();
@@ -125,15 +125,18 @@ export class TeamMemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarTeamMembers();
+    this.setPage({ offset: 0 });
+    this.page.currentPage = 1;
+    //this.cargarTeamMembers(this.page);
   }
 
-  cargarTeamMembers(){
+  cargarTeamMembers(page: Page) {
     this.loadingIndicator = true;
-    this.teamMemberService.getAllTeamMembers().subscribe(
-      res => {
-        this.teamMemberList = res;
-        this.page.totalCount = this.teamMemberList.length;
+    this.teamMemberService.getTeamMembers(this.page).subscribe(
+      res=> {
+        this.page.currentPage = this.page.currentPage - 1;
+        this.teamMemberList = res.teamMembers;
+        this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;
       },
       err => {
@@ -141,4 +144,5 @@ export class TeamMemberComponent implements OnInit {
       }
     )
   }
+
 }

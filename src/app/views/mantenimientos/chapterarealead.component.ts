@@ -31,14 +31,13 @@ export class ChapterAreaLeadComponent implements OnInit {
     private chapterAreaLeadService: ChapterAreaLeadService,
     private SimpleModalService: SimpleModalService
   ) {
-    this.page.pageSize = 200;
-    this.page.currentPage = 1;
-    this.page.totalCount = 200;
+    this.page.pageSize = 10;
+    this.page.currentPage = 0;
   }
 
-  setPage(pageInfo : any) {
-    this.page.currentPage = pageInfo.offset;
-    this.cargarChapterAreaLeads();
+  setPage(pageInfo: any) {
+    this.page.currentPage = pageInfo.offset+1;
+    this.cargarChapterAreaLeads(this.page);
   }
  
   modalRef: BsModalRef;
@@ -63,7 +62,7 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarChapterAreaLeads();
+        this.cargarChapterAreaLeads(this.page);
         },
         err => {
           this.cerrarModal();
@@ -80,7 +79,7 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.chapterAreaLeadService.updateChapterAreaLead(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterAreaLeads();
+        this.cargarChapterAreaLeads(this.page);
       },
       err => {
         this.cerrarModal();
@@ -98,7 +97,7 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarChapterAreaLeads();
+        this.cargarChapterAreaLeads(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -107,19 +106,22 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarChapterAreaLeads();
+    this.setPage({ offset: 0 });
+    this.page.currentPage = 1;
+    //this.cargarChapterAreaLeads(this.page);
   }
 
-  cargarChapterAreaLeads(){
+  cargarChapterAreaLeads(page: Page){
     this.loadingIndicator = true;
-    this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
+    this.chapterAreaLeadService.getChapterAreaLeads(this.page).subscribe(
       res => {
-        this.chapterAreaLeadList = res;
-        this.page.totalCount = this.chapterAreaLeadList.length;
+        debugger;
+        this.page.currentPage = this.page.currentPage - 1;
+        this.chapterAreaLeadList = res.chapterAreaLeaders;
+        this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;
       },
       err => {
-        
         this.loadingIndicator = false;
       }
     )

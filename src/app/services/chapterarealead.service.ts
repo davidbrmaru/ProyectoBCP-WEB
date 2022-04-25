@@ -1,8 +1,9 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { IChapterAreaLead } from './../../app/models/chapterarealead.model';
+import { IChapterAreaLead, IChapterAreaLeadResponse } from './../../app/models/chapterarealead.model';
 import { environment } from './../../environments/environment';
+import { Page } from 'src/app/models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,13 @@ export class ChapterAreaLeadService {
   
     constructor(private http: HttpClient) { }
   
-    getAllChapterAreaLeads(): Observable<IChapterAreaLead[]> {
+    getChapterAreaLeads(page: Page): Observable<IChapterAreaLeadResponse> {
       // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
-      return this.http.get<IChapterAreaLead[]>(environment.apiUrl + 'api/ChapterArea');
+    return this.http.get<IChapterAreaLeadResponse>(environment.apiUrl + 'api/ChapterArea?PageSize=' + page.pageSize + '&PageNumber=' + page.currentPage);
+    }
+    getAllChapterAreaLeads(): Observable<IChapterAreaLead[]> {
+    // return this.http.get<ITeamMember[]>(environment.apiUrl + '/api/coin');
+    return this.http.get<IChapterAreaLead[]>(environment.apiUrl + 'api/ChapterArea/All');
     }
   
     saveChapterAreaLead(input : IChapterAreaLead): Observable<IChapterAreaLead> {

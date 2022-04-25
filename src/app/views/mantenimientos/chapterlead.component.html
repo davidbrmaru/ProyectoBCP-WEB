@@ -22,22 +22,21 @@
           <c-col>
             <div style="overflow-x:auto;">
               <div class="col-md-12 mb-3" style="margin-top: 10px;">
-                  <ngx-datatable 
-                  class="material container striped" 
-                  [rows]="chapterLeadList" 
-                  [loadingIndicator]="loadingIndicator"
-                  [columnMode]="'force'"
-                  [headerHeight]="50" 
-                  [footerHeight]="50" 
-                  [scrollbarH]="true"
-                  [rowHeight]="50"
-                  [externalPaging]="true"
-                  [count]="page.totalCount"
-                  [offset]="page.currentPage"
-                  [limit]="page.pageSize"
-                  (page)='setPage($event)'
-                  [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Chapter Leads encontrados.'}">   
-                  
+                <ngx-datatable class="material container striped"
+                               [rows]="chapterLeadList"
+                               [loadingIndicator]="loadingIndicator"
+                               [columnMode]="'force'"
+                               [headerHeight]="50"
+                               [footerHeight]="50"
+                               [scrollbarH]="true"
+                               [rowHeight]="50"
+                               [externalPaging]="true"
+                               [count]="page.totalCount"
+                               [offset]="page.currentPage"
+                               [limit]="page.pageSize"
+                               (page)='setPage($event)'
+                               [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Chapter Leads encontrados.'}">
+
                   <ngx-datatable-column name="Matricula">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.codMatricula}}
@@ -48,7 +47,7 @@
                       {{row.nombres}}
                     </ng-template>
                   </ngx-datatable-column>
-                
+
                   <ngx-datatable-column name="Ap. Paterno">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.apellidoPaterno}}
@@ -57,6 +56,11 @@
                   <ngx-datatable-column name="Ap. Materno">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.apellidoMaterno}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombre Chapter">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nombreChapter}}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column name="Fecha Ingreso">
@@ -69,7 +73,7 @@
                       <div>
                         <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
                         <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
-                    </div>
+                      </div>
                     </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>
@@ -138,6 +142,15 @@
                 <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterLead.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required />
                 <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
                   <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="nombreChapter">Nombre Chapter</label>
+                <input class="form-control" id="nombreChapter" type="text" [(ngModel)]="chapterLead.nombreChapter" name="nombreChapter" #nombreChapter="ngModel" required />
+                <div *ngIf="nombreChapter.invalid && (nombreChapter.dirty || nombreChapter.touched)" class="alert">
+                  <div *ngIf="nombreChapter.errors?.['required']">Nombre Chapter es obligatorio.</div>
                 </div>
               </div>
             </div>
