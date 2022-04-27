@@ -1,8 +1,9 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { IApplication } from './../../app/models/application.model';
+import { IApplication, IApplicationResponse } from './../../app/models/application.model';
 import { environment } from './../../environments/environment';
+import { Page } from 'src/app/models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,26 @@ export class ApplicationService {
   
     constructor(private http: HttpClient) { }
   
+    getApplications(page: Page): Observable<IApplicationResponse> {
+    return this.http.get<IApplicationResponse>(environment.apiUrl + 'api/Application?PageSize=' + page.pageSize + '&PageNumber=' + page.currentPage);
+    }
+
     getAllApplications(): Observable<IApplication[]> {
-      return this.http.get<IApplication[]>(environment.apiUrl + 'api/Application');
+      return this.http.get<IApplication[]>(environment.apiUrl + 'api/Application/All');
     }
   
     saveApplication(input : IApplication): Observable<IApplication> {
-      return this.http.post<IApplication>(environment.apiUrl + '/api/Application', input);
+      return this.http.post<IApplication>(environment.apiUrl + 'api/Application', input);
     }
 
     updateApplication(input : IApplication): Observable<IApplication> {
-      return this.http.put<IApplication>(environment.apiUrl + '/api/Application', input);
+      return this.http.put<IApplication>(environment.apiUrl + 'api/Application/'+ input.id, input);
     }
 
     deleteApplication(input : IApplication): Observable<IApplication> {
-      return this.http.patch<IApplication>(environment.apiUrl + '/api/Application/' + input.id, input);
+      return this.http.delete<IApplication>(environment.apiUrl + 'api/Application/' + input.id, {
+        body: input
+      });
     }
   
   }

@@ -38,9 +38,9 @@
                   (page)='setPage($event)'
                   [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Aplicaciones encontrados.'}">   
                   
-                  <ngx-datatable-column name="Matricula">
+                  <ngx-datatable-column name="Codigo APP">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.codApplication}}
+                      {{row.codAplicacion}}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column name="Nombre">
@@ -92,8 +92,11 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="matricula">Matricula</label>
-                
+                <label cLabel for="codigo">Codigo APP</label>
+                <input class="form-control" id="codigo" type="text" [(ngModel)]="application.codAplicacion" name="codApplication" #codApplication="ngModel" required />
+                  <div *ngIf="codApplication.invalid && (codApplication.dirty || codApplication.touched)" class="alert">
+                    <div *ngIf="codApplication.errors?.['required']">Codigo aplicacion es obligatorio.</div>
+                  </div>
               </div>
             </div>
             <div class="col-6">
@@ -142,7 +145,7 @@
           </button>
       </div>
       <div class="modal-body">
-        <span cLabel>¿Estas seguro de eliminar la aplicación </span>{{application.nombre}} - {{application.codApplication}} <span>?</span>
+        <span cLabel>¿Estas seguro de eliminar la aplicación </span>{{application.nombre}} - {{application.codAplicacion}} <span>?</span>
 
       </div>
       <div class="modal-footer">

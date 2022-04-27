@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2, TemplateRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
-import { ITeamMember } from 'src/app/models/teammember.model';
 import { ApplicationService } from 'src/app/services/application.service';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
@@ -32,13 +31,12 @@ export class ApplicationComponent implements OnInit {
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
-    this.page.currentPage = 1;
-    this.page.totalCount = 50;
+    this.page.currentPage = 0;
   }
 
   setPage(pageInfo : any) {
-    this.page.currentPage = pageInfo.offset;
-    this.cargarApplications();
+    this.page.currentPage = pageInfo.offset+1;
+    this.cargarApplications(this.page);
   }
  
   modalRef: BsModalRef;
@@ -59,10 +57,12 @@ export class ApplicationComponent implements OnInit {
 
   agregarApplication(a: NgForm){ 
     if(this.NewEdit == "Nuevo"){   
+      this.application.usuarioIngresa = "S61121";
+      this.application.idSquad = 27;
       this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarApplications();
+          this.cargarApplications(this.page);
         },
         err =>{
           this.cerrarModal();
@@ -75,10 +75,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   editarApplication(item: IApplication){
+    this.application.usuarioActualiza = "S61121";
     this.applicationService.updateApplication(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarApplications();
+        this.cargarApplications(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -97,7 +98,7 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.deleteApplication(this.application).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarApplications();
+        this.cargarApplications(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -106,14 +107,18 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarApplications();
+    this.setPage({ offset: 0 });
+    this.page.currentPage = 1;
+    this.cargarApplications(this.page);
   }
 
-  cargarApplications(){
+  cargarApplications(page: Page){
     this.loadingIndicator = true;
-    this.applicationService.getAllApplications().subscribe(
+    this.applicationService.getApplications(this.page).subscribe(
       res => {
-        this.applicationList = res;
+        this.page.currentPage = this.page.currentPage - 1;
+        this.applicationList = res.applications;
+        this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;
       },
       err =>{

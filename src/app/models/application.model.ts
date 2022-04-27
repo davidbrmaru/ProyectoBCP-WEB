@@ -1,7 +1,7 @@
 export class IApplication {
     constructor () {}
     id:number;
-    codApplication: string;
+    codAplicacion: string;
     nombre: string;
     codOwner: string;
     idSquad: number;
@@ -12,3 +12,8 @@ export class IApplication {
     usuarioActualiza: string;
     flgActivo: number;
 }
+
+export class IApplicationResponse {
+    totalRows: number;
+    applications: IApplication[];
+  }

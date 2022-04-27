@@ -19,7 +19,6 @@ export class SquadComponent implements OnInit {
   reorderable = true;
   squadList : ISquad[] = [];
   nombre :string;
-  columns = [{prop:'' , name:''}];
   squad : ISquad;
   page: Page = new Page();
   NewEdit:string;
@@ -32,13 +31,12 @@ export class SquadComponent implements OnInit {
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
-    this.page.currentPage = 1;
-    this.page.totalCount = 50;
+    this.page.currentPage = 0;
   }
 
   setPage(pageInfo : any) {
-    this.page.currentPage = pageInfo.offset;
-    this.cargarSquads();
+    this.page.currentPage = pageInfo.offset +1;
+    this.cargarSquads(this.page);
   }
  
   modalRef: BsModalRef;
@@ -59,10 +57,12 @@ export class SquadComponent implements OnInit {
 
   agregarSquad(a: NgForm) {
     if(this.NewEdit == "Nuevo"){
+      this.squad.usuarioIngresa = "S61121";
       this.squadService.saveSquad(this.squad).subscribe(
         res => {
           this.cerrarModal();
-          this.cargarSquads();
+          this.page.currentPage = 1;
+          this.cargarSquads(this.page);
         },
         err =>{
           this.cerrarModal();
@@ -75,10 +75,12 @@ export class SquadComponent implements OnInit {
   }
 
   editarSquad(item: ISquad){
+    this.squad.usuarioActualiza = "S61121";
     this.squadService.updateSquad(item).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarSquads();
+        this.page.currentPage = this.page.currentPage +1;
+        this.cargarSquads(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -87,17 +89,16 @@ export class SquadComponent implements OnInit {
   }
 
   openModalDelete(template: TemplateRef<any>, squad: ISquad){
-    debugger;
     this.squad = squad; 
     this.modalService.show(template);
   }
 
   eliminarSquad(){
-    this.squad.usuario_actualiza = "T16587";
+    this.squad.usuarioActualiza = "T16587";
     this.squadService.deleteSquad(this.squad).subscribe(
       res => {
         this.cerrarModal();
-        this.cargarSquads();
+        this.cargarSquads(this.page);
       },
       err =>{
         this.cerrarModal();
@@ -106,14 +107,18 @@ export class SquadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarSquads();
+    this.setPage({ offset: 0 });
+    this.page.currentPage = 1;
+    this.cargarSquads(this.page);
   }
 
-  cargarSquads(){
+  cargarSquads(page: Page){
     this.loadingIndicator = true;
-    this.squadService.getAllSquads().subscribe(
+    this.squadService.getSquads(this.page).subscribe(
       res => {
-        this.squadList = res;
+        this.page.currentPage = this.page.currentPage - 1;
+        this.squadList = res.squads;
+        this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;
       },
       err =>{

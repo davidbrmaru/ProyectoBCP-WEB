@@ -1,10 +1,16 @@
 export class ISquad {
     constructor () {}
     nombre: string;
-    id_tribe: number;
-    fec_ingresa: Date;
-    fec_actualiza: Date;
-    usuario_actualiza: string;
-    flg_activo: boolean;
+    idTribe: number;
+    fecIngreso: Date;
+    usuarioIngresa: string;
+    fecActualiza: Date;
+    usuarioActualiza: string;
+    flgActivo: boolean;
     id: string;
 }
+
+export class ISquadResponse {
+    totalRows: number;
+    squads: ISquad[];
+  }
