@@ -129,6 +129,19 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="Squad">Tribu</label>
+                <select class="form-select" id="Squad" [(ngModel)]="application.idSquad" name="idSquad" #idSquad="ngModel" required>
+                  <option value={{squad.id}} *ngFor="let squad of squadList">{{squad.nombre}}</option>
+                </select>
+                <div *ngIf="idSquad.invalid && (idSquad.dirty || idSquad.touched)" class="alert">
+                  <div *ngIf="idSquad.errors?.['required']">Tribu es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>

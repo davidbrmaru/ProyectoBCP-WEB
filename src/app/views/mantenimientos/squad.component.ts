@@ -2,7 +2,9 @@ import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { ISquad } from 'src/app/models/squad.model';
+import { ITribe } from 'src/app/models/tribe.model';
 import { SquadService } from 'src/app/services/squad.service';
+import { TribeService } from 'src/app/services/tribe.service';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -18,6 +20,7 @@ export class SquadComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   squadList : ISquad[] = [];
+  tribeList : ITribe[] = [];
   nombre :string;
   squad : ISquad;
   page: Page = new Page();
@@ -28,6 +31,7 @@ export class SquadComponent implements OnInit {
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
     private squadService: SquadService,
+    private tribeService: TribeService,
     private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
@@ -43,6 +47,7 @@ export class SquadComponent implements OnInit {
 
   openModalNewEdit(template: TemplateRef<any>, squad?: ISquad) {
     this.squad = new ISquad;
+    this.cargarTribes();
     this.NewEdit = "Nuevo";
     if(squad != undefined){
       this.NewEdit = "Editar";
@@ -50,6 +55,20 @@ export class SquadComponent implements OnInit {
     }
     this.modalService.show(template);
   }
+
+  cargarTribes() {
+    this.loadingIndicator = true;
+    this.tribeService.getAllTribes().subscribe(
+      res => {
+        this.tribeList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
 
   cerrarModal(){
     this.modalService.hide();
@@ -61,7 +80,7 @@ export class SquadComponent implements OnInit {
       this.squadService.saveSquad(this.squad).subscribe(
         res => {
           this.cerrarModal();
-          this.page.currentPage = 1;
+          this.page.currentPage = this.page.currentPage + 1;
           this.cargarSquads(this.page);
         },
         err =>{
@@ -98,6 +117,7 @@ export class SquadComponent implements OnInit {
     this.squadService.deleteSquad(this.squad).subscribe(
       res => {
         this.cerrarModal();
+        this.page.currentPage = this.page.currentPage + 1;
         this.cargarSquads(this.page);
       },
       err =>{
@@ -119,7 +139,7 @@ export class SquadComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.squadList = res.squads;
         this.page.totalCount = res.totalRows;
-        this.loadingIndicator = false;
+        this.loadingIndicator = false;  
       },
       err =>{
         this.loadingIndicator = false;

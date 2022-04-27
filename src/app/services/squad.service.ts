@@ -19,7 +19,7 @@ export class SquadService {
       }
   
     getAllSquads(): Observable<ISquad[]> {
-      return this.http.get<ISquad[]>(environment.apiUrl + '/api/Squad/All');
+      return this.http.get<ISquad[]>(environment.apiUrl + 'api/Squad/All');
     }
   
     saveSquad(input : ISquad): Observable<ISquad> {

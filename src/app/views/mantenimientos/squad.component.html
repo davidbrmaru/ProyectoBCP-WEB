@@ -92,13 +92,12 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="id_tribe">Tribu</label>
-                <select class="form-select" id="id_tribe" [(ngModel)]="squad.idTribe" name="id_tribe" #id_tribe="ngModel" required>
-                  <option value="1">Tribu 1</option>
-                  <option value="2">Tribu 2</option>
+                <label cLabel for="Tribe">Tribu</label>
+                <select class="form-select" id="Tribe" [(ngModel)]="squad.idTribe" name="idTribe" #idTribe="ngModel" required>
+                  <option value={{tribe.id}} *ngFor="let tribe of tribeList">{{tribe.nombre}}</option>
                 </select>
-                <div *ngIf="id_tribe.invalid && (id_tribe.dirty || id_tribe.touched)" class="alert">
-                  <div *ngIf="id_tribe.errors?.['required']">Tribu es obligatorio.</div>   
+                <div *ngIf="idTribe.invalid && (idTribe.dirty || idTribe.touched)" class="alert">
+                  <div *ngIf="idTribe.errors?.['required']">Tribu es obligatorio.</div>
                 </div>
               </div>
             </div>

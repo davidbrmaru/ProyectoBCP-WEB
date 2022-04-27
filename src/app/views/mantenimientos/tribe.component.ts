@@ -99,6 +99,7 @@
       this.tribeService.deleteTribe(this.tribe).subscribe(
         res => {
           this.cerrarModal();
+          this.page.currentPage = this.page.currentPage +1;
           this.cargarTribes(this.page);
         },
         err =>{
