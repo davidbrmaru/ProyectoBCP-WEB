@@ -69,7 +69,8 @@ export class TeamMemberComponent implements OnInit {
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
         res => {
           this.cerrarModal();
-          //this.cargarTeamMembers();
+          this.page.currentPage = 1;
+          this.cargarTeamMembers(this.page);
         },
         err => {
           this.cerrarModal();
@@ -98,7 +99,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.updateTeamMember(item).subscribe(
       res => {
         this.cerrarModal();
-        //this.cargarTeamMembers();
+        this.cargarTeamMembers(this.page);
       },
       err => {
         this.cerrarModal();
@@ -116,7 +117,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.deleteTeamMember(this.teammember).subscribe(
       res => {
         this.cerrarModal();
-        //this.cargarTeamMembers();
+        this.cargarTeamMembers(this.page);
       },
       err => {
         this.cerrarModal();
@@ -127,7 +128,7 @@ export class TeamMemberComponent implements OnInit {
   ngOnInit(): void {
     this.setPage({ offset: 0 });
     this.page.currentPage = 1;
-    //this.cargarTeamMembers(this.page);
+    this.cargarTeamMembers(this.page);
   }
 
   cargarTeamMembers(page: Page) {
