@@ -46,6 +46,15 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'Reportes'
+  },
+  {
+    name: 'Base de Activos',
+    url: '/reportes/baseactivos',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {
