@@ -12,7 +12,8 @@
                     Nuevo 
             </button>
             <button cButton
-                    class="me-1 btn btn-secondary">
+                    class="me-1 btn btn-secondary"
+                    (click)="cerrarPeriodo()">
                     Cerrar Periodo
             </button>
           </c-col>
@@ -149,22 +150,25 @@
             </button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-6">
-              <div class="mb-1">
-                <label cLabel for="matricula">Matricula</label>
-                <input class="form-control" id="matricula" type="text" [(ngModel)]="matricula" name="matricula"/>
+          <form cForm class="form" #addForm="ngForm" (ngSubmit)="agregarTeamMember()">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-1">
+                  <label cLabel for="matricula">Matricula</label>
+                  <input class="form-control" id="matricula" type="text" [(ngModel)]="activoTable.matricula" name="matricula" #matricula="ngModel" required/>
+                  <div *ngIf="matricula.invalid && (matricula.dirty || matricula.touched)" class="alert">
+                    <div *ngIf="matricula.errors?.['required']">Matricula es obligatorio.</div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <form cForm class="form" #addForm="ngForm" (ngSubmit)="agregarTeamMember()" novalidate>
             <div class="row">
                 <div class="col-6">
                 <div class="mb-1">
                     <label cLabel for="aplicacion">Aplicación</label>
-                    <select class="form-select" id="aplicacion" [(ngModel)]="activo.id" name="aplicacion" #aplicacion="ngModel" required>
-                    <option value="1">ABCD</option>
-                    <option value="2">1234</option>
+                    <select class="form-select" id="aplicacion" [(ngModel)]="activoTable.aplicacion" name="aplicacion" #aplicacion="ngModel" required>
+                    <option value="ABCD">ABCD</option>
+                    <option value="1234">1234</option>
                     </select>
                     <div *ngIf="aplicacion.invalid && (aplicacion.dirty || aplicacion.touched)" class="alert">
                     <div *ngIf="aplicacion.errors?.['required']">Tipo proveedor es obligatorio.</div>   
@@ -174,7 +178,7 @@
                 <div class="col-6">
                 <div class="mb-1">
                     <label cLabel for="porcentaje">Porcentaje</label>
-                    <input class="form-control" id="porcentaje" type="text" [(ngModel)]="activo.porcentaje" name="porcentaje" #porcentaje="ngModel" required />
+                    <input class="form-control" id="porcentaje" type="number" [(ngModel)]="activoTable.porcentaje" name="porcentaje" #porcentaje="ngModel" required />
                     <div *ngIf="porcentaje.invalid && (porcentaje.dirty || porcentaje.touched)" class="alert">
                     <div *ngIf="porcentaje.errors?.['required']">Porcentaje es obligatorio.</div>
                     </div>
@@ -185,7 +189,7 @@
                 <div class="col-12">
                 <div class="mb-1">
                     <label cLabel for="comentario">Comentario</label>
-                    <input class="form-control" id="comentario" type="text" [(ngModel)]="activo.comentario" name="comentario" #comentario="ngModel" required />
+                    <textarea class="form-control" id="comentario" [(ngModel)]="activoTable.comentario" name="comentario" #comentario="ngModel" required rows="3"></textarea>
                     <div *ngIf="comentario.invalid && (comentario.dirty || comentario.touched)" class="alert">
                     <div *ngIf="comentario.errors?.['required']">Comentario es obligatorio.</div>
                     </div>
@@ -193,9 +197,34 @@
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Agregar</button>
+              <div class="col-12">
+                <button style="width: 100%; margin-top: 15px;" type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Agregar</button>
+              </div>
             </div>
         </form>
+        <label style="color: red; font-size: 16px; font-weight: bold; margin-top: 14px;">{{mensaje}}</label>
+        <table style="margin-top: 14px;" [striped]="true" cTable color="dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Aplicación</th>
+            <th scope="col">Porcentaje</th>
+            <th scope="col">Comentario</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of activosListTable; let i = index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.matricula}}</td>
+            <td>{{item.aplicacion}}</td>
+            <td>{{item.porcentaje}}</td>
+            <td>{{item.comentario}}</td>
+            <td><a><span (click)="borrarTeamMember(item)">Borrar</span></a></td>
+          </tr>
+          </tbody>
+        </table>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>

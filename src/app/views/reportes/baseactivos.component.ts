@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2, TemplateRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Inject, Input, OnInit, Renderer2, TemplateRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, DefaultIterableDiffer } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Page } from 'src/app/models/page.model';
-import { IBaseActivo, IBaseActivos, IActivo } from 'src/app/models/baseactivo.model';
+import { IBaseActivo, IBaseActivos, IActivo, IActivoTable } from 'src/app/models/baseactivo.model';
 import { ITeamMemberResponse } from 'src/app/models/teammember.model';
 import { BaseActivosService } from 'src/app/services/baseactivos.service';
 import { ChapterLeadService } from 'src/app/services/chapterlead.service';
@@ -22,10 +22,15 @@ export class BaseActivosComponent implements OnInit {
   reorderable = true;
   baseActivoList: IBaseActivos[] = [];
   columns = [{prop:'' , name:''}];
-  baseActivo : IBaseActivo;
+  baseActivo : IBaseActivo = new IBaseActivo();
   matricula: string = "";
-  listActivos : IActivo[];
-  activo : IActivo;
+  listActivos : IActivo[] = [];
+  activo : IActivo = new IActivo();
+  activosListTable: IActivoTable[] = [];
+  activoTable: IActivoTable = new IActivoTable();
+  indexBorrar : number;
+  mensaje :string = "";
+  total : number = 0;
   
   page: Page = new Page();
   NewEdit:string;
@@ -47,9 +52,14 @@ export class BaseActivosComponent implements OnInit {
  
   modalRef: BsModalRef;
 
-  openModalAdd(template: TemplateRef<any>) {
-    
+  openModalAdd(template: TemplateRef<any>) {  
     this.cargarApps();
+    this.total = 0;
+    this.mensaje = "";
+    this.activo = new IActivo();
+    this.activoTable = new IActivoTable();
+    this.listActivos = [];
+    this.activosListTable = [];
     this.modalService.show(template);
   }
 
@@ -58,15 +68,74 @@ export class BaseActivosComponent implements OnInit {
   }
 
   agregarTeamMember() {
+    this.mensaje = "";
+    this.total = 0;
+    debugger;
+    if(this.activosListTable.length > 0){
+      if(this.activoTable.matricula != this.activosListTable[0].matricula){
+        this.mensaje = "Estas ingresando la matricula de otro teammember";
+        return;
+      }
+    }
+    else{
+      if(this.activoTable.porcentaje > 100){
+        this.mensaje = "Estas superando el 100% de la capacidad del teammember";
+        return;  
+      }
+    }
+    
+    this.activosListTable.forEach((item,index) => {
+      this.total += item.porcentaje;
+    });
+
+    this.total += this.activoTable.porcentaje;
+
+    if(this.total > 100){
+      this.mensaje = "Estas superando el 100% de la capacidad del teammember";
+      return;
+    }
+
+    this.activosListTable.push(this.activoTable);
+    this.matricula = this.activoTable.matricula;
+    
+    this.activo.id = this.activoTable.aplicacion;
+    this.activo.porcentaje = this.activoTable.porcentaje;
+    this.activo.comentario = this.activoTable.comentario;
     this.listActivos.push(this.activo);
+
+    this.activoTable = new IActivoTable();
+    this.activoTable.matricula = this.matricula;
+  }
+
+  borrarTeamMember(activo: any){
+    this.activosListTable.forEach((item, index) => {
+      if(item.aplicacion == activo.aplicacion && item.matricula == activo.matricula
+        && item.porcentaje == activo.porcentaje && item.comentario == activo.comentario) {
+          // Si el elemento coincide, actualizar variable
+          this.total -= activo.porcentaje;
+          this.indexBorrar = index;
+          // No hay posibilidad de usar break para cancelar
+          // En todo caso, si son muchos elementos, conviene mejor usar un ciclo for
+      }
+    });
+    this.activosListTable.splice(this.indexBorrar, 1);
   }
 
   cargarApps(){
 
   }
 
-  registrarBaseActivo() {
+  cerrarPeriodo(){
+    
+  }
 
+  registrarBaseActivo() {
+    debugger;
+    if(this.listActivos.length <= 0){
+      this.mensaje = "Debes agregar al menos 1 registro del teammember";
+      return;
+    }
+    this.total = 0;
     this.baseActivo.id = this.matricula;
     this.baseActivo.applications = this.listActivos;
     

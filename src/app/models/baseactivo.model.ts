@@ -4,11 +4,17 @@ export class IBaseActivo {
 }
 
 export class IActivo{
-    id : number;
+    id : string;
     porcentaje: number;
     comentario: string;
 }
 
+export class IActivoTable{
+    matricula : string;
+    aplicacion: string;
+    porcentaje: number;
+    comentario: string;
+}
 export class IBaseActivosResponse{
     totalRows: number;
     baseActivos: IBaseActivos[];
