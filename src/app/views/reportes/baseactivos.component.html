@@ -16,9 +16,33 @@
                     (click)="cerrarPeriodo()">
                     Cerrar Periodo
             </button>
+            <button cButton
+                    class="me-1 btn btn-default"
+                    (click)="exportar()">
+                    Exportar
+            </button>
           </c-col>
         </c-row>
         
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+              </tr>
+              <tr *ngFor="let item of userList">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
+
         <c-row>
           <c-col>
             <div style="overflow-x:auto;">
