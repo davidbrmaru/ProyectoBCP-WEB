@@ -80,7 +80,7 @@ export class SquadComponent implements OnInit {
       this.squadService.saveSquad(this.squad).subscribe(
         res => {
           this.cerrarModal();
-          this.page.currentPage = this.page.currentPage + 1;
+          this.page.currentPage = 1;
           this.cargarSquads(this.page);
         },
         err =>{

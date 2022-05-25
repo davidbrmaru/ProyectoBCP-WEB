@@ -62,6 +62,7 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
           this.cerrarModal();
+          this.page.currentPage = 1;
         this.cargarChapterAreaLeads(this.page);
         },
         err => {

@@ -76,11 +76,10 @@ export class ApplicationComponent implements OnInit {
   agregarApplication(a: NgForm){ 
     if(this.NewEdit == "Nuevo"){   
       this.application.usuarioIngresa = "S61121";
-      this.application.idSquad = 27;
       this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
-          this.page.currentPage = this.page.currentPage + 1;
+          this.page.currentPage = 1;
           this.cargarApplications(this.page);
         },
         err =>{
