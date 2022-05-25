@@ -1,0 +1,171 @@
+<div class="fade-in">
+    <c-card class="mb-4">
+      <c-card-header>
+        Aplicaciones
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col>
+            <button cButton
+                    class="me-1 btn btn-primary"
+                    (click)="openModalNewEdit(templateNewEdit)">
+                    Nuevo 
+            </button>
+            <button cButton
+                    class="me-1 btn btn-secondary">
+                    Exportar
+            </button>
+          </c-col>
+        </c-row>
+        
+        <c-row>
+          <c-col>
+            <div style="overflow-x:auto;">
+              <div class="col-md-12 mb-3" style="margin-top: 10px;">
+                  <ngx-datatable 
+                  class="material container striped" 
+                  [rows]="applicationList" 
+                  [loadingIndicator]="loadingIndicator"
+                  [columnMode]="'force'"
+                  [headerHeight]="50" 
+                  [footerHeight]="50" 
+                  [scrollbarH]="true"
+                  [rowHeight]="50"
+                  [externalPaging]="true"
+                  [count]="page.totalCount"
+                  [offset]="page.currentPage"
+                  [limit]="page.pageSize"
+                  (page)='setPage($event)'
+                  [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Aplicaciones encontrados.'}">   
+                  
+                  <ngx-datatable-column name="Codigo APP">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.codAplicacion}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombre">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nombre}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                
+                  <ngx-datatable-column name="Código Owner">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.codOwner}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Binding Block">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.bindingBlock}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha Ingreso">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.fecIngreso}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Acciones">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div>
+                        <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
+                        <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
+                    </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  
+    <ng-template #templateNewEdit>
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarApplication(registerForm)" novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">{{NewEdit}} Aplicación</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+              <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="codigo">Codigo APP</label>
+                <input class="form-control" id="codigo" type="text" [(ngModel)]="application.codAplicacion" name="codApplication" #codApplication="ngModel" required />
+                  <div *ngIf="codApplication.invalid && (codApplication.dirty || codApplication.touched)" class="alert">
+                    <div *ngIf="codApplication.errors?.['required']">Codigo aplicacion es obligatorio.</div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="nombre">Nombre</label>
+                <input class="form-control" id="nombre" type="text" [(ngModel)]="application.nombre" name="nombre" #nombre="ngModel" required />
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+                  <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="codOwner">Código Owner</label>
+                <input class="form-control" id="codOwner" type="text" [(ngModel)]="application.codOwner" name="codOwner" #codOwner="ngModel" required />
+                <div *ngIf="codOwner.invalid && (codOwner.dirty || codOwner.touched)" class="alert">
+                  <div *ngIf="codOwner.errors?.['required']">Apellido paterno es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="bindingBlock">Binding Block</label>
+                <input class="form-control" id="bindingBlock" type="text" [(ngModel)]="application.bindingBlock" name="bindingBlock" #bindingBlock="ngModel" required />
+                <div *ngIf="bindingBlock.invalid && (bindingBlock.dirty || bindingBlock.touched)" class="alert">
+                  <div *ngIf="bindingBlock.errors?.['required']">Apellido materno es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-1">
+                <label cLabel for="Squad">Tribu</label>
+                <select class="form-select" id="Squad" [(ngModel)]="application.idSquad" name="idSquad" #idSquad="ngModel" required>
+                  <option value={{squad.id}} *ngFor="let squad of squadList">{{squad.nombre}}</option>
+                </select>
+                <div *ngIf="idSquad.invalid && (idSquad.dirty || idSquad.touched)" class="alert">
+                  <div *ngIf="idSquad.errors?.['required']">Tribu es obligatorio.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+        </div>
+    </form>
+    </ng-template>
+  
+    <ng-template #templateDelete>
+      <div class="modal-header">
+          <h4 class="modal-title pull-left">Eliminar Aplicación</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+            <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <span cLabel>¿Estas seguro de eliminar la aplicación </span>{{application.nombre}} - {{application.codAplicacion}} <span>?</span>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="cerrarModal()">No</button>
+          <button type="button" class="btn btn-primary" (click)="eliminarApplication()">Si</button>
+      </div>
+    </ng-template>
+  
+  </div>
+  

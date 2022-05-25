@@ -1,0 +1,260 @@
+<div class="fade-in">
+    <c-card class="mb-4">
+      <c-card-header>
+        Base de Activos
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col>
+            <button cButton
+                    class="me-1 btn btn-primary"
+                    (click)="openModalAdd(templateAdd)">
+                    Nuevo 
+            </button>
+            <button cButton
+                    class="me-1 btn btn-secondary"
+                    (click)="cerrarPeriodo()">
+                    Cerrar Periodo
+            </button>
+            <button cButton
+                    class="me-1 btn btn-default"
+                    (click)="exportar()">
+                    Exportar
+            </button>
+          </c-col>
+        </c-row>
+        
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+              </tr>
+              <tr *ngFor="let item of userList">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
+
+        <c-row>
+          <c-col>
+            <div style="overflow-x:auto;">
+              <div class="col-md-12 mb-3" style="margin-top: 10px;">
+                  <ngx-datatable 
+                  class="material container striped" 
+                  [rows]="baseActivoList" 
+                  [loadingIndicator]="loadingIndicator"
+                  [columnMode]="'force'"
+                  [headerHeight]="50" 
+                  [footerHeight]="50" 
+                  [scrollbarH]="true"
+                  [rowHeight]="50"
+                  [externalPaging]="true"
+                  [count]="page.totalCount"
+                  [offset]="page.currentPage"
+                  [limit]="page.pageSize"
+                  (page)='setPage($event)'
+                  [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Activos encontrados.'}">   
+                  
+                  <ngx-datatable-column name="Nombre CAL">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nombreCal}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Matricula Chapter">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.matriculaChapter}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Chapter Leader">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.chapterLeader}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Tipo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.tipo}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Empresa">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.empresa}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Matricula">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.matricula}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Ap.Paterno">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.apellidoPaterno}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Ap. Materno">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.apellidoMaterno}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombres">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nombre}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Rol">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.rol}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Rol Insourcing">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.rolInsourcing}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Especialidad">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.especialidad}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Tribu/Coe">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.tribuCoe}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Squad">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.squad}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Código App asignado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.codAppAsignado}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="% de asignación a la App">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.porcentajeAsignacion}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="BB">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.bb}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Chapter">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.chapter}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Comentarios">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.comentarios}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  
+    <ng-template #templateAdd>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Agregar Team Member</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+              <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form cForm class="form" #addForm="ngForm" (ngSubmit)="agregarTeamMember()">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-1">
+                  <label cLabel for="matricula">Matricula</label>
+                  <input class="form-control" id="matricula" type="text" [(ngModel)]="activoTable.matricula" name="matricula" #matricula="ngModel" required/>
+                  <div *ngIf="matricula.invalid && (matricula.dirty || matricula.touched)" class="alert">
+                    <div *ngIf="matricula.errors?.['required']">Matricula es obligatorio.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                <div class="mb-1">
+                    <label cLabel for="aplicacion">Aplicación</label>
+                    <select class="form-select" id="aplicacion" [(ngModel)]="activoTable.aplicacion" name="aplicacion" #aplicacion="ngModel" required>
+                    <option value="ABCD">ABCD</option>
+                    <option value="1234">1234</option>
+                    </select>
+                    <div *ngIf="aplicacion.invalid && (aplicacion.dirty || aplicacion.touched)" class="alert">
+                    <div *ngIf="aplicacion.errors?.['required']">Tipo proveedor es obligatorio.</div>   
+                    </div>
+                </div>
+                </div>
+                <div class="col-6">
+                <div class="mb-1">
+                    <label cLabel for="porcentaje">Porcentaje</label>
+                    <input class="form-control" id="porcentaje" type="number" [(ngModel)]="activoTable.porcentaje" name="porcentaje" #porcentaje="ngModel" required />
+                    <div *ngIf="porcentaje.invalid && (porcentaje.dirty || porcentaje.touched)" class="alert">
+                    <div *ngIf="porcentaje.errors?.['required']">Porcentaje es obligatorio.</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mb-1">
+                    <label cLabel for="comentario">Comentario</label>
+                    <textarea class="form-control" id="comentario" [(ngModel)]="activoTable.comentario" name="comentario" #comentario="ngModel" required rows="3"></textarea>
+                    <div *ngIf="comentario.invalid && (comentario.dirty || comentario.touched)" class="alert">
+                    <div *ngIf="comentario.errors?.['required']">Comentario es obligatorio.</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button style="width: 100%; margin-top: 15px;" type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Agregar</button>
+              </div>
+            </div>
+        </form>
+        <label style="color: red; font-size: 16px; font-weight: bold; margin-top: 14px;">{{mensaje}}</label>
+        <table style="margin-top: 14px;" [striped]="true" cTable color="dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Aplicación</th>
+            <th scope="col">Porcentaje</th>
+            <th scope="col">Comentario</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of activosListTable; let i = index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.matricula}}</td>
+            <td>{{item.aplicacion}}</td>
+            <td>{{item.porcentaje}}</td>
+            <td>{{item.comentario}}</td>
+            <td><a><span (click)="borrarTeamMember(item)">Borrar</span></a></td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
+            <button type="button" class="btn btn-primary" (click)="registrarBaseActivo()">Registrar</button>
+        </div>
+    </ng-template>
+  </div>
+  
+  

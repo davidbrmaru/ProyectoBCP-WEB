@@ -1,0 +1,256 @@
+<div class="fade-in">
+  <c-card class="mb-4">
+    <c-card-header>
+      Team Members
+    </c-card-header>
+    <c-card-body>
+      <c-row>
+        <c-col>
+          <button cButton
+                  class="me-1 btn btn-primary"
+                  (click)="openModalNewEdit(templateNewEdit)">
+                  Nuevo 
+          </button>
+          <button cButton
+                  class="me-1 btn btn-secondary">
+                  Exportar
+          </button>
+        </c-col>
+      </c-row>
+      
+      <c-row>
+        <c-col>
+          <div style="overflow-x:auto;">
+            <div class="col-md-12 mb-3" style="margin-top: 10px;">
+                <ngx-datatable 
+                class="material container striped" 
+                [rows]="teamMemberList" 
+                [loadingIndicator]="loadingIndicator"
+                [columnMode]="'force'"
+                [headerHeight]="50" 
+                [footerHeight]="50" 
+                [scrollbarH]="true"
+                [rowHeight]="50"
+                [externalPaging]="true"
+                [count]="page.totalCount"
+                [offset]="page.currentPage"
+                [limit]="page.pageSize"
+                (page)='setPage($event)'
+                [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Team Members encontrados.'}">   
+                
+                <ngx-datatable-column name="Matricula">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.codMatricula}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Nombre">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.nombre}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Ap. Paterno">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.apellidoPaterno}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Ap. Materno">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.apellidoMaterno}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Chapter Lead">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.idChapterLeader}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Tipo Proveedor">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.tipoProveedor}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Empresa">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.empresa}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Rol">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.rol}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Rol Insourcing">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.rolInsourcing}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Especialidad">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.especialidad}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Fecha Ingreso">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.fecIngreso}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div>
+                      <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
+                      <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
+                  </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+          </div>
+        </c-col>
+      </c-row>
+    </c-card-body>
+  </c-card>
+
+  <ng-template #templateNewEdit>
+    <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTeamMember(registerForm)" novalidate>
+      <div class="modal-header">
+          <h4 class="modal-title pull-left">{{NewEdit}} Team Member</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+            <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="nombre">Nombre</label>
+              <input class="form-control" id="nombre" type="text" [(ngModel)]="teammember.nombre" name="nombre" #nombre="ngModel" required/>
+              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+                <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="apellidoPaterno">Apellido Paterno</label>
+              <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
+              <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
+                <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>   
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="apellidoMaterno">Apellido Materno</label>
+              <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
+              <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
+                <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>   
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="chapterLead">Chapter Lead</label>
+              <select class="form-select" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" >
+                <option value={{chapterLead.id}} *ngFor="let chapterLead of chapterLeadList">{{chapterLead.nombres + ' '+ chapterLead.apellidoPaterno}}</option>
+              </select>
+              <div *ngIf="idChapterLeader.invalid && (idChapterLeader.dirty || idChapterLeader.touched)" class="alert">
+                <div *ngIf="idChapterLeader.errors?.['required']">Chapter leader es obligatorio.</div>   
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="tipoProveedor">Tipo Proveedor</label>
+              <select class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
+                <option value="PROVEEDOR">PROVEEDOR</option>
+                <option value="ORGÁNICO">ORGÁNICO</option>
+              </select>
+              <div *ngIf="tipoProveedor.invalid && (tipoProveedor.dirty || tipoProveedor.touched)" class="alert">
+                <div *ngIf="tipoProveedor.errors?.['required']">Tipo proveedor es obligatorio.</div>   
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="empresa">Empresa</label>
+              <input class="form-control" id="empresa" type="text" [(ngModel)]="teammember.empresa" name="empresa" #empresa="ngModel" required />
+              <div *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" class="alert">
+                <div *ngIf="empresa.errors?.['required']">Empresa es obligatorio.</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="rol">Rol</label>
+              <input class="form-control" id="rol" type="text" [(ngModel)]="teammember.rol" name="rol" #rol="ngModel" required />
+              <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert">
+                <div *ngIf="rol.errors?.['required']">Rol es obligatorio.</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="rolInsourcing">Rol Insourcing</label>
+              <input class="form-control" id="rolInsourcing" type="text" [(ngModel)]="teammember.rolInsourcing" name="rolInsourcing" #rolInsourcing="ngModel" required />
+              <div *ngIf="rolInsourcing.invalid && (rolInsourcing.dirty || rolInsourcing.touched)" class="alert">
+                <div *ngIf="rolInsourcing.errors?.['required']">rolInsourcing es obligatorio.</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="especialidad">Especialidad</label>
+              <input class="form-control" id="especialidad" type="text" [(ngModel)]="teammember.especialidad" name="especialidad" #especialidad="ngModel" required />
+              <div *ngIf="especialidad.invalid && (especialidad.dirty || especialidad.touched)" class="alert">
+                <div *ngIf="especialidad.errors?.['required']">Especialidad es obligatorio.</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="matricula">Matricula</label>
+              <input class="form-control" id="matricula" type="text" [(ngModel)]="teammember.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
+              <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
+                <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #templateDelete>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Eliminar Team Member</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+          <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+      <span cLabel>¿Estas seguro de eliminar a </span>{{teammember.nombre}} {{teammember.apellidoPaterno}} {{teammember.apellidoMaterno}} - {{teammember.codMatricula}} <span>?</span>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="cerrarModal()">No</button>
+        <button type="button" class="btn btn-primary" (click)="eliminarTeamMember()">Si</button>
+    </div>
+  </ng-template>
+
+</div>
+
