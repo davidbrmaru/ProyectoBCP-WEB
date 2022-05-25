@@ -52,16 +52,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     pointHoverBackgroundColor: '#fff'
   };
   brandData = [
-    {
-      icon: 'cibFacebook',
-      values: [{ title: 'friends', value: '89K' }, { title: 'feeds', value: '459' }],
-      capBg: { '--cui-card-cap-bg': '#3b5998' },
-      labels: [...this.labels],
-      data: {
-        labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Facebook', ...this.colors }]
-      }
-    },
+    
     {
       icon: 'cibTwitter',
       values: [{ title: 'followers', value: '973k' }, { title: 'tweets', value: '1.792' }],
