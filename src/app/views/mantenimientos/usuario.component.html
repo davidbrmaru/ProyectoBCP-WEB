@@ -1,0 +1,158 @@
+<div class="fade-in">
+  <c-card class="mb-4">
+    <c-card-header>
+      Usuarios
+    </c-card-header>
+    <c-card-body>
+      <c-row>
+        <c-col>
+          <button cButton
+                  class="me-1 btn btn-primary"
+                  (click)="openModalNewEdit(templateNewEdit)">
+            Nuevo
+          </button>
+          <button cButton
+                  class="me-1 btn btn-secondary">
+            Exportar
+          </button>
+        </c-col>
+      </c-row>
+
+      <c-row>
+        <c-col>
+          <div style="overflow-x:auto;">
+            <div class="col-md-12 mb-3" style="margin-top: 10px;">
+              <ngx-datatable class="material container striped"
+                             [rows]="usuarioList"
+                             [loadingIndicator]="loadingIndicator"
+                             [columnMode]="'force'"
+                             [headerHeight]="50"
+                             [footerHeight]="50"
+                             [scrollbarH]="true"
+                             [rowHeight]="50"
+                             [externalPaging]="true"
+                             [count]="page.totalCount"
+                             [offset]="page.currentPage"
+                             [limit]="page.pageSize"
+                             (page)='setPage($event)'
+                             [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Aplicaciones encontrados.'}">
+
+                <ngx-datatable-column name="Codigo Matricula">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.codMatricula}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Correo">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.correo}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Rol">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.idRol}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Fecha Ingreso">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.fecIngreso}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Usuario Ingreso">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.usuarioIngresa}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div>
+                      <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
+                      <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+          </div>
+        </c-col>
+      </c-row>
+    </c-card-body>
+  </c-card>
+
+  <ng-template #templateNewEdit>
+    <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarUsuario(registerForm)" novalidate>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{NewEdit}} Usuario</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="codigo">Codigo Usuario</label>
+              <input class="form-control" id="codMatricula" type="text" [(ngModel)]="usuario.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
+              <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
+                <div *ngIf="codMatricula.errors?.['required']">Codigo del usuario es obligatorio.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="password">Password</label>
+              <input class="form-control" id="password" type="password" [(ngModel)]="usuario.password" name="password" #password="ngModel" required />
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                <div *ngIf="password.errors?.['required']">Password del usuario es obligatorio.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="correo">Correo</label>
+              <input class="form-control" id="correo" type="text" [(ngModel)]="usuario.correo" name="correo" #correo="ngModel" required />
+              <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert">
+                <div *ngIf="correo.errors?.['required']">Correo es obligatorio.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-1">
+              <label cLabel for="rol">Rol</label>
+              <select class="form-select" id="rol" [(ngModel)]="usuario.idRol" name="codRol" #codRol="ngModel">
+                <option value={{rol.id}} *ngFor="let rol of rolList">{{rol.nombre}}</option>
+              </select>
+              <div *ngIf="codRol.invalid && (codRol.dirty || codRol.touched)" class="alert">
+                <div *ngIf="codRol.errors?.['required']">Rol es obligatorio.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #templateDelete>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Eliminar Usuario</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span cLabel>¿Estas seguro de eliminar el Usuario </span>{{usuario.codMatricula}} - {{usuario.correo}} <span>?</span>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="cerrarModal()">No</button>
+      <button type="button" class="btn btn-primary" (click)="eliminarUsuario()">Si</button>
+    </div>
+  </ng-template>
+
+</div>
+

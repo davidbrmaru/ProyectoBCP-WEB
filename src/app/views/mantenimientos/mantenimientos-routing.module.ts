@@ -7,6 +7,9 @@ import { ChapterLeadComponent } from './chapterlead.component';
 import { ApplicationComponent } from './application.component';
 import { TribeComponent } from './tribe.component';
 import { SquadComponent } from './squad.component';
+import { RolComponent } from './rol.component';
+import { UsuarioComponent } from './usuario.component';
+
 
 const routes: Routes = [
   {
@@ -59,6 +62,20 @@ const routes: Routes = [
         component: SquadComponent,
         data: {
           title: 'Squad',
+        },
+      },
+      {
+        path: 'rol',
+        component: RolComponent,
+        data: {
+          title: 'Rol',
+        },
+      },
+      {
+        path: 'usuario',
+        component: UsuarioComponent,
+        data: {
+          title: 'Usuario',
         },
       },
     ],
