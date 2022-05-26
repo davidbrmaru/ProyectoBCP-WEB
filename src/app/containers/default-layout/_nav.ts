@@ -41,16 +41,9 @@ export const navItems: INavData[] = [
     url: '/mantenimientos/squad',
     iconComponent: { name: 'cil-check' }
   },
-  {
-    name: 'Rol',
-    url: '/mantenimientos/rol',
-    iconComponent: { name: 'cil-star' }
-  },
-  {
-    name: 'Usuario',
-    url: '/mantenimientos/usuario',
-    iconComponent: { name: 'cil-user' }
-  },
+  
+  
+
   {
     title: true,
     name: 'Reportes'
@@ -60,7 +53,20 @@ export const navItems: INavData[] = [
     url: '/reportes/baseactivos',
     iconComponent: { name: 'cil-file' }
   },
-  
+  {
+    title: true,
+    name: 'Configuración'
+  },{
+    name: 'Rol',
+    url: '/mantenimientos/rol',
+    iconComponent: { name: 'cil-star' }
+  },
+  {
+    name: 'Usuario',
+    url: '/mantenimientos/usuario',
+    iconComponent: { name: 'cil-user' }
+  },
+
   {
     name: 'Pages',
     url: '/login',

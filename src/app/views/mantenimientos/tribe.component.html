@@ -58,8 +58,8 @@
                   <ngx-datatable-column name="Acciones">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <div>
-                        <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
-                        <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
+                        <img src="assets/editar.png" width="25" height="25" (click)="openModalNewEdit(templateNewEdit, row);">
+                        <img src="assets/eliminar.png" width="25" height="25" (click)="openModalDelete(templateDelete, row);">
                     </div>
                     </ng-template>
                   </ngx-datatable-column>
