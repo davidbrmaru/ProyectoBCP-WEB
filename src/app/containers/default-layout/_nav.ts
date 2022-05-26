@@ -2,13 +2,10 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Base de Activos',
+    name: 'Inicio',
     url: '/dashboard',
     iconComponent: { name: 'cil-home' },
-    badge: {
-      color: 'info',
-      text: 'Nuevo'
-    }
+    
   },
   {
     title: true,
@@ -27,7 +24,7 @@ export const navItems: INavData[] = [
   {
     name: 'Chapter Lead',
     url: '/mantenimientos/chapterlead',
-    iconComponent: { name: 'cil-user' }
+    iconComponent: { name: 'cil-task' }
   },
   {
     name: 'Application',
@@ -47,12 +44,12 @@ export const navItems: INavData[] = [
   {
     name: 'Rol',
     url: '/mantenimientos/rol',
-    iconComponent: { name: 'cil-drop' }
+    iconComponent: { name: 'cil-star' }
   },
   {
     name: 'Usuario',
     url: '/mantenimientos/usuario',
-    iconComponent: { name: 'cil-drop' }
+    iconComponent: { name: 'cil-user' }
   },
   {
     title: true,
@@ -67,7 +64,7 @@ export const navItems: INavData[] = [
   {
     name: 'Pages',
     url: '/login',
-    iconComponent: { name: 'cil-star' },
+    iconComponent: { name: 'cil-puzzle' },
     children: [
       {
         name: 'Login',
