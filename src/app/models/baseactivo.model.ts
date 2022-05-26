@@ -1,5 +1,6 @@
 export class IBaseActivo {
     idUser:string;
+    matricula:string;
     applications : IActivo[];
 }
 

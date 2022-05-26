@@ -139,7 +139,6 @@ export class BaseActivosComponent implements OnInit {
         return;  
       }
     }
-    
     this.activosListTable.forEach((item,index) => {
       this.total += item.porcentaje;
     });
@@ -150,15 +149,8 @@ export class BaseActivosComponent implements OnInit {
       this.mensaje = "Estas superando el 100% de la capacidad del teammember";
       return;
     }
-
     this.activosListTable.push(this.activoTable);
     this.matricula = this.activoTable.matricula;
-    
-    this.activo.idApplication = this.activoTable.aplicacion.split("-")[0];
-    this.activo.porcentaje = this.activoTable.porcentaje;
-    this.activo.comentario = this.activoTable.comentario;
-    this.listActivos.push(this.activo);
-
     this.activoTable = new IActivoTable();
     this.activoTable.matricula = this.matricula;
   }
@@ -206,12 +198,22 @@ export class BaseActivosComponent implements OnInit {
   }
 
   registrarBaseActivo() {
+    debugger;
+    this.activosListTable.forEach((item, index) => {
+      this.activo = new IActivo();
+      this.activo.idApplication = item.aplicacion.split("-")[0];
+      this.activo.porcentaje = item.porcentaje;
+      this.activo.comentario = item.comentario;
+      this.listActivos.push(this.activo);
+    });
+
     if(this.listActivos.length <= 0){
       this.mensaje = "Debes agregar al menos 1 registro del teammember";
       return;
     }
     this.total = 0;
     this.baseActivo.idUser = this.matricula.split("-")[0];
+    this.baseActivo.matricula = "S61121";
     this.baseActivo.applications = this.listActivos;
     
     this.baseActivosService.saveBaseActivo(this.baseActivo).subscribe(
