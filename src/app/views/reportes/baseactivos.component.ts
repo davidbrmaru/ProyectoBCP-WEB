@@ -24,6 +24,7 @@ export class BaseActivosComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   baseActivoList: IBaseActivos[] = [];
+  excelList : IBaseActivos[] = [];
   columns = [{prop:'' , name:''}];
   baseActivo : IBaseActivo = new IBaseActivo();
   applicationList: IApplication[] = [];
@@ -42,39 +43,6 @@ export class BaseActivosComponent implements OnInit {
   @ViewChild('registerForm') registerForm: NgForm;
 
   fileName= 'ExcelSheet.xlsx';
-  userList = [
-    {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz"
-    },
-    {
-      "id": 2,
-      "name": "Ervin Howell",
-      "username": "Antonette",
-      "email": "Shanna@melissa.tv"
-    },
-    {
-      "id": 3,
-      "name": "Clementine Bauch",
-      "username": "Samantha",
-      "email": "Nathan@yesenia.net"
-    },
-    {
-      "id": 4,
-      "name": "Patricia Lebsack",
-      "username": "Karianne",
-      "email": "Julianne.OConner@kory.org"
-    },
-    {
-      "id": 5,
-      "name": "Chelsey Dietrich",
-      "username": "Kamren",
-      "email": "Lucio_Hettinger@annie.ca"
-    }
-  ]
-
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -198,7 +166,6 @@ export class BaseActivosComponent implements OnInit {
   }
 
   registrarBaseActivo() {
-    debugger;
     this.activosListTable.forEach((item, index) => {
       this.activo = new IActivo();
       this.activo.idApplication = item.aplicacion.split("-")[0];
@@ -221,6 +188,7 @@ export class BaseActivosComponent implements OnInit {
         this.cerrarModal();
         this.page.currentPage = 1;
         this.cargarBaseActivos(this.page);
+        this.cargarExcelList();
     },
     err => {
         this.cerrarModal();
@@ -237,6 +205,8 @@ export class BaseActivosComponent implements OnInit {
     this.setPage({ offset: 0 });
     this.page.currentPage = 1;
     this.cargarBaseActivos(this.page);
+    this.cargarExcelList();
+    
   }
 
   cargarBaseActivos(page: Page) {
@@ -246,6 +216,19 @@ export class BaseActivosComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;
         this.page.totalCount = res.totalRows;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.baseActivosService.getAllBaseActivos().subscribe(
+      res => {
+        this.excelList = res;
         this.loadingIndicator = false;
       },
       err => {

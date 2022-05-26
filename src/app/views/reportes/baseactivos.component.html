@@ -28,16 +28,46 @@
           <c-col>
             <table id="excel-table">
               <tr>
-                <th>Id</th>
+                <th>Nombre Cal</th>
+                <th>Matricula Chapter</th>
+                <th>Chapter Leader</th>
+                <th>Tipo</th>
+                <th>Empresa</th>
+                <th>Matricula</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
                 <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Correo</th>
+                <th>Rol</th>
+                <th>Rol Insourcing</th>
+                <th>Especialidad</th>
+                <th>Tribu/COE</th>
+                <th>Squad</th>
+                <th>Cod App Asignado</th>
+                <th>Porcentaje de Asignacion</th>
+                <th>BB</th>
+                <th>Chapter</th>
+                <th>Comentarios</th>
               </tr>
-              <tr *ngFor="let item of userList">
-                <td>{{item.id}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.username}}</td>
-                <td>{{item.email}}</td>
+              <tr *ngFor="let item of excelList">
+                <td>{{item.nombre_cal}}</td>
+                <td>{{item.mat_chapter}}</td>
+                <td>{{item.chapter_leader}}</td>
+                <td>{{item.tipo_preper}}</td>
+                <td>{{item.empresa}}</td>
+                <td>{{item.matricula}}</td>
+                <td>{{item.apellido_paterno}}</td>
+                <td>{{item.apellido_materno}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.sq_rol}}</td>
+                <td>{{item.rol_insourcing}}</td>
+                <td>{{item.especialidad}}</td>
+                <td>{{item.tribu}}</td>
+                <td>{{item.squad}}</td>
+                <td>{{item.codigo_app_asignado}}</td>
+                <td>{{item.porcentaje_asignado}}</td>
+                <td>{{item.bb}}</td>
+                <td>{{item.chapter}}</td>
+                <td>{{item.comentario}}</td>
               </tr>
             </table>
           </c-col>
