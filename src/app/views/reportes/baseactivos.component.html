@@ -189,13 +189,12 @@
             <div class="row">
                 <div class="col-6">
                 <div class="mb-1">
-                    <label cLabel for="aplicacion">Aplicación</label>
-                    <select class="form-select" id="aplicacion" [(ngModel)]="activoTable.aplicacion" name="aplicacion" #aplicacion="ngModel" required>
-                    <option value="ABCD">ABCD</option>
-                    <option value="1234">1234</option>
+                    <label cLabel for="application">Aplicación</label>
+                    <select class="form-select" id="application" [(ngModel)]="activoTable.aplicacion" name="application" #application="ngModel" required>
+                      <option value={{application.id}} *ngFor="let application of applicationList">{{application.nombre}}</option>
                     </select>
-                    <div *ngIf="aplicacion.invalid && (aplicacion.dirty || aplicacion.touched)" class="alert">
-                    <div *ngIf="aplicacion.errors?.['required']">Tipo proveedor es obligatorio.</div>   
+                    <div *ngIf="application.invalid && (application.dirty || application.touched)" class="alert">
+                    <div *ngIf="application.errors?.['required']">Aplicacion es obligatorio.</div>   
                     </div>
                 </div>
                 </div>

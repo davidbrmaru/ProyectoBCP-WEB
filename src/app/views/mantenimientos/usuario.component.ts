@@ -70,7 +70,6 @@ export class UsuarioComponent implements OnInit {
           this.cargarUsuario(this.page);
         },
         err => {
-          debugger;
           this.cerrarModal();
         }
       )
@@ -122,7 +121,6 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.getUsuarios(this.page).subscribe(
       res => {
         this.page.currentPage = this.page.currentPage - 1;
-        debugger;
         this.usuarioList = res.users;
         this.page.totalCount = res.totalRows;
         this.loadingIndicator = false;

@@ -4,8 +4,8 @@ import { Page } from 'src/app/models/page.model';
 import { IBaseActivo, IBaseActivos, IActivo, IActivoTable } from 'src/app/models/baseactivo.model';
 import { ITeamMemberResponse } from 'src/app/models/teammember.model';
 import { BaseActivosService } from 'src/app/services/baseactivos.service';
-import { ChapterLeadService } from 'src/app/services/chapterlead.service';
-import { IChapterLead } from 'src/app/models/chapterlead.model';
+import { ApplicationService } from 'src/app/services/application.service';
+import { IApplication } from 'src/app/models/application.model';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -24,6 +24,7 @@ export class BaseActivosComponent implements OnInit {
   baseActivoList: IBaseActivos[] = [];
   columns = [{prop:'' , name:''}];
   baseActivo : IBaseActivo = new IBaseActivo();
+  applicationList: IApplication[] = [];
   matricula: string = "";
   listActivos : IActivo[] = [];
   activo : IActivo = new IActivo();
@@ -74,6 +75,7 @@ export class BaseActivosComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
+    private applicationService: ApplicationService,
     private baseActivosService: BaseActivosService
   ) {
     this.page.pageSize = 10;
@@ -120,7 +122,6 @@ export class BaseActivosComponent implements OnInit {
   agregarTeamMember() {
     this.mensaje = "";
     this.total = 0;
-    debugger;
     if(this.activosListTable.length > 0){
       if(this.activoTable.matricula != this.activosListTable[0].matricula){
         this.mensaje = "Estas ingresando la matricula de otro teammember";
@@ -219,6 +220,18 @@ export class BaseActivosComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;
         this.page.totalCount = res.totalRows;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarApplication() {
+    this.applicationService.getAllApplications().subscribe(
+      res => {
+        this.applicationList = res;
         this.loadingIndicator = false;
       },
       err => {

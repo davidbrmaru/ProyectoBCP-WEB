@@ -93,7 +93,6 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   openModalDelete(template: TemplateRef<any>, chapterLead: IChapterLead){
-    debugger;
     this.chapterLead = chapterLead; 
     this.modalService.show(template);
   }
@@ -120,7 +119,6 @@ export class ChapterLeadComponent implements OnInit {
     this.loadingIndicator = true;
     this.chapterLeadService.getChapterLeads(this.page).subscribe(
       res => {
-        debugger;
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterLeadList = res.chapterLeaders;
         this.page.totalCount = res.totalRows;
