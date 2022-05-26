@@ -22,7 +22,7 @@ export class BaseActivosService {
     }
   
     saveBaseActivo(input : IBaseActivo): Observable<IBaseActivo> {
-      return this.http.post<IBaseActivo>(environment.apiUrl + 'api/BaseActivo', input);
+      return this.http.post<IBaseActivo>(environment.apiUrl + 'api/ApplicationTeamMember', input);
     }
   
   }

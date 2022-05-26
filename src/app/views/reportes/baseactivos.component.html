@@ -178,10 +178,12 @@
             <div class="row">
               <div class="col-12">
                 <div class="mb-1">
-                  <label cLabel for="matricula">Matricula</label>
-                  <input class="form-control" id="matricula" type="text" [(ngModel)]="activoTable.matricula" name="matricula" #matricula="ngModel" required/>
-                  <div *ngIf="matricula.invalid && (matricula.dirty || matricula.touched)" class="alert">
-                    <div *ngIf="matricula.errors?.['required']">Matricula es obligatorio.</div>
+                  <label cLabel for="teamMember">Matricula</label>
+                  <select class="form-select" id="teamMember" [(ngModel)]="activoTable.matricula" name="teamMember" #teamMember="ngModel" required>
+                    <option value="{{teamMember.id}}-{{teamMember.codMatricula}}" *ngFor="let teamMember of teamMemberList">{{teamMember.codMatricula+ '-' + teamMember.nombre+ ' ' + teamMember.apellidoPaterno+ ' ' + teamMember.apellidoMaterno}}</option>
+                  </select> 
+                  <div *ngIf="teamMember.invalid && (teamMember.dirty || teamMember.touched)" class="alert">
+                  <div *ngIf="teamMember.errors?.['required']">Matricula es obligatorio.</div>
                   </div>
                 </div>
               </div>
@@ -191,7 +193,7 @@
                 <div class="mb-1">
                     <label cLabel for="application">Aplicación</label>
                     <select class="form-select" id="application" [(ngModel)]="activoTable.aplicacion" name="application" #application="ngModel" required>
-                      <option value={{application.nombre}} *ngFor="let application of applicationList">{{application.nombre}}</option>
+                      <option value="{{application.id}}-{{application.codAplicacion}}" *ngFor="let application of applicationList">{{application.codAplicacion}}</option>
                     </select> 
                     <div *ngIf="application.invalid && (application.dirty || application.touched)" class="alert">
                     <div *ngIf="application.errors?.['required']">Aplicacion es obligatorio.</div>   
@@ -239,8 +241,8 @@
           <tbody>
           <tr *ngFor="let item of activosListTable; let i = index;">
             <th scope="row">{{i+1}}</th>
-            <td>{{item.matricula}}</td>
-            <td>{{item.aplicacion}}</td>
+            <td>{{item.matricula.split("-")[1]}}</td>
+            <td>{{item.aplicacion.split("-")[1]}}</td>
             <td>{{item.porcentaje}}</td>
             <td>{{item.comentario}}</td>
             <td><a><span (click)="borrarTeamMember(item)">Borrar</span></a></td>

@@ -1,17 +1,16 @@
 export class IBaseActivo {
-    id:string;
+    idUser:string;
     applications : IActivo[];
 }
 
 export class IActivo{
-    id : string;
+    idApplication : string;
     porcentaje: number;
     comentario: string;
 }
 
 export class IActivoTable{
     matricula : string;
-    idAplicacion : string;
     aplicacion: string;
     porcentaje: number;
     comentario: string;

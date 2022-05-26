@@ -6,6 +6,8 @@ import { ITeamMemberResponse } from 'src/app/models/teammember.model';
 import { BaseActivosService } from 'src/app/services/baseactivos.service';
 import { ApplicationService } from 'src/app/services/application.service';
 import { IApplication } from 'src/app/models/application.model';
+import { TeamMemberService } from 'src/app/services/teammember.service';
+import { ITeamMember } from 'src/app/models/teammember.model';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -25,6 +27,7 @@ export class BaseActivosComponent implements OnInit {
   columns = [{prop:'' , name:''}];
   baseActivo : IBaseActivo = new IBaseActivo();
   applicationList: IApplication[] = [];
+  teamMemberList: ITeamMember[] = [];
   matricula: string = "";
   listActivos : IActivo[] = [];
   activo : IActivo = new IActivo();
@@ -76,6 +79,7 @@ export class BaseActivosComponent implements OnInit {
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
     private applicationService: ApplicationService,
+    private teamMemberService: TeamMemberService,
     private baseActivosService: BaseActivosService
   ) {
     this.page.pageSize = 10;
@@ -90,6 +94,7 @@ export class BaseActivosComponent implements OnInit {
   modalRef: BsModalRef;
 
   openModalAdd(template: TemplateRef<any>) {  
+    this.cargarTeamMember();
     this.cargarApplication();
     this.total = 0;
     this.mensaje = "";
@@ -149,7 +154,7 @@ export class BaseActivosComponent implements OnInit {
     this.activosListTable.push(this.activoTable);
     this.matricula = this.activoTable.matricula;
     
-    this.activo.id = this.activoTable.aplicacion;
+    this.activo.idApplication = this.activoTable.aplicacion.split("-")[0];
     this.activo.porcentaje = this.activoTable.porcentaje;
     this.activo.comentario = this.activoTable.comentario;
     this.listActivos.push(this.activo);
@@ -184,6 +189,18 @@ export class BaseActivosComponent implements OnInit {
     )
   }
 
+  cargarTeamMember() {
+    this.teamMemberService.getAllTeamMembers().subscribe(
+      res => {
+        this.teamMemberList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
   cerrarPeriodo(){
     
   }
@@ -194,7 +211,7 @@ export class BaseActivosComponent implements OnInit {
       return;
     }
     this.total = 0;
-    this.baseActivo.id = this.matricula;
+    this.baseActivo.idUser = this.matricula.split("-")[0];
     this.baseActivo.applications = this.listActivos;
     
     this.baseActivosService.saveBaseActivo(this.baseActivo).subscribe(
