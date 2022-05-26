@@ -90,7 +90,7 @@ export class BaseActivosComponent implements OnInit {
   modalRef: BsModalRef;
 
   openModalAdd(template: TemplateRef<any>) {  
-    this.cargarApps();
+    this.cargarApplication();
     this.total = 0;
     this.mensaje = "";
     this.activo = new IActivo();
@@ -172,8 +172,16 @@ export class BaseActivosComponent implements OnInit {
     this.activosListTable.splice(this.indexBorrar, 1);
   }
 
-  cargarApps(){
-
+  cargarApplication() {
+    this.applicationService.getAllApplications().subscribe(
+      res => {
+        this.applicationList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
   }
 
   cerrarPeriodo(){
@@ -181,7 +189,6 @@ export class BaseActivosComponent implements OnInit {
   }
 
   registrarBaseActivo() {
-    debugger;
     if(this.listActivos.length <= 0){
       this.mensaje = "Debes agregar al menos 1 registro del teammember";
       return;
@@ -228,16 +235,6 @@ export class BaseActivosComponent implements OnInit {
     )
   }
 
-  cargarApplication() {
-    this.applicationService.getAllApplications().subscribe(
-      res => {
-        this.applicationList = res;
-        this.loadingIndicator = false;
-      },
-      err => {
-        this.loadingIndicator = false;
-      }
-    )
-  }
+  
 
 }

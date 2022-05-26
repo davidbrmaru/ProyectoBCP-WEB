@@ -115,7 +115,6 @@ export class RolComponent implements OnInit {
     this.loadingIndicator = true;
     this.rolService.getRols(this.page).subscribe(
       res => {
-        debugger;
         this.page.currentPage = this.page.currentPage - 1;
         
         this.rolList = res.rols;

@@ -116,7 +116,6 @@ export class ChapterAreaLeadComponent implements OnInit {
     this.loadingIndicator = true;
     this.chapterAreaLeadService.getChapterAreaLeads(this.page).subscribe(
       res => {
-        debugger;
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterAreaLeadList = res.chapterAreaLeaders;
         this.page.totalCount = res.totalRows;

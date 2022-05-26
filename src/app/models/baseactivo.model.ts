@@ -11,6 +11,7 @@ export class IActivo{
 
 export class IActivoTable{
     matricula : string;
+    idAplicacion : string;
     aplicacion: string;
     porcentaje: number;
     comentario: string;

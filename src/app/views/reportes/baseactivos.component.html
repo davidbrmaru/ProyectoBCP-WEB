@@ -191,8 +191,8 @@
                 <div class="mb-1">
                     <label cLabel for="application">Aplicación</label>
                     <select class="form-select" id="application" [(ngModel)]="activoTable.aplicacion" name="application" #application="ngModel" required>
-                      <option value={{application.id}} *ngFor="let application of applicationList">{{application.nombre}}</option>
-                    </select>
+                      <option value={{application.nombre}} *ngFor="let application of applicationList">{{application.nombre}}</option>
+                    </select> 
                     <div *ngIf="application.invalid && (application.dirty || application.touched)" class="alert">
                     <div *ngIf="application.errors?.['required']">Aplicacion es obligatorio.</div>   
                     </div>
@@ -212,9 +212,8 @@
                 <div class="col-12">
                 <div class="mb-1">
                     <label cLabel for="comentario">Comentario</label>
-                    <textarea class="form-control" id="comentario" [(ngModel)]="activoTable.comentario" name="comentario" #comentario="ngModel" required rows="3"></textarea>
+                    <textarea class="form-control" id="comentario" [(ngModel)]="activoTable.comentario" name="comentario" #comentario="ngModel" rows="3"></textarea>
                     <div *ngIf="comentario.invalid && (comentario.dirty || comentario.touched)" class="alert">
-                    <div *ngIf="comentario.errors?.['required']">Comentario es obligatorio.</div>
                     </div>
                 </div>
                 </div>

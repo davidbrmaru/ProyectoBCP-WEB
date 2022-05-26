@@ -118,7 +118,7 @@ export class ChapterLeadComponent implements OnInit {
   cargarChapterLeads(page: Page){
     this.loadingIndicator = true;
     this.chapterLeadService.getChapterLeads(this.page).subscribe(
-      res => {
+      res => {  
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterLeadList = res.chapterLeaders;
         this.page.totalCount = res.totalRows;
