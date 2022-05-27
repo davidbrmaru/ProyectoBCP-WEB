@@ -117,6 +117,7 @@ export class TeamMemberComponent implements OnInit {
     this.teamMemberService.deleteTeamMember(this.teammember).subscribe(
       res => {
         this.cerrarModal();
+        this.page.currentPage = this.page.currentPage + 1;
         this.cargarTeamMembers(this.page);
       },
       err => {

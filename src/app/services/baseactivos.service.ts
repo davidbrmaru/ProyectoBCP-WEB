@@ -6,6 +6,7 @@ import { __param } from 'tslib';
 import { environment } from './../../environments/environment';
 import { Page } from 'src/app/models/page.model';
 import { IBaseActivo,IBaseActivos, IBaseActivosResponse } from '../models/baseactivo.model';
+import { IUsuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class BaseActivosService {
   
     constructor(private http: HttpClient) { }
   
-    getBaseActivos(page: Page): Observable<IBaseActivosResponse> {
-      return this.http.get<IBaseActivosResponse>(environment.apiUrl + 'api/BaseActivo?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage);
+    getBaseActivos(input : IUsuario ,page: Page): Observable<IBaseActivosResponse> {
+      return this.http.post<IBaseActivosResponse>(environment.apiUrl + 'api/BaseActivo?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage, input);
         //return this.http.get<ITeamMember[]>(environment.apiUrl + 'api/TeamMember');
     }
 

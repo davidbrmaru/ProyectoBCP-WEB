@@ -17,14 +17,14 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-people' }
   },
   {
-    name: 'Chapter Area Lead',
-    url: '/mantenimientos/chapterarealead',
-    iconComponent: { name: 'cil-pencil' }
-  },
-  {
     name: 'Chapter Lead',
     url: '/mantenimientos/chapterlead',
     iconComponent: { name: 'cil-task' }
+  },
+  {
+    name: 'Chapter Area Lead',
+    url: '/mantenimientos/chapterarealead',
+    iconComponent: { name: 'cil-pencil' }
   },
   {
     name: 'Application',
@@ -32,18 +32,15 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-code' }
   },
   {
-    name: 'Tribe',
-    url: '/mantenimientos/tribe',
-    iconComponent: { name: 'cil-notes' }
-  },
-  {
     name: 'Squad',
     url: '/mantenimientos/squad',
     iconComponent: { name: 'cil-check' }
   },
-  
-  
-
+  {
+    name: 'Tribe',
+    url: '/mantenimientos/tribe',
+    iconComponent: { name: 'cil-notes' }
+  },
   {
     title: true,
     name: 'Reportes'

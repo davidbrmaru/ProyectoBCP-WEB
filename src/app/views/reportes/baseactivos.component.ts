@@ -8,6 +8,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 import { IApplication } from 'src/app/models/application.model';
 import { TeamMemberService } from 'src/app/services/teammember.service';
 import { ITeamMember } from 'src/app/models/teammember.model';
+import { IUsuario } from 'src/app/models/usuario.model';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -34,6 +35,7 @@ export class BaseActivosComponent implements OnInit {
   activo : IActivo = new IActivo();
   activosListTable: IActivoTable[] = [];
   activoTable: IActivoTable = new IActivoTable();
+  usuario: IUsuario = new IUsuario();
   indexBorrar : number;
   mensaje :string = "";
   total : number = 0;
@@ -48,7 +50,8 @@ export class BaseActivosComponent implements OnInit {
     private renderer: Renderer2,private modalService: BsModalService,
     private applicationService: ApplicationService,
     private teamMemberService: TeamMemberService,
-    private baseActivosService: BaseActivosService
+    private baseActivosService: BaseActivosService,
+    private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
     this.page.currentPage = 0;
@@ -211,7 +214,8 @@ export class BaseActivosComponent implements OnInit {
 
   cargarBaseActivos(page: Page) {
     this.loadingIndicator = true;
-    this.baseActivosService.getBaseActivos(this.page).subscribe(
+    this.usuario.codMatricula = '----';
+    this.baseActivosService.getBaseActivos(this.usuario,this.page).subscribe(
       res => {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;
