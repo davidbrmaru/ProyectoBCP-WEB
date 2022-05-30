@@ -52,29 +52,56 @@ export class WidgetsBrandComponent implements AfterContentInit {
     pointHoverBackgroundColor: '#fff'
   };
   brandData = [
-    
     {
-      icon: 'cibTwitter',
-      values: [{ title: 'followers', value: '973k' }, { title: 'tweets', value: '1.792' }],
-      capBg: { '--cui-card-cap-bg': '#00aced' },
+      icon: 'cil-notes',
+      values: [{ title: 'tribes', value: '89K' }],
+      capBg: { '--cui-card-cap-bg': '#033677' },
+      labels: [...this.labels],
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [1, 13, 9, 17, 34, 41, 38], label: 'Twitter', ...this.colors }]
+        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Facebook', ...this.colors }]
       }
     },
     {
-      icon: 'cib-linkedin',
-      values: [{ title: 'contacts', value: '500' }, { title: 'feeds', value: '1.292' }],
-      capBg: { '--cui-card-cap-bg': '#4875b4' },
+      icon: 'cil-check',
+      values: [{ title: 'squad', value: '973k' }],
+      capBg: { '--cui-card-cap-bg': '#033677' },
+      data: {
+        labels: [...this.labels],
+        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Twitter', ...this.colors }]
+      }
+    },
+    {
+      icon: 'cil-code',
+      values: [{ title: 'Applications', value: '500' }],
+      capBg: { '--cui-card-cap-bg': '#F37936' },
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [78, 81, 80, 45, 34, 12, 40], label: 'LinkedIn', ...this.colors }]
       }
     },
     {
-      icon: 'cilCalendar',
-      values: [{ title: 'events', value: '12+' }, { title: 'meetings', value: '4' }],
-      color: 'warning',
+      icon: 'cil-pencil',
+      values: [{ title: 'chapter area lead', value: '12+' }],
+      capBg: { '--cui-card-cap-bg': '#F37936' },
+      data: {
+        labels: [...this.labels],
+        datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
+      }
+    },
+    {
+      icon: 'cil-user',
+      values: [{ title: 'chapter lead', value: '12+' }],      
+      color: 'info',
+      data: {
+        labels: [...this.labels],
+        datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
+      }
+    },
+    {
+      icon: 'cil-people',
+      values: [{ title: 'team members', value: '12+' }],
+      color: 'info',
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
