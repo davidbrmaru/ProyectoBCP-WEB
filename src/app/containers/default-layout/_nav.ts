@@ -34,7 +34,8 @@ export const navItems: INavData[] = [
   {
     name: 'Squad',
     url: '/mantenimientos/squad',
-    iconComponent: { name: 'cil-check' }
+    iconComponent: { name: 'fa-solid fa-laptop-code' }
+  
   },
   {
     name: 'Tribe',
@@ -62,6 +63,7 @@ export const navItems: INavData[] = [
     name: 'Usuario',
     url: '/mantenimientos/usuario',
     iconComponent: { name: 'cil-user' }
+
   },
 
   {
@@ -69,14 +71,7 @@ export const navItems: INavData[] = [
     url: '/login',
     iconComponent: { name: 'cil-puzzle' },
     children: [
-      {
-        name: 'Login',
-        url: '/login'
-      },
-      {
-        name: 'Register',
-        url: '/register'
-      },
+      
       {
         name: 'Error 404',
         url: '/404'
