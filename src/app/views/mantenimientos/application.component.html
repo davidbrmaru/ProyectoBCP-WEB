@@ -133,7 +133,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="Squad">Tribu</label>
+                <label cLabel for="Squad">Squad</label>
                 <select class="form-select" id="Squad" [(ngModel)]="application.idSquad" name="idSquad" #idSquad="ngModel" required>
                   <option value={{squad.id}} *ngFor="let squad of squadList">{{squad.nombre}}</option>
                 </select>
