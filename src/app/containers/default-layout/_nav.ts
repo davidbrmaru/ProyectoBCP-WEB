@@ -19,7 +19,7 @@ export const navItems: INavData[] = [
   {
     name: 'Chapter Lead',
     url: '/mantenimientos/chapterlead',
-    iconComponent: { name: 'cil-task' }
+    iconComponent: { name: 'cil-user' }
   },
   {
     name: 'Chapter Area Lead',
@@ -34,7 +34,7 @@ export const navItems: INavData[] = [
   {
     name: 'Squad',
     url: '/mantenimientos/squad',
-    iconComponent: { name: 'fa-solid fa-laptop-code' }
+    iconComponent: { name: 'cil-cursor' }
   
   },
   {

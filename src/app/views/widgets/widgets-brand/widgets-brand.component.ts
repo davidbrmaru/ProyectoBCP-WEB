@@ -54,7 +54,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
   brandData = [
     {
       icon: 'cil-notes',
-      values: [{ title: 'tribes', value: '89K' }],
+      values: [{ title: 'tribes', value: '50+' }],
       capBg: { '--cui-card-cap-bg': '#033677' },
       labels: [...this.labels],
       data: {
@@ -63,8 +63,8 @@ export class WidgetsBrandComponent implements AfterContentInit {
       }
     },
     {
-      icon: 'cil-check',
-      values: [{ title: 'squad', value: '973k' }],
+      icon: 'cil-cursor',
+      values: [{ title: 'squad', value: '30+' }],
       capBg: { '--cui-card-cap-bg': '#033677' },
       data: {
         labels: [...this.labels],
@@ -73,7 +73,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     },
     {
       icon: 'cil-code',
-      values: [{ title: 'Applications', value: '500' }],
+      values: [{ title: 'Applications', value: '200+' }],
       capBg: { '--cui-card-cap-bg': '#F37936' },
       data: {
         labels: [...this.labels],

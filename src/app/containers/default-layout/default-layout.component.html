@@ -4,7 +4,7 @@
   class="d-print-none sidebar sidebar-fixed"
   id="sidebar"
   visible
-  style="background-color: #072E83"
+  style="background-color: #184EA9"
 >
   <c-sidebar-brand
     [brandFull]="{
@@ -19,15 +19,15 @@
       height: 30,
       alt: 'Koodi Logo'
     }"
-    routerLink="./"
+    routerLink="./dashboard"
   >
   </c-sidebar-brand >
-    <perfect-scrollbar font-face="Flexo" style="background-color: #072E83" [config]="perfectScrollbarConfig">
+    <perfect-scrollbar font-face="Flexo" style="background-color: #184EA9" [config]="perfectScrollbarConfig">
   <!--  [perfectScrollbar]="perfectScrollbarConfig"-->
-  <c-sidebar-nav style="background-color: #072E83"
+  <b><c-sidebar-nav style="background-color: #184EA9"
     [navItems]="navItems"
   >
-  </c-sidebar-nav>
+  </c-sidebar-nav> </b>
     </perfect-scrollbar>
   <c-sidebar-toggler
     *ngIf="!sidebar.narrow"
@@ -37,7 +37,7 @@
 </c-sidebar>
 
 <!--main-->
-<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" style="color: #0004A6">
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" style="color: #184EA9">
   <!--app-header-->
   <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-default-header>
   <!--app-body-->
