@@ -56,12 +56,12 @@ export const navItems: INavData[] = [
     name: 'Configuración'
   },{
     name: 'Rol',
-    url: '/mantenimientos/rol',
+    url: '/configuracion/rol',
     iconComponent: { name: 'cil-star' }
   },
   {
     name: 'Usuario',
-    url: '/mantenimientos/usuario',
+    url: '/configuracion/usuario',
     iconComponent: { name: 'cil-user' }
 
   },

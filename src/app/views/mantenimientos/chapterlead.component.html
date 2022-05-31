@@ -63,6 +63,11 @@
                       {{row.nombreChapter}}
                     </ng-template>
                   </ngx-datatable-column>
+                  <ngx-datatable-column name="Total Team Members">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.teamMembers.length}}
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column name="Fecha Ingreso">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.fecIngreso}}

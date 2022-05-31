@@ -10,8 +10,8 @@ import { ChapterLeadComponent } from './chapterlead.component';
 import { ApplicationComponent } from './application.component';
 import { TribeComponent } from './tribe.component';
 import { SquadComponent } from './squad.component';
-import { RolComponent } from './rol.component';
-import { UsuarioComponent } from './usuario.component';
+import { RolComponent } from '../configuracion/rol.component';
+import { UsuarioComponent } from '../configuracion/usuario.component';
 
 
 // Theme Routing
@@ -42,8 +42,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ApplicationComponent,
     TribeComponent,
     SquadComponent,
-    RolComponent,
-    UsuarioComponent,
     //MantenimientosTeamMemberComponent,
   ],
   schemas:[
