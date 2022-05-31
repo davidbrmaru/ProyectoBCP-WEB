@@ -55,7 +55,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     {
       icon: 'cil-notes',
       values: [{ title: 'tribes', value: '50+' }],
-      capBg: { '--cui-card-cap-bg': '#033677' },
+      capBg: { '--cui-card-cap-bg': '#00b1cd' },
       labels: [...this.labels],
       data: {
         labels: [...this.labels],
@@ -65,7 +65,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     {
       icon: 'cil-cursor',
       values: [{ title: 'squad', value: '30+' }],
-      capBg: { '--cui-card-cap-bg': '#033677' },
+      capBg: { '--cui-card-cap-bg': '#FA7F2C' },
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Twitter', ...this.colors }]
@@ -74,7 +74,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     {
       icon: 'cil-code',
       values: [{ title: 'Applications', value: '200+' }],
-      capBg: { '--cui-card-cap-bg': '#F37936' },
+      capBg: { '--cui-card-cap-bg': '#ffc212' },
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [78, 81, 80, 45, 34, 12, 40], label: 'LinkedIn', ...this.colors }]
@@ -83,7 +83,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     {
       icon: 'cil-pencil',
       values: [{ title: 'chapter area lead', value: '12+' }],
-      capBg: { '--cui-card-cap-bg': '#F37936' },
+      capBg: { '--cui-card-cap-bg': '#2BDE5B' },
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
@@ -92,7 +92,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     {
       icon: 'cil-user',
       values: [{ title: 'chapter lead', value: '12+' }],      
-      color: 'info',
+      capBg: { '--cui-card-cap-bg': '#0015FF' },
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
