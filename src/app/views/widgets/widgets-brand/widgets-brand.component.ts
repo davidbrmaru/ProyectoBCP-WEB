@@ -75,6 +75,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
   brandData = [
     {
       icon: 'cil-notes',
+      url: '/mantenimientos/tribe',
       values: [{ title: 'tribes', value: 0 }],
       capBg: { '--cui-card-cap-bg': '#00b1cd' },
       labels: [...this.labels],
@@ -85,7 +86,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
     },
     {
       icon: 'cil-cursor',
-      values: [{ title: 'squad', value: 0 }],
+      values: [{ title: 'squads', value: 0 }],
       capBg: { '--cui-card-cap-bg': '#FA7F2C' },
       data: {
         labels: [...this.labels],
