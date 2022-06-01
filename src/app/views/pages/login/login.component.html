@@ -1,67 +1,59 @@
+<div class=" bg-light" style="width: 100%; height: 100vh; display: inline-block; display: flex; align-items: center;" >
+  <div class="container" >
+      <div class="row"  >
+          <div class="col-lg-10 offset-lg-1" >
+            <h3 class="mb-3">Iniciar Sesión</h3>
+              <div class="bg-white shadow rounded">
+                  <div class="row">
+                      <div class="col-md-7 pe-0">
+                          <div class="form-left h-100 py-5 px-5">
+                              <form action="" class="row g-4">
+                                      <div class="col-12">
+                                          <label>Matrícula<span class="text-danger">*</span></label>
+                                          <div class="input-group">
+                                              <div class="input-group-text"><svg cIcon name="cilUser"></svg></div>
+                                              <input type="text" class="form-control" placeholder="Escribe tu Matrícula">
+                                          </div>
+                                      </div>
 
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center"  >
-  
-  <p style="float: left"  >
-    <img src="assets/login.png" width="440" height="420"
-    alt="login">
-  </p>
-  <c-container  >
-   
-    <c-row class="justify-content"  >
-     
-      <c-col  md="2" style="width: 500px"   >
-        
-        <c-card-group >
-          
-          <c-card class="p-2">
-            <c-card-body >
-              
-              <form cForm >
-                <h1>Iniciar Sesión</h1>
-                <c-input-group class="mb-3">
-                  <span cInputGroupText>
-                    <svg cIcon name="cilUser"></svg>
-                  </span>
-                  <input autoComplete="Escribe tu matricula" cFormControl placeholder="Escribe tu matricula" />
-                </c-input-group>
-                <c-input-group class="mb-4">
-                  <span cInputGroupText>
-                    <svg cIcon name="cilLockLocked"></svg>
-                  </span>
-                  <input
-                    autoComplete="current-password"
-                    cFormControl
-                    placeholder="Escribe tu contraseña"
-                    type="password"
-                  />
-                </c-input-group>
-               
-                  
-                    <button  style="justify-content: center; background-color: #FA7F2C;  border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;"  routerLink="./dashboard"  >
-                      Entrar
-                    </button>
-                  
-              </form>
-            </c-card-body> 
-          
-          </c-card>
-         
-        </c-card-group>
-        
-      </c-col>
-      
-    </c-row>
+                                      <div class="col-12">
+                                          <label>Contraseña<span class="text-danger">*</span></label>
+                                          <div class="input-group">
+                                              <div class="input-group-text"><svg cIcon name="cilLockLocked"></svg></div>
+                                              <input type="text" class="form-control" placeholder="Escribe tu contraseña" type="password">
+                                          </div>
+                                      </div>
 
-  
-  </c-container>
-  
+                                      <div class="col-sm-6">
+                                          <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                                              <label class="form-check-label" for="inlineFormCheck">Recordarme</label>
+                                          </div>
+                                      </div>
 
- 
-  
+
+                                      <div class="col-12">
+                                          <button type="submit" class="btn btn-primary px-4 float-end mt-4" style="justify-content: center; background-color: #FA7F2C; 
+                                          border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;"  routerLink="./dashboard">Entrar</button>
+                                      </div>
+                              </form>
+                          </div>
+                      </div>
+                      <div class="col-md-5 ps-0 d-none d-md-block" >
+                        <div class="form-right h-100 bg-primary text-white text-center pt-5" >
+                            <i class="bi bi-bootstrap" ></i>
+                            <img src="assets/login.png" width="292" height="278"
+                                alt="login">
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <p class="text-end text-secondary mt-3">Nueva Base de Activos - BCP 2022</p>
+          </div>
+      </div>
+  </div>
 </div>
-
-<div>
-
+<footer>
   <img src="assets/bcp.png"  width="60" height="20" alt="bcp">
   <span> © 2022 BCP | Todos los derechos reservados.</span>
-</div>
+</footer>
