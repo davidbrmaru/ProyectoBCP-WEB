@@ -37,7 +37,7 @@
                                (page)='setPage($event)'
                                [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Aplicaciones encontrados.'}">
 
-                  <ngx-datatable-column name="Codigo APP">
+                  <ngx-datatable-column name="Codigo Rol">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.codRol}}
                     </ng-template>
@@ -52,7 +52,7 @@
                       {{row.fecIngreso}}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Fecha Ingreso">
+                  <ngx-datatable-column name="Usuario Ingresa">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.usuarioIngresa}}
                     </ng-template>
