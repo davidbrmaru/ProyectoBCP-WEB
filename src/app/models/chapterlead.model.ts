@@ -7,6 +7,9 @@ export class IChapterLead {
     apellidoPaterno: string;
     apellidoMaterno: string;
     nombreChapter: string;
+    totalTeamMember: number;
+    totalTeamMemberBCP: number;
+    totalTeamMemberProveedor: number;
     fecIngreso: Date;
     usuarioIngresa: string;
     fecActualiza: Date;
@@ -20,7 +23,7 @@ export class ITeamMember {
   apellidoPaterno: string;
   apellidoMaterno: string;
   idChapterLeader: number;
-  tipoProveedor: number;
+  tipoProveedor: string;
   empresa: string;
   rol: string;
   rolInsourcing: string;

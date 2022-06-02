@@ -5,7 +5,7 @@ export class ITeamMember {
     apellidoPaterno: string;
     apellidoMaterno: string;
     idChapterLeader: number;
-    tipoProveedor: number;
+    tipoProveedor: string;
     empresa: string;
     rol: string;
     rolInsourcing: string;

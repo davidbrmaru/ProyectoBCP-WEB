@@ -122,6 +122,11 @@ export class ChapterLeadComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterLeadList = res.chapterLeaders;
         this.page.totalCount = res.totalRows;
+        this.chapterLeadList.forEach((item, index) => {
+          this.chapterLeadList[index].totalTeamMember = item.teamMembers.length;
+          this.chapterLeadList[index].totalTeamMemberBCP= item.teamMembers.filter(x => x.tipoProveedor.includes("ORGÁNICO")).length;
+          this.chapterLeadList[index].totalTeamMemberProveedor = item.teamMembers.filter(x => x.tipoProveedor.includes("PROVEEDOR")).length;
+        })
         this.loadingIndicator = false;
       },
       err =>{
