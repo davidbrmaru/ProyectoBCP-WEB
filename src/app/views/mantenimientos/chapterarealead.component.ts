@@ -10,6 +10,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
 import { IChapterAreaLead } from 'src/app/models/chapterarealead.model';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'chapterarealead.component.html',
@@ -19,12 +20,14 @@ export class ChapterAreaLeadComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   chapterAreaLeadList : IChapterAreaLead[] = [];
+  excelList : IChapterAreaLead[] = [];
   nombre :string;
   chapterAreaLead : IChapterAreaLead;
   page: Page = new Page();
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'ChapterAreaLead.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -50,6 +53,21 @@ export class ChapterAreaLeadComponent implements OnInit {
       this.chapterAreaLead = chapterAreaLead;
     }
     this.modalService.show(template);
+  }
+
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
   cerrarModal(){
@@ -109,7 +127,6 @@ export class ChapterAreaLeadComponent implements OnInit {
   ngOnInit(): void {
     this.setPage({ offset: 0 });
     this.page.currentPage = 1;
-    //this.cargarChapterAreaLeads(this.page);
   }
 
   cargarChapterAreaLeads(page: Page){
@@ -119,6 +136,20 @@ export class ChapterAreaLeadComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterAreaLeadList = res.chapterAreaLeaders;
         this.page.totalCount = res.totalRows;
+        this.cargarExcelList();
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(
+      res => {
+        this.excelList = res;
         this.loadingIndicator = false;
       },
       err => {

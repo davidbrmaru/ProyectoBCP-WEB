@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'teammember.component.html',
@@ -21,6 +22,7 @@ export class TeamMemberComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   teamMemberList: ITeamMember[] = [];
+  excelList : ITeamMember[] = [];
   chapterLeadList: IChapterLead[] = [];
   nombre :string;
   columns = [{prop:'' , name:''}];
@@ -30,6 +32,7 @@ export class TeamMemberComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'TeamMember.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -57,6 +60,20 @@ export class TeamMemberComponent implements OnInit {
       this.teammember = teamMember;
     }
     this.modalService.show(template);
+  }
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
   cerrarModal(){
@@ -119,6 +136,7 @@ export class TeamMemberComponent implements OnInit {
         this.cerrarModal();
         this.page.currentPage = this.page.currentPage + 1;
         this.cargarTeamMembers(this.page);
+        
       },
       err => {
         this.cerrarModal();
@@ -139,6 +157,20 @@ export class TeamMemberComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.teamMemberList = res.teamMembers;
         this.page.totalCount = res.totalRows;
+        this.loadingIndicator = false;
+        this.cargarExcelList();
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.teamMemberService.getAllTeamMembers().subscribe(
+      res => {
+        this.excelList = res;
         this.loadingIndicator = false;
       },
       err => {

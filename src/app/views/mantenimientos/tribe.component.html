@@ -12,12 +12,28 @@
                     Nuevo 
             </button>
             <button cButton
-                    class="me-1 btn btn-secondary">
+                    class="me-1 btn btn-default"
+                    (click)="exportar()">
                     Exportar
             </button>
           </c-col>
         </c-row>
-        
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Fecha de Ingreso</th>
+              </tr>
+              <tr *ngFor="let item of excelList">
+                <td>{{item.nombre}}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.fecIngreso}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
         <c-row>
           <c-col>
             <div style="overflow-x:auto;">

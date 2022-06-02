@@ -9,6 +9,7 @@
   import { SimpleModalService } from 'ngx-simple-modal';
   import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
   import { NgForm } from '@angular/forms';
+  import * as XLSX from 'xlsx';
 
   @Component({
     templateUrl: 'tribe.component.html',
@@ -18,12 +19,14 @@
     loadingIndicator: boolean;
     reorderable = true;
     tribeList : ITribe[] = [];
+    excelList : ITribe[] = [];
     nombre :string;
     tribe : ITribe;
     page: Page = new Page();
     NewEdit:string;
     @ViewChild('registerForm') registerForm: NgForm;
 
+    fileName= 'Tribu.xlsx';
     constructor(
       @Inject(DOCUMENT) private document: HTMLDocument,
       private renderer: Renderer2,private modalService: BsModalService,
@@ -49,6 +52,21 @@
         this.tribe = tribe;
       }
       this.modalService.show(template);
+    }
+
+    exportar(): void
+    {
+      /* pass here the table id */
+      let element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+   
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   
+      /* save to file */  
+      XLSX.writeFile(wb, this.fileName);
+   
     }
 
     cerrarModal(){
@@ -121,9 +139,22 @@
           this.page.currentPage = this.page.currentPage - 1;
           this.tribeList = res.tribes;
           this.page.totalCount = res.totalRows;
+          this.cargarExcelList();
           this.loadingIndicator = false;
         },
         err =>{
+          this.loadingIndicator = false;
+        }
+      )
+    }
+    cargarExcelList() {
+      this.loadingIndicator = true;
+      this.tribeService.getAllTribes().subscribe(
+        res => {
+          this.excelList = res;
+          this.loadingIndicator = false;
+        },
+        err => {
           this.loadingIndicator = false;
         }
       )

@@ -12,12 +12,36 @@
                     Nuevo 
             </button>
             <button cButton
-                    class="me-1 btn btn-secondary">
+                    class="me-1 btn btn-default"
+                    (click)="exportar()">
                     Exportar
             </button>
           </c-col>
         </c-row>
-        
+
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Codigo Aplicacion</th>
+                <th>Nombre</th>
+                <th>Codigo Owner</th>
+                <th>id Squad</th>
+                <th>Binding Block</th>
+                <th>Fecha Ingreso</th>
+              </tr>
+              <tr *ngFor="let item of excelList">
+                <td>{{item.codAplicacion}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.codOwner}}</td>
+                <td>{{item.idSquad}}</td>
+                <td>{{item.bindingBlock}}</td>
+                <td>{{item.fecIngreso}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
+
         <c-row>
           <c-col>
             <div style="overflow-x:auto;">
@@ -133,7 +157,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="Squad">Tribu</label>
+                <label cLabel for="Squad">Squad</label>
                 <select class="form-select" id="Squad" [(ngModel)]="application.idSquad" name="idSquad" #idSquad="ngModel" required>
                   <option value={{squad.id}} *ngFor="let squad of squadList">{{squad.nombre}}</option>
                 </select>
