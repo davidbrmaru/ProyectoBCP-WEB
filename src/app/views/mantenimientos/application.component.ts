@@ -11,6 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'application.component.html',
@@ -20,6 +21,7 @@ export class ApplicationComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   applicationList : IApplication[] = [];
+  excelList : IApplication[] = [];
   squadList : ISquad[] = [];
   nombre :string;
   application : IApplication;
@@ -27,6 +29,7 @@ export class ApplicationComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'Application.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -54,6 +57,21 @@ export class ApplicationComponent implements OnInit {
       this.application = application;
     }
     this.modalService.show(template);
+  }
+
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
   cargarSquads() {
@@ -136,9 +154,23 @@ export class ApplicationComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.applicationList = res.applications;
         this.page.totalCount = res.totalRows;
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err =>{
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.applicationService.getAllApplications().subscribe(
+      res => {
+        this.excelList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
         this.loadingIndicator = false;
       }
     )
