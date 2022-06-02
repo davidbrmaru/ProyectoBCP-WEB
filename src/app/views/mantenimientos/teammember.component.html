@@ -12,12 +12,44 @@
                   Nuevo 
           </button>
           <button cButton
-                  class="me-1 btn btn-secondary">
+                  class="me-1 btn btn-default"
+                  (click)="exportar()">
                   Exportar
           </button>
         </c-col>
       </c-row>
-      
+      <c-row class="d-none">
+        <c-col>
+          <table id="excel-table">
+            <tr>
+              <th>Codigo Matricula</th>
+              <th>Nombre</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+              <th>Chapter Leader</th>
+              <th>Tipo Proveedor</th>
+              <th>Empresa</th>
+              <th>Rol</th>
+              <th>Rol Insourcing</th>
+              <th>Especialidad</th>
+              <th>Fecha Ingreso</th>
+            </tr>
+            <tr *ngFor="let item of excelList">
+              <td>{{item.codMatricula}}</td>
+              <td>{{item.nombre}}</td>
+              <td>{{item.apellidoPaterno}}</td>
+              <td>{{item.apellidoMaterno}}</td>
+              <td>{{item.idChapterLeader}}</td>
+              <td>{{item.tipoProveedor}}</td>
+              <td>{{item.empresa}}</td>
+              <td>{{item.rol}}</td>
+              <td>{{item.rolInsourcing}}</td>
+              <td>{{item.especialidad}}</td>
+              <td>{{item.fecIngreso}}</td>
+            </tr>
+          </table>
+        </c-col>
+      </c-row>
       <c-row>
         <c-col>
           <div style="overflow-x:auto;">

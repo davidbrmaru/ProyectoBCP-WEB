@@ -11,6 +11,7 @@ import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
 import { IChapterLead } from 'src/app/models/chapterlead.model';
 import { IChapterAreaLead } from 'src/app/models/chapterarealead.model';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'chapterlead.component.html',
@@ -20,6 +21,7 @@ export class ChapterLeadComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   chapterLeadList: IChapterLead[] = [];
+  excelList : IChapterLead[] = [];
   chapterAreaLeadList: IChapterAreaLead[] = [];
   nombre :string;
   chapterLead : IChapterLead;
@@ -27,6 +29,7 @@ export class ChapterLeadComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'ChapterLead.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -54,6 +57,21 @@ export class ChapterLeadComponent implements OnInit {
       this.chapterLead = chapterAreaLead;
     }
     this.modalService.show(template);
+  }
+
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
   cerrarModal(){
@@ -127,6 +145,7 @@ export class ChapterLeadComponent implements OnInit {
           this.chapterLeadList[index].totalTeamMemberBCP= item.teamMembers.filter(x => x.tipoProveedor.includes("ORGÁNICO")).length;
           this.chapterLeadList[index].totalTeamMemberProveedor = item.teamMembers.filter(x => x.tipoProveedor.includes("PROVEEDOR")).length;
         })
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err =>{
@@ -134,7 +153,18 @@ export class ChapterLeadComponent implements OnInit {
       }
     )
   }
-
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.chapterLeadService.getAllChapterLeads().subscribe(
+      res => {
+        this.excelList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
   cargarChapterAreaLeads() {
     this.loadingIndicator = true;
     this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(

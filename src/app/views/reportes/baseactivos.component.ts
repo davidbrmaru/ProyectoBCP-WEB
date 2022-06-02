@@ -44,7 +44,7 @@ export class BaseActivosComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
-  fileName= 'ExcelSheet.xlsx';
+  fileName= 'BaseActivos.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -191,7 +191,6 @@ export class BaseActivosComponent implements OnInit {
         this.cerrarModal();
         this.page.currentPage = 1;
         this.cargarBaseActivos(this.page);
-        this.cargarExcelList();
     },
     err => {
         this.cerrarModal();
@@ -200,15 +199,10 @@ export class BaseActivosComponent implements OnInit {
    
   }
 
-  
-
-
-
   ngOnInit(): void {
     this.setPage({ offset: 0 });
     this.page.currentPage = 1;
     this.cargarBaseActivos(this.page);
-    this.cargarExcelList();
     
   }
 
@@ -220,6 +214,7 @@ export class BaseActivosComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;
         this.page.totalCount = res.totalRows;
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err => {
