@@ -1,9 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {AuthGuard} from './guards/auth.guard'
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
@@ -110,7 +110,11 @@ const APP_CONTAINERS = [
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy,
+      useClass: HashLocationStrategy,            
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
     },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
@@ -118,7 +122,8 @@ const APP_CONTAINERS = [
     },
     IconSetService,
     Title,
-    BsModalService
+    BsModalService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

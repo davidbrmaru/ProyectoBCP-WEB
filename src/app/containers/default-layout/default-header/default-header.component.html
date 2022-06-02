@@ -81,7 +81,7 @@
         <hr cDropdownDivider/>
       </li>
       <li>
-        <a routerLink="./login" cDropdownItem>
+        <a (click)="doLogOut()" cDropdownItem>
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
           Cerrar Sesión
         </a>

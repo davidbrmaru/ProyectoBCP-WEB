@@ -7,12 +7,12 @@
                   <div class="row">
                       <div class="col-md-7 pe-0">
                           <div class="form-left h-100 py-5 px-5">
-                              <form action="" class="row g-4">
+                              <form action="" class="row g-4" >
                                       <div class="col-12">
                                           <label>Matrícula<span class="text-danger">*</span></label>
                                           <div class="input-group">
                                               <div class="input-group-text"><svg cIcon name="cilUser"></svg></div>
-                                              <input type="text" class="form-control" placeholder="Escribe tu Matrícula">
+                                              <input class="form-control"  type="text"  class="form-control" id="user" type="text" [(ngModel)]="usr" name="user" #user="ngModel"  required placeholder="Escribe tu Matrícula" >
                                           </div>
                                       </div>
 
@@ -20,7 +20,7 @@
                                           <label>Contraseña<span class="text-danger">*</span></label>
                                           <div class="input-group">
                                               <div class="input-group-text"><svg cIcon name="cilLockLocked"></svg></div>
-                                              <input type="text" class="form-control" placeholder="Escribe tu contraseña" type="password">
+                                              <input type="text" name="pass"  class="form-control" id="passd" type="text" [(ngModel)]="pass" name="passd" #passd="ngModel"  required placeholder="Escribe tu contraseña" type="password">
                                           </div>
                                       </div>
 
@@ -33,8 +33,8 @@
 
 
                                       <div class="col-12">
-                                          <button type="submit" class="btn btn-primary px-4 float-end mt-4" style="justify-content: center; background-color: #FA7F2C; 
-                                          border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;"  routerLink="./dashboard">Entrar</button>
+                                          <button type="button" class="btn btn-primary px-4 float-end mt-4" style="justify-content: center; background-color: #FA7F2C; 
+                                          border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;"  (click)="doLogin()">Entrar</button>
                                       </div>
                               </form>
                           </div>

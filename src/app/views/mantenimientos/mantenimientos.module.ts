@@ -12,12 +12,13 @@ import { TribeComponent } from './tribe.component';
 import { SquadComponent } from './squad.component';
 import { RolComponent } from '../configuracion/rol.component';
 import { UsuarioComponent } from '../configuracion/usuario.component';
-
+import { LoginComponent } from '../pages/login/login.component';
 
 // Theme Routing
 import { MantenimientosRoutingModule } from './mantenimientos-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ApplicationComponent,
     TribeComponent,
     SquadComponent,
+    LoginComponent,
     //MantenimientosTeamMemberComponent,
   ],
   schemas:[
