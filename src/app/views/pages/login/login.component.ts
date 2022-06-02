@@ -13,16 +13,20 @@ export class LoginComponent {
   usr:string
   pass:string
   login: ILogin
+  isBadCredentials:boolean
   @ViewChild('loginForm') registerForm: NgForm;
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private _router : Router,
     private authService : AuthService
-  ) { }
+  ) { 
+    this.isBadCredentials = false
+  }
 
   doLogin(){
-    this.authService.login(this.usr,this.pass).subscribe((x:any) =>{
-      if (x)this._router.navigate(['dashboard']).then()
+    this.authService.login(this.usr,this.pass).subscribe((auth:any) =>{
+      if (auth)this._router.navigate(['dashboard']).then()
+      else this.isBadCredentials = true;
     });
     
   }
