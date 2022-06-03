@@ -66,20 +66,5 @@ export const navItems: INavData[] = [
 
   },
 
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-puzzle' },
-    children: [
-      
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
-      }
-    ]
-  },
+  
 ];
