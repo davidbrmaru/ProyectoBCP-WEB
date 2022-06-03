@@ -2,34 +2,54 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { ILogin } from '../models/login.model';
 import { IUsuario, IUsuarioResponse } from './../../app/models/usuario.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  iLogin: ILogin = new ILogin();
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  login(usr:string, pass:string){
-      return new Observable(observer => {
-        if(usr != 'admin' || pass != 'admin') return observer.next(false);
-        this.saveSessionInLocalStorage()
-        return observer.next(true);
-      });
+  autenticacion(usr: string, pass: string) {
+    this.iLogin.matricula = usr;
+    this.iLogin.password = pass;
+    return new Observable((observer) => {
+      this.auth(this.iLogin).subscribe(
+        (data) => {
+          this.saveSessionInLocalStorage();
+          this.saveTokenInLocalStorage(data.token);
+          this.iLogin.token = data.token
+          return observer.next(true);
+        },
+        (error) => {
+          return observer.next(false);
+        }
+      );
+    });
   }
 
-  saveSessionInLocalStorage(){
-    console.log("entro local storage")
-    localStorage.setItem('auth','success')
+  auth(login: ILogin): Observable<ILogin> {
+    return this.http.post<ILogin>(environment.apiUrl + 'api/login', login);
   }
 
-  getSessionFromLocalStorage(){
-      return localStorage.getItem('auth')
+  saveTokenInLocalStorage(token: string) {
+    console.log('entro local storage');
+    localStorage.setItem('token', token);
   }
 
-  removeSessionFromLocalStorage(){
-    localStorage.removeItem('auth')
+  saveSessionInLocalStorage() {
+    console.log('entro local storage');
+    localStorage.setItem('auth', 'success');
+  }
+
+  getSessionFromLocalStorage() {
+    return localStorage.getItem('auth');
+  }
+
+  removeSessionFromLocalStorage() {
+    localStorage.removeItem('auth');
   }
 }

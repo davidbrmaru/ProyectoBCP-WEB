@@ -1,7 +1,8 @@
 
 export class ILogin {
     constructor () {}
-    usr: string;
-    pass: string;
+    matricula: string;
+    password: string;
+    token:string;
    
 }

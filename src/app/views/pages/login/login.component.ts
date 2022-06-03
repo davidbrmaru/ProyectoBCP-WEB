@@ -24,7 +24,7 @@ export class LoginComponent {
   }
 
   doLogin(){
-    this.authService.login(this.usr,this.pass).subscribe((auth:any) =>{
+    this.authService.autenticacion(this.usr,this.pass).subscribe((auth:any) =>{
       if (auth)this._router.navigate(['dashboard']).then()
       else this.isBadCredentials = true;
     });

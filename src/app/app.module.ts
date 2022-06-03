@@ -47,10 +47,10 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { BasicComponent } from './components/modal/basic/basic.component';
-
+import { TokenInterceptorService } from '../app/services/tokeninterceptor.service'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -119,6 +119,11 @@ const APP_CONTAINERS = [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
     },
     IconSetService,
     Title,
