@@ -198,7 +198,7 @@
   
     <ng-template #templateAdd>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">Agregar Asignacion Team Member</h4>
+            <h4 class="modal-title pull-left" style="color: #00085C ">Agregar Asignación Team Member</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -208,12 +208,12 @@
             <div class="row">
               <div class="col-12">
                 <div class="mb-1">
-                  <label cLabel for="teamMember">Matricula</label>
+                  <label cLabel for="teamMember" style="color: #002277" >Matrícula</label>
                   <select class="form-select" id="teamMember" [(ngModel)]="activoTable.matricula" name="teamMember" #teamMember="ngModel" required>
                     <option value="{{teamMember.id}}-{{teamMember.codMatricula}}" *ngFor="let teamMember of teamMemberList">{{teamMember.codMatricula+ '-' + teamMember.nombre+ ' ' + teamMember.apellidoPaterno+ ' ' + teamMember.apellidoMaterno}}</option>
                   </select> 
                   <div *ngIf="teamMember.invalid && (teamMember.dirty || teamMember.touched)" class="alert">
-                  <div *ngIf="teamMember.errors?.['required']">Matricula es obligatorio.</div>
+                  <div *ngIf="teamMember.errors?.['required']">Matrícula es obligatorio.</div>
                   </div>
                 </div>
               </div>
@@ -221,18 +221,18 @@
             <div class="row">
                 <div class="col-6">
                 <div class="mb-1">
-                    <label cLabel for="application">Aplicación</label>
+                    <label cLabel for="application" style="color: #002277" >Aplicación</label>
                     <select class="form-select" id="application" [(ngModel)]="activoTable.aplicacion" name="application" #application="ngModel" required>
                       <option value="{{application.id}}-{{application.codAplicacion}}" *ngFor="let application of applicationList">{{application.codAplicacion}}</option>
                     </select> 
                     <div *ngIf="application.invalid && (application.dirty || application.touched)" class="alert">
-                    <div *ngIf="application.errors?.['required']">Aplicacion es obligatorio.</div>   
+                    <div *ngIf="application.errors?.['required']">Aplicación es obligatorio.</div>   
                     </div>
                 </div>
                 </div>
                 <div class="col-6">
                 <div class="mb-1">
-                    <label cLabel for="porcentaje">Porcentaje</label>
+                    <label cLabel for="porcentaje" style="color: #002277">Porcentaje</label>
                     <input class="form-control" id="porcentaje" type="number" [(ngModel)]="activoTable.porcentaje" name="porcentaje" #porcentaje="ngModel" required />
                     <div *ngIf="porcentaje.invalid && (porcentaje.dirty || porcentaje.touched)" class="alert">
                     <div *ngIf="porcentaje.errors?.['required']">Porcentaje es obligatorio.</div>
@@ -243,7 +243,7 @@
             <div class="row">
                 <div class="col-12">
                 <div class="mb-1">
-                    <label cLabel for="comentario">Comentario</label>
+                    <label cLabel for="comentario" style="color: #002277">Comentario</label>
                     <textarea class="form-control" id="comentario" [(ngModel)]="activoTable.comentario" name="comentario" #comentario="ngModel" rows="3"></textarea>
                     <div *ngIf="comentario.invalid && (comentario.dirty || comentario.touched)" class="alert">
                     </div>
@@ -252,7 +252,8 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <button style="width: 100%; margin-top: 15px;" type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Agregar</button>
+                <button style="width: 100%; margin-top: 15px;  background-color: #FA7F2C; 
+                border: 2px solid #FA7F2C;" type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Agregar</button>
               </div>
             </div>
         </form>
@@ -282,7 +283,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="button" class="btn btn-primary" (click)="registrarBaseActivo()">Registrar</button>
+            <button type="button" class="btn btn-primary" style ="background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C;" (click)="registrarBaseActivo()">Registrar</button>
         </div>
     </ng-template>
   </div>

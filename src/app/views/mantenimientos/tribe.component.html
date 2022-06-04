@@ -1,4 +1,4 @@
-<div class="fade-in">
+<div class="fade-in" style="font-family:Flexo">
     <c-card class="mb-4">
       <c-card-header>
         Tribus
@@ -87,10 +87,10 @@
       </c-card-body>
     </c-card>
   
-    <ng-template #templateNewEdit>
-      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate>
+    <ng-template #templateNewEdit >
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate style="font-family:Flexo">
         <div class="modal-header">
-            <h4 class="modal-title pull-left">{{NewEdit}} Tribu</h4>
+            <h4 class="modal-title pull-left" style="color: #00085C">{{NewEdit}} Tribu</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -99,7 +99,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombre">Nombre</label>
+                <label cLabel for="nombre" style="color: #002277">Nombre</label>
                 <input class="form-control" id="nombre" type="text" [(ngModel)]="tribe.nombre" name="nombre" #nombre="ngModel" required/>
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
                   <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
@@ -108,7 +108,7 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="tipo">Tipo</label>
+                <label cLabel for="tipo" style="color: #002277">Tipo</label>
                 <select class="form-select" id="tipo" [(ngModel)]="tribe.tipo" name="tipo" #tipo="ngModel" required>
                   <option value="TRIBU">TRIBU</option>
                   <option value="COE">COE</option>
@@ -122,13 +122,15 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+            <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
+
         </div>
       </form>
     </ng-template>
   
-    <ng-template #templateDelete>
-      <div class="modal-header">
+    <ng-template #templateDelete >
+      <div class="modal-header" style="font-family:Flexo">
           <h4 class="modal-title pull-left">Eliminar Tribu</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
             <span aria-hidden="true">×</span>

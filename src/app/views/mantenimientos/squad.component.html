@@ -1,17 +1,17 @@
 <div class="fade-in">
     <c-card class="mb-4">
-      <c-card-header>
+      <c-card-header style="font-family:Flexo">
         Squads
       </c-card-header>
       <c-card-body>
         <c-row>
           <c-col>
             <button cButton
-                    class="me-1 btn btn-primary"
+                    class="me-1 btn btn-primary" style="font-family:Flexo"
                     (click)="openModalNewEdit(templateNewEdit)">
                     Nuevo 
             </button>
-            <button cButton style="background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
+            <button cButton style=" font-family:Flexo; background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
                     (click)="exportar()">
                     <img src="assets/excel.png" width="20" height="20" alt="excel" > 
                      Exportar
@@ -38,7 +38,7 @@
 
         <c-row>
           <c-col>
-            <div style="overflow-x:auto;">
+            <div style="overflow-x:auto; font-family:Flexo">
               <div class="col-md-12 mb-3" style="margin-top: 10px;">
                   <ngx-datatable 
                   class="material container striped" 
@@ -92,7 +92,7 @@
     <ng-template #templateNewEdit>
       <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarSquad(registerForm)" novalidate>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">{{NewEdit}} Squad</h4>
+            <h4 class="modal-title pull-left" style="color: #00085C ;font-family:Flexo">{{NewEdit}} Squad</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -101,47 +101,48 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombre">Nombre</label>
-                <input class="form-control" id="nombre" type="text" [(ngModel)]="squad.nombre" name="nombre" #nombre="ngModel" required/>
+                <label cLabel for="nombre" style="color: #002277 ;font-family:Flexo">Nombre</label>
+                <input class="form-control" id="nombre" type="text" style="font-family:Flexo" [(ngModel)]="squad.nombre" name="nombre" #nombre="ngModel" required/>
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                  <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
+                  <div *ngIf="nombre.errors?.['required']" style="font-family:Flexo">Nombre es obligatorio.</div>   
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="Tribe">Tribu/COE</label>
-                <select class="form-select" id="Tribe" [(ngModel)]="squad.idTribe" name="idTribe" #idTribe="ngModel" required>
+                <label cLabel for="Tribe" style="color: #002277 ;font-family:Flexo">Tribu/COE</label>
+                <select class="form-select" id="Tribe" style="font-family:Flexo" [(ngModel)]="squad.idTribe" name="idTribe" #idTribe="ngModel" required>
                   <option value={{tribe.id}} *ngFor="let tribe of tribeList">{{tribe.nombre}}</option>
                 </select>
                 <div *ngIf="idTribe.invalid && (idTribe.dirty || idTribe.touched)" class="alert">
-                  <div *ngIf="idTribe.errors?.['required']">Tribu es obligatorio.</div>
+                  <div *ngIf="idTribe.errors?.['required']"style="font-family:Flexo" >Tribu es obligatorio.</div>
                 </div>
               </div>
             </div>
           </div> 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+            <button type="button" class="btn btn-default" (click)="cerrarModal()" style="font-family:Flexo" >Cerrar</button>
+            <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
         </div>
       </form>
     </ng-template>
   
     <ng-template #templateDelete>
       <div class="modal-header">
-          <h4 class="modal-title pull-left">Eliminar Squad</h4>
+          <h4 class="modal-title pull-left" style="font-family:Flexo">Eliminar Squad</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
             <span aria-hidden="true">×</span>
           </button>
       </div>
       <div class="modal-body">
-          <span cLabel>¿Estas seguro de eliminar el </span>{{squad.nombre}} <span>?</span>
+          <span cLabel style="font-family:Flexo">¿Estas seguro de eliminar el </span>{{squad.nombre}} <span>?</span>
         
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="cerrarModal()">No</button>
-          <button type="button" class="btn btn-primary" (click)="eliminarSquad()">Si</button>
+          <button type="button" class="btn btn-default" (click)="cerrarModal()" style="font-family:Flexo">No</button>
+          <button type="button" class="btn btn-primary" (click)="eliminarSquad()" style="font-family:Flexo">Si</button>
       </div>
     </ng-template>
   

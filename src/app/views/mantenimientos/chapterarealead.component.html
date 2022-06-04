@@ -1,4 +1,4 @@
-<div class="fade-in">
+<div class="fade-in" style="font-family:Flexo">
     <c-card class="mb-4">
       <c-card-header>
         Chapter Area Leads
@@ -102,10 +102,10 @@
       </c-card-body>
     </c-card>
   
-    <ng-template #templateNewEdit>
-      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterAreaLead(registerForm)" novalidate>
+    <ng-template #templateNewEdit >
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterAreaLead(registerForm)" style="font-family:Flexo" novalidate>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">{{NewEdit}} Chapter Area Lead</h4>
+            <h4 class="modal-title pull-left" style="color: #00085C">{{NewEdit}} Chapter Area Lead</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -114,16 +114,16 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="matricula">Matricula</label>
+                <label cLabel for="matricula" style="color: #002277">Matrícula</label>
                 <input class="form-control" id="matricula" type="text" [(ngModel)]="chapterAreaLead.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
                   <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
-                    <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+                    <div *ngIf="codMatricula.errors?.['required']">Matrícula es obligatorio.</div>
                   </div>
               </div>
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombre">Nombre</label>
+                <label cLabel for="nombre" style="color: #002277">Nombre</label>
                 <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterAreaLead.nombres" name="nombre" #nombre="ngModel" required />
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
                   <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
@@ -134,7 +134,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="apellidoPaterno">Apellido Paterno</label>
+                <label cLabel for="apellidoPaterno" style="color: #002277">Apellido Paterno</label>
                 <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoPaterno" name="apellido_paterno" #apellido_paterno="ngModel" required />
                 <div *ngIf="apellido_paterno.invalid && (apellido_paterno.dirty || apellido_paterno.touched)" class="alert">
                   <div *ngIf="apellido_paterno.errors?.['required']">Apellido paterno es obligatorio.</div>
@@ -143,7 +143,7 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="apellidoMaterno">Apellido Materno</label>
+                <label cLabel for="apellidoMaterno" style="color: #002277">Apellido Materno</label>
                 <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterAreaLead.apellidoMaterno" name="apellido_materno" #apellido_materno="ngModel" required />
                 <div *ngIf="apellido_materno.invalid && (apellido_materno.dirty || apellido_materno.touched)" class="alert">
                   <div *ngIf="apellido_materno.errors?.['required']">Apellido materno es obligatorio.</div>
@@ -154,7 +154,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+            <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
+
         </div>
       </form>
     </ng-template>

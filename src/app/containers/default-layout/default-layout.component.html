@@ -22,12 +22,12 @@
     routerLink="./dashboard"
   >
   </c-sidebar-brand >
-    <perfect-scrollbar font-face="Flexo" style="background-color: #184EA9" [config]="perfectScrollbarConfig">
+    <perfect-scrollbar  style="background-color: #184EA9;  font-family:Flexo ;font-weight: 500" [config]="perfectScrollbarConfig">
   <!--  [perfectScrollbar]="perfectScrollbarConfig"-->
-  <b><c-sidebar-nav style="background-color: #184EA9"
+  <c-sidebar-nav style="background-color: #184EA9"
     [navItems]="navItems"
   >
-  </c-sidebar-nav> </b>
+  </c-sidebar-nav> 
     </perfect-scrollbar>
   <c-sidebar-toggler
     *ngIf="!sidebar.narrow"

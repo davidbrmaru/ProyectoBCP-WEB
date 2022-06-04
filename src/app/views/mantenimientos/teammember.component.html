@@ -1,4 +1,4 @@
-<div class="fade-in">
+<div class="fade-in" style="font-family:Flexo">
   <c-card class="mb-4">
     <c-card-header>
       Team Members
@@ -142,10 +142,10 @@
     </c-card-body>
   </c-card>
 
-  <ng-template #templateNewEdit>
+  <ng-template #templateNewEdit style="font-family:Flexo">
     <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTeamMember(registerForm)" novalidate>
       <div class="modal-header">
-          <h4 class="modal-title pull-left">{{NewEdit}} Team Member</h4>
+          <h4 class="modal-title pull-left"  style="color: #00085C">{{NewEdit}} Team Member</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
             <span aria-hidden="true">×</span>
           </button>
@@ -154,19 +154,19 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="nombre">Nombre</label>
-              <input class="form-control" id="nombre" type="text" [(ngModel)]="teammember.nombre" name="nombre" #nombre="ngModel" required/>
+              <label cLabel for="nombre" style="color: #002277">Nombre</label>
+              <input class="form-control"style="font-family:Flexo" id="nombre" type="text" [(ngModel)]="teammember.nombre" name="nombre" #nombre="ngModel" required/>
               <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
+                <div *ngIf="nombre.errors?.['required']" style="font-family:Flexo">Nombre es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="apellidoPaterno">Apellido Paterno</label>
-              <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
+              <label cLabel for="apellidoPaterno" style="color: #002277" >Apellido Paterno</label>
+              <input class="form-control" id="apellidoPaterno" style="font-family:Flexo" type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
               <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
-                <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>   
+                <div *ngIf="apellidoPaterno.errors?.['required']" style="font-family:Flexo">Apellido paterno es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -174,21 +174,21 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="apellidoMaterno">Apellido Materno</label>
-              <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
+              <label cLabel for="apellidoMaterno" style="color: #002277" >Apellido Materno</label>
+              <input class="form-control" id="apellidoMaterno" style="font-family:Flexo" type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
               <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
-                <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>   
+                <div *ngIf="apellidoMaterno.errors?.['required']"style="font-family:Flexo">Apellido materno es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="chapterLead">Chapter Lead</label>
-              <select class="form-select" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
+              <label cLabel for="chapterLead" style="color: #002277">Chapter Lead</label>
+              <select class="form-select" style="font-family:Flexo" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
                 <option value={{chapterLead.id}} *ngFor="let chapterLead of chapterLeadList">{{chapterLead.nombres + ' '+ chapterLead.apellidoPaterno+ ' '+ chapterLead.apellidoMaterno}}</option>
               </select>
               <div *ngIf="idChapterLeader.invalid && (idChapterLeader.dirty || idChapterLeader.touched)" class="alert">
-                <div *ngIf="idChapterLeader.errors?.['required']">Chapter leader es obligatorio.</div>   
+                <div *ngIf="idChapterLeader.errors?.['required']" style="font-family:Flexo" >Chapter leader es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -196,19 +196,19 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="tipoProveedor">Tipo Proveedor</label>
-              <select class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
+              <label cLabel for="tipoProveedor" style="color: #002277">Tipo Proveedor</label>
+              <select style="font-family:Flexo" class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
                 <option value="PROVEEDOR">PROVEEDOR</option>
                 <option value="ORGÁNICO">ORGÁNICO</option>
               </select>
               <div *ngIf="tipoProveedor.invalid && (tipoProveedor.dirty || tipoProveedor.touched)" class="alert">
-                <div *ngIf="tipoProveedor.errors?.['required']">Tipo proveedor es obligatorio.</div>   
+                <div *ngIf="tipoProveedor.errors?.['required']">Tipo de Proveedor es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="empresa">Empresa</label>
+              <label cLabel for="empresa" style="color: #002277">Empresa</label>
               <input class="form-control" id="empresa" type="text" [(ngModel)]="teammember.empresa" name="empresa" #empresa="ngModel" required />
               <div *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" class="alert">
                 <div *ngIf="empresa.errors?.['required']">Empresa es obligatorio.</div>
@@ -220,7 +220,7 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="rol">Rol</label>
+              <label cLabel for="rol"style="color: #002277">Rol</label>
               <input class="form-control" id="rol" type="text" [(ngModel)]="teammember.rol" name="rol" #rol="ngModel" required />
               <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert">
                 <div *ngIf="rol.errors?.['required']">Rol es obligatorio.</div>
@@ -230,10 +230,10 @@
           </div>
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="rolInsourcing">Rol Insourcing</label>
+              <label cLabel for="rolInsourcing"style="color: #002277">Rol Insourcing</label>
               <input class="form-control" id="rolInsourcing" type="text" [(ngModel)]="teammember.rolInsourcing" name="rolInsourcing" #rolInsourcing="ngModel" required />
               <div *ngIf="rolInsourcing.invalid && (rolInsourcing.dirty || rolInsourcing.touched)" class="alert">
-                <div *ngIf="rolInsourcing.errors?.['required']">rolInsourcing es obligatorio.</div>
+                <div *ngIf="rolInsourcing.errors?.['required']">Rol Insourcing es obligatorio.</div>
               </div>
 
             </div>
@@ -242,7 +242,7 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="especialidad">Especialidad</label>
+              <label cLabel for="especialidad"style="color: #002277">Especialidad</label>
               <input class="form-control" id="especialidad" type="text" [(ngModel)]="teammember.especialidad" name="especialidad" #especialidad="ngModel" required />
               <div *ngIf="especialidad.invalid && (especialidad.dirty || especialidad.touched)" class="alert">
                 <div *ngIf="especialidad.errors?.['required']">Especialidad es obligatorio.</div>
@@ -252,10 +252,10 @@
           </div>
           <div class="col-6">
             <div class="mb-1">
-              <label cLabel for="matricula">Matricula</label>
+              <label cLabel for="matricula"style="color: #002277">Matrícula</label>
               <input class="form-control" id="matricula" type="text" [(ngModel)]="teammember.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
               <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
-                <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+                <div *ngIf="codMatricula.errors?.['required']">Matrícula es obligatorio.</div>
               </div>
             </div>
           </div>
@@ -263,7 +263,9 @@
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+          <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
+
       </div>
     </form>
   </ng-template>
