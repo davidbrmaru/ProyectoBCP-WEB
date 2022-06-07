@@ -17,8 +17,8 @@ export class BaseActivosService {
   
     constructor(private http: HttpClient) { }
   
-    getBaseActivos(input : IUsuario ,page: Page): Observable<IBaseActivosResponse> {
-      return this.http.post<IBaseActivosResponse>(environment.apiUrl + 'api/BaseActivo?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage, input);
+    getBaseActivos(page: Page): Observable<IBaseActivosResponse> {
+      return this.http.get<IBaseActivosResponse>(environment.apiUrl + 'api/BaseActivo?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage);
         //return this.http.get<ITeamMember[]>(environment.apiUrl + 'api/TeamMember');
     }
 

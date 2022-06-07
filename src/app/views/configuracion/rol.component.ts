@@ -57,7 +57,6 @@ export class RolComponent implements OnInit {
 
   agregarRol(a: NgForm) {
     if (this.NewEdit == "Nuevo") {
-      this.rol.usuarioIngresa = "S61121";
       this.rolService.saveRol(this.rol).subscribe(
         res => {
           this.cerrarModal();
@@ -75,7 +74,6 @@ export class RolComponent implements OnInit {
   }
 
   editarRol(item: IRol) {
-    this.rol.usuarioActualiza = "S61121";
     this.rolService.updateRol(item).subscribe(
       res => {
         this.cerrarModal();
@@ -93,7 +91,6 @@ export class RolComponent implements OnInit {
   }
 
   eliminarRol() {
-    this.rol.usuarioActualiza = "T16587";
     this.rolService.deleteRol(this.rol).subscribe(
       res => {
         this.cerrarModal();

@@ -76,7 +76,6 @@ export class ChapterAreaLeadComponent implements OnInit {
 
   agregarChapterAreaLead(a: NgForm) {
     if(this.NewEdit == "Nuevo"){
-    this.chapterAreaLead.usuarioIngresa = "S61121";
     this.chapterAreaLeadService.saveChapterAreaLead(this.chapterAreaLead).subscribe(
         res => {
           this.cerrarModal();
@@ -94,7 +93,6 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   editarChapterAreaLead(item: IChapterAreaLead) {
-    this.chapterAreaLead.usuarioActualiza = "S61121";
     this.chapterAreaLeadService.updateChapterAreaLead(item).subscribe(
       res => {
         this.cerrarModal();
@@ -112,7 +110,6 @@ export class ChapterAreaLeadComponent implements OnInit {
   }
 
   eliminarChapterAreaLead(){
-    this.chapterAreaLead.usuarioActualiza = "S61121";
     this.chapterAreaLeadService.deleteChapterAreaLead(this.chapterAreaLead).subscribe(
       res => {
         this.cerrarModal();

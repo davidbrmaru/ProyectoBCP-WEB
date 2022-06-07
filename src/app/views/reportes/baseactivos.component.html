@@ -93,6 +93,36 @@
                   (page)='setPage($event)'
                   [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Activos encontrados.'}">   
                   
+                  <ngx-datatable-column name="Nombres">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.nombre}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Ap.Paterno">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.apellido_paterno}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Ap. Materno">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.apellido_materno}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="% de asignación a la App">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.porcentaje_asignado}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Código App asignado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.codigo_app_asignado}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Comentarios">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.comentario}}
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column name="Nombre CAL">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.nombre_cal}}
@@ -123,21 +153,6 @@
                       {{row.matricula}}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Ap.Paterno">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.apellido_paterno}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                  <ngx-datatable-column name="Ap. Materno">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.apellido_materno}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                  <ngx-datatable-column name="Nombres">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.nombre}}
-                    </ng-template>
-                  </ngx-datatable-column>
                   <ngx-datatable-column name="Rol">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.sq_rol}}
@@ -163,16 +178,6 @@
                       {{row.squad}}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Código App asignado">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.codigo_app_asignado}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                  <ngx-datatable-column name="% de asignación a la App">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.porcentaje_asignado}}
-                    </ng-template>
-                  </ngx-datatable-column>
                   <ngx-datatable-column name="BB">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.bb}}
@@ -181,11 +186,6 @@
                   <ngx-datatable-column name="Chapter">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.chapter}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                  <ngx-datatable-column name="Comentarios">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{row.comentario}}
                     </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>
@@ -210,7 +210,7 @@
                 <div class="mb-1">
                   <label cLabel for="teamMember" style="color: #002277" >Matrícula</label>
                   <select class="form-select" id="teamMember" [(ngModel)]="activoTable.matricula" name="teamMember" #teamMember="ngModel" required>
-                    <option value="{{teamMember.id}}-{{teamMember.codMatricula}}" *ngFor="let teamMember of teamMemberList">{{teamMember.codMatricula+ '-' + teamMember.nombre+ ' ' + teamMember.apellidoPaterno+ ' ' + teamMember.apellidoMaterno}}</option>
+                    <option value="{{teamMember.id}}-{{teamMember.codMatricula}}" *ngFor="let teamMember of teamMemberList" >{{teamMember.codMatricula+ '-' + teamMember.nombre+ ' ' + teamMember.apellidoPaterno+ ' ' + teamMember.apellidoMaterno}}</option>
                   </select> 
                   <div *ngIf="teamMember.invalid && (teamMember.dirty || teamMember.touched)" class="alert">
                   <div *ngIf="teamMember.errors?.['required']">Matrícula es obligatorio.</div>

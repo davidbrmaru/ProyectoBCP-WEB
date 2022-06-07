@@ -39,6 +39,7 @@ export class BaseActivosComponent implements OnInit {
   indexBorrar : number;
   mensaje :string = "";
   total : number = 0;
+  repetido : number = 0;
   
   page: Page = new Page();
   NewEdit:string;
@@ -68,6 +69,7 @@ export class BaseActivosComponent implements OnInit {
     this.cargarTeamMember();
     this.cargarApplication();
     this.total = 0;
+    this.repetido = 0;
     this.mensaje = "";
     this.activo = new IActivo();
     this.activoTable = new IActivoTable();
@@ -98,6 +100,7 @@ export class BaseActivosComponent implements OnInit {
   agregarTeamMember() {
     this.mensaje = "";
     this.total = 0;
+    this.repetido = 0;
     if(this.activosListTable.length > 0){
       if(this.activoTable.matricula != this.activosListTable[0].matricula){
         this.mensaje = "Estas ingresando la matricula de otro teammember";
@@ -112,7 +115,15 @@ export class BaseActivosComponent implements OnInit {
     }
     this.activosListTable.forEach((item,index) => {
       this.total += item.porcentaje;
+      if( item.aplicacion == this.activoTable.aplicacion){
+        this.mensaje = "Estas ingresando la aplicacion "+ this.activoTable.aplicacion +" otra vez";
+        this.repetido=1;
+      }
     });
+    if(this.repetido > 0){
+      this.repetido = 0;
+      return;
+    }
 
     this.total += this.activoTable.porcentaje;
 
@@ -183,7 +194,6 @@ export class BaseActivosComponent implements OnInit {
     }
     this.total = 0;
     this.baseActivo.idUser = this.matricula.split("-")[0];
-    this.baseActivo.matricula = "S61121";
     this.baseActivo.applications = this.listActivos;
     
     this.baseActivosService.saveBaseActivo(this.baseActivo).subscribe(
@@ -208,8 +218,7 @@ export class BaseActivosComponent implements OnInit {
 
   cargarBaseActivos(page: Page) {
     this.loadingIndicator = true;
-    this.usuario.codMatricula = '----';
-    this.baseActivosService.getBaseActivos(this.usuario,this.page).subscribe(
+    this.baseActivosService.getBaseActivos(this.page).subscribe(
       res => {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;

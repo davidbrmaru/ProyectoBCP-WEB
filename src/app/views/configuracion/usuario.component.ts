@@ -62,7 +62,6 @@ export class UsuarioComponent implements OnInit {
 
   agregarUsuario(a: NgForm) {
     if (this.NewEdit == "Nuevo") {
-      this.usuario.usuarioIngresa = "S61121";
       this.usuarioService.saveUsuario(this.usuario).subscribe(
         res => {
           this.cerrarModal();
@@ -80,7 +79,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   editarUsuario(item: IUsuario) {
-    this.usuario.usuarioActualiza = "S61121";
     this.usuarioService.updateUsuario(item).subscribe(
       res => {
         this.cerrarModal();
@@ -98,7 +96,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   eliminarUsuario() {
-    this.usuario.usuarioActualiza = "T16587";
     this.usuarioService.deleteUsuario(this.usuario).subscribe(
       res => {
         this.cerrarModal();

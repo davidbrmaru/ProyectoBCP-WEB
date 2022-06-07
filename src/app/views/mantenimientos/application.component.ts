@@ -93,7 +93,6 @@ export class ApplicationComponent implements OnInit {
 
   agregarApplication(a: NgForm){ 
     if(this.NewEdit == "Nuevo"){   
-      this.application.usuarioIngresa = "S61121";
       this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
@@ -111,7 +110,6 @@ export class ApplicationComponent implements OnInit {
   }
 
   editarApplication(item: IApplication){
-    this.application.usuarioActualiza = "S61121";
     this.applicationService.updateApplication(item).subscribe(
       res => {
         this.cerrarModal();
@@ -129,7 +127,6 @@ export class ApplicationComponent implements OnInit {
   }
 
   eliminarApplication(){
-    this.application.usuarioActualiza = "T16587";
     this.applicationService.deleteApplication(this.application).subscribe(
       res => {
         this.cerrarModal();

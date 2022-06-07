@@ -94,7 +94,6 @@ export class SquadComponent implements OnInit {
 
   agregarSquad(a: NgForm) {
     if(this.NewEdit == "Nuevo"){
-      this.squad.usuarioIngresa = "S61121";
       this.squadService.saveSquad(this.squad).subscribe(
         res => {
           this.cerrarModal();
@@ -112,7 +111,6 @@ export class SquadComponent implements OnInit {
   }
 
   editarSquad(item: ISquad){
-    this.squad.usuarioActualiza = "S61121";
     this.squadService.updateSquad(item).subscribe(
       res => {
         this.cerrarModal();
@@ -131,7 +129,6 @@ export class SquadComponent implements OnInit {
   }
 
   eliminarSquad(){
-    this.squad.usuarioActualiza = "T16587";
     this.squadService.deleteSquad(this.squad).subscribe(
       res => {
         this.cerrarModal();

@@ -82,7 +82,6 @@ export class TeamMemberComponent implements OnInit {
 
   agregarTeamMember(a: NgForm) {
     if (this.NewEdit == "Nuevo") {
-      this.teammember.usuarioIngresa = "S61121";
       this.teamMemberService.saveTeamMember(this.teammember).subscribe(
         res => {
           this.cerrarModal();
@@ -112,7 +111,6 @@ export class TeamMemberComponent implements OnInit {
   }
 
   editarTeamMember(item: ITeamMember) {
-    this.teammember.usuarioActualiza = "S61121";
     this.teamMemberService.updateTeamMember(item).subscribe(
       res => {
         this.cerrarModal();
@@ -130,7 +128,6 @@ export class TeamMemberComponent implements OnInit {
   }
 
   eliminarTeamMember(){
-    this.teammember.usuarioActualiza = "S61121";
     this.teamMemberService.deleteTeamMember(this.teammember).subscribe(
       res => {
         this.cerrarModal();

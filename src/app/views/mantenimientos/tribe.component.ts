@@ -75,7 +75,6 @@
 
     agregarTribe(a: NgForm) {
       if(this.NewEdit == "Nuevo"){
-      this.tribe.usuarioIngresa = "S61121";
         this.tribeService.saveTribe(this.tribe).subscribe(
           res => {
             this.cerrarModal();
@@ -94,7 +93,6 @@
     }
 
     editarTribe(item: ITribe){
-      this.tribe.usuarioActualiza = "S61121";
       this.tribeService.updateTribe(item).subscribe(
         res => {
           this.cerrarModal();
@@ -113,7 +111,6 @@
     }
 
     eliminarTribe(){
-      this.tribe.usuarioActualiza = "T16587";
       this.tribeService.deleteTribe(this.tribe).subscribe(
         res => {
           this.cerrarModal();
