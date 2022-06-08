@@ -1,5 +1,5 @@
 
-<div class="fade-in" style="font-family:Flexo">
+<div class="fade-in" >
     <c-card class="mb-4">
       <c-card-header>
         Chapter Leads
@@ -128,7 +128,7 @@
     </c-card>
   
     <ng-template #templateNewEdit >
-      <form  style="font-family:Flexo" cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterLead(registerForm)" novalidate>
+      <form  cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterLead(registerForm)" novalidate>
         <div class="modal-header">
             <h4 class="modal-title pull-left"  style="color: #00085C" >{{NewEdit}} Chapter Lead</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
@@ -201,7 +201,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            <button type="submit" class="btn btn-primary" style="  justify-content: center; background-color: #FA7F2C; 
             border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
 
         </div>

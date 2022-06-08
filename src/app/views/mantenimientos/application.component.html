@@ -1,17 +1,17 @@
 <div class="fade-in">
     <c-card class="mb-4">
-      <c-card-header style="font-family:Flexo">
+      <c-card-header >
         Aplicaciones
       </c-card-header>
       <c-card-body>
         <c-row>
           <c-col>
             <button cButton
-                    class="me-1 btn btn-primary" style="font-family:Flexo"
+                    class="me-1 btn btn-primary" 
                     (click)="openModalNewEdit(templateNewEdit)">
                     Nuevo 
             </button>
-            <button cButton style=" font-family:Flexo; background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
+            <button cButton style="  background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
                     (click)="exportar()">
                     <img src="assets/excel.png" width="20" height="20" alt="excel" > 
                      Exportar
@@ -70,18 +70,18 @@
                     </div>
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column style="font-family:Flexo" name="Código Aplicación">
-                    <ng-template let-row="row" ngx-datatable-cell-template style="font-family:Flexo">
+                  <ngx-datatable-column  name="Código Aplicación">
+                    <ng-template let-row="row" ngx-datatable-cell-template >
                       {{row.codAplicacion}}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column style="font-family:Flexo" name="Nombre">
-                    <ng-template let-row="row" ngx-datatable-cell-template style="font-family:Flexo">
+                  <ngx-datatable-column  name="Nombre">
+                    <ng-template let-row="row" ngx-datatable-cell-template >
                       {{row.nombre}}
                     </ng-template>
                   </ngx-datatable-column>
                 
-                  <ngx-datatable-column style="font-family:Flexo" name="Código Owner">
+                  <ngx-datatable-column  name="Código Owner">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.codOwner}}
                     </ng-template>

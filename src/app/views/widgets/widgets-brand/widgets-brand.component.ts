@@ -5,6 +5,7 @@ import { SquadService } from 'src/app/services/squad.service';
 import { ChapterAreaLeadService } from 'src/app/services/chapterarealead.service';
 import { ChapterLeadService } from 'src/app/services/chapterlead.service';
 import { TeamMemberService } from 'src/app/services/teammember.service';
+
 @Component({
   selector: 'app-widgets-brand',
   templateUrl: './widgets-brand.component.html',
@@ -52,7 +53,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
       }
     }
   };
-  labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  labels = ['-', '-', '-', '-', '-', '-', '-'];
   datasets = {
     borderWidth: 2,
     fill: true
@@ -81,22 +82,26 @@ export class WidgetsBrandComponent implements AfterContentInit {
       labels: [...this.labels],
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Facebook', ...this.colors }]
+        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], ...this.colors }]
       }
     },
     {
       icon: 'cil-cursor',
       values: [{ title: 'squads', value: 0 }],
       capBg: { '--cui-card-cap-bg': '#FA7F2C' },
+      url: '/mantenimientos/squad',
       data: {
+       
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Twitter', ...this.colors }]
+        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], ...this.colors }]
       }
+    
     },
     {
       icon: 'cil-code',
       values: [{ title: 'Applications', value: 0 }],
       capBg: { '--cui-card-cap-bg': '#ffc212' },
+      url: '/mantenimientos/application',
       data: {
         labels: [...this.labels],
         datasets: [{ ...this.datasets, data: [78, 81, 80, 45, 34, 12, 40], label: 'LinkedIn', ...this.colors }]

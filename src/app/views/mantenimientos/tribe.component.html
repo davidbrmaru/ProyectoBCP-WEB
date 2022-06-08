@@ -1,4 +1,4 @@
-<div class="fade-in" style="font-family:Flexo">
+<div class="fade-in" >
     <c-card class="mb-4">
       <c-card-header>
         Tribus
@@ -88,7 +88,7 @@
     </c-card>
   
     <ng-template #templateNewEdit >
-      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate style="font-family:Flexo">
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate >
         <div class="modal-header">
             <h4 class="modal-title pull-left" style="color: #00085C">{{NewEdit}} Tribu</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
@@ -122,7 +122,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+            <button type="submit" class="btn btn-primary" style=" justify-content: center; background-color: #FA7F2C; 
             border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
 
         </div>
@@ -130,7 +130,7 @@
     </ng-template>
   
     <ng-template #templateDelete >
-      <div class="modal-header" style="font-family:Flexo">
+      <div class="modal-header" >
           <h4 class="modal-title pull-left">Eliminar Tribu</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
             <span aria-hidden="true">×</span>

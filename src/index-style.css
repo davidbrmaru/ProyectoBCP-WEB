@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: "fuente1";
+    src: url(fonts/Flexo.ttf) format('truetype');;
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+.tipografia_1{
+    font-family: "fuente1";
+}

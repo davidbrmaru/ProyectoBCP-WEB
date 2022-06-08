@@ -1,4 +1,4 @@
-<div class="fade-in" style="font-family:Flexo">
+<div class="fade-in" >
   <c-card class="mb-4">
     <c-card-header>
       Team Members
@@ -142,7 +142,7 @@
     </c-card-body>
   </c-card>
 
-  <ng-template #templateNewEdit style="font-family:Flexo">
+  <ng-template #templateNewEdit >
     <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTeamMember(registerForm)" novalidate>
       <div class="modal-header">
           <h4 class="modal-title pull-left"  style="color: #00085C">{{NewEdit}} Team Member</h4>
@@ -155,18 +155,18 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="nombre" style="color: #002277">Nombre</label>
-              <input class="form-control"style="font-family:Flexo" id="nombre" type="text" [(ngModel)]="teammember.nombre" name="nombre" #nombre="ngModel" required/>
+              <input class="form-control" id="nombre" type="text" [(ngModel)]="teammember.nombre" name="nombre" #nombre="ngModel" required/>
               <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                <div *ngIf="nombre.errors?.['required']" style="font-family:Flexo">Nombre es obligatorio.</div>   
+                <div *ngIf="nombre.errors?.['required']" >Nombre es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="apellidoPaterno" style="color: #002277" >Apellido Paterno</label>
-              <input class="form-control" id="apellidoPaterno" style="font-family:Flexo" type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
+              <input class="form-control" id="apellidoPaterno"  type="text" [(ngModel)]="teammember.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required/>
               <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
-                <div *ngIf="apellidoPaterno.errors?.['required']" style="font-family:Flexo">Apellido paterno es obligatorio.</div>   
+                <div *ngIf="apellidoPaterno.errors?.['required']" >Apellido paterno es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -175,20 +175,20 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="apellidoMaterno" style="color: #002277" >Apellido Materno</label>
-              <input class="form-control" id="apellidoMaterno" style="font-family:Flexo" type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
+              <input class="form-control" id="apellidoMaterno"  type="text" [(ngModel)]="teammember.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required/>
               <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
-                <div *ngIf="apellidoMaterno.errors?.['required']"style="font-family:Flexo">Apellido materno es obligatorio.</div>   
+                <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>   
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="chapterLead" style="color: #002277">Chapter Lead</label>
-              <select class="form-select" style="font-family:Flexo" id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
+              <select class="form-select"  id="chapterLead" [(ngModel)]="teammember.idChapterLeader" name="idChapterLeader" #idChapterLeader="ngModel" required>
                 <option value={{chapterLead.id}} *ngFor="let chapterLead of chapterLeadList">{{chapterLead.nombres + ' '+ chapterLead.apellidoPaterno+ ' '+ chapterLead.apellidoMaterno}}</option>
               </select>
               <div *ngIf="idChapterLeader.invalid && (idChapterLeader.dirty || idChapterLeader.touched)" class="alert">
-                <div *ngIf="idChapterLeader.errors?.['required']" style="font-family:Flexo" >Chapter leader es obligatorio.</div>   
+                <div *ngIf="idChapterLeader.errors?.['required']"  >Chapter leader es obligatorio.</div>   
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
           <div class="col-6">
             <div class="mb-1">
               <label cLabel for="tipoProveedor" style="color: #002277">Tipo Proveedor</label>
-              <select style="font-family:Flexo" class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
+              <select  class="form-select" id="tipoProveedor" [(ngModel)]="teammember.tipoProveedor" name="tipoProveedor" #tipoProveedor="ngModel" required>
                 <option value="PROVEEDOR">PROVEEDOR</option>
                 <option value="ORGÁNICO">ORGÁNICO</option>
               </select>
@@ -263,7 +263,7 @@
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-          <button type="submit" class="btn btn-primary" style=" font-family:Flexo; justify-content: center; background-color: #FA7F2C; 
+          <button type="submit" class="btn btn-primary" style="  justify-content: center; background-color: #FA7F2C; 
             border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
 
       </div>
