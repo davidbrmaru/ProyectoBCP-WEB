@@ -66,6 +66,7 @@ import {
   cilPaperPlane,
   cilPen,
   cilPencil,
+  cil3d,
   cilPeople,
   cilPrint,
   cilPuzzle,

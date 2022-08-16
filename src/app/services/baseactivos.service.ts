@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { __param } from 'tslib';
 import { environment } from './../../environments/environment';
 import { Page } from 'src/app/models/page.model';
-import { IBaseActivo, IBaseActivosResponse } from '../models/baseactivo.model';
+import { IBaseActivo,IBaseActivos, IBaseActivosResponse } from '../models/baseactivo.model';
+import { IUsuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,16 @@ export class BaseActivosService {
     constructor(private http: HttpClient) { }
   
     getBaseActivos(page: Page): Observable<IBaseActivosResponse> {
-      debugger;
       return this.http.get<IBaseActivosResponse>(environment.apiUrl + 'api/BaseActivo?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage);
         //return this.http.get<ITeamMember[]>(environment.apiUrl + 'api/TeamMember');
     }
+
+    getAllBaseActivos(): Observable<IBaseActivos[]> {
+      return this.http.get<IBaseActivos[]>(environment.apiUrl + 'api/BaseActivo/All');
+    }
   
     saveBaseActivo(input : IBaseActivo): Observable<IBaseActivo> {
-      return this.http.post<IBaseActivo>(environment.apiUrl + 'api/BaseActivo', input);
+      return this.http.post<IBaseActivo>(environment.apiUrl + 'api/ApplicationTeamMember', input);
     }
   
   }

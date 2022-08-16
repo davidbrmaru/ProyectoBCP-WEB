@@ -6,6 +6,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,8 +17,9 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
-      title: 'Home'
+      title: 'Inicio'
     },
     children: [
       {
@@ -29,6 +31,11 @@ const routes: Routes = [
         path: 'mantenimientos',
         loadChildren: () =>
           import('./views/mantenimientos/mantenimientos.module').then((m) => m.MantenimientosModule)
+      },
+      {
+        path: 'configuracion',
+        loadChildren: () =>
+          import('./views/configuracion/configuracion.module').then((m) => m.ConfiguracionModule)
       },
       {
         path: 'reportes',

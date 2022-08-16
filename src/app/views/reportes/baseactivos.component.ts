@@ -4,8 +4,11 @@ import { Page } from 'src/app/models/page.model';
 import { IBaseActivo, IBaseActivos, IActivo, IActivoTable } from 'src/app/models/baseactivo.model';
 import { ITeamMemberResponse } from 'src/app/models/teammember.model';
 import { BaseActivosService } from 'src/app/services/baseactivos.service';
-import { ChapterLeadService } from 'src/app/services/chapterlead.service';
-import { IChapterLead } from 'src/app/models/chapterlead.model';
+import { ApplicationService } from 'src/app/services/application.service';
+import { IApplication } from 'src/app/models/application.model';
+import { TeamMemberService } from 'src/app/services/teammember.service';
+import { ITeamMember } from 'src/app/models/teammember.model';
+import { IUsuario } from 'src/app/models/usuario.model';
 
 import { getStyle, rgbToHex } from '@coreui/utils/src';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -22,59 +25,34 @@ export class BaseActivosComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   baseActivoList: IBaseActivos[] = [];
+  excelList : IBaseActivos[] = [];
   columns = [{prop:'' , name:''}];
   baseActivo : IBaseActivo = new IBaseActivo();
+  applicationList: IApplication[] = [];
+  teamMemberList: ITeamMember[] = [];
   matricula: string = "";
   listActivos : IActivo[] = [];
   activo : IActivo = new IActivo();
   activosListTable: IActivoTable[] = [];
   activoTable: IActivoTable = new IActivoTable();
+  usuario: IUsuario = new IUsuario();
   indexBorrar : number;
   mensaje :string = "";
   total : number = 0;
+  repetido : number = 0;
   
   page: Page = new Page();
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
-  fileName= 'ExcelSheet.xlsx';
-  userList = [
-    {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz"
-    },
-    {
-      "id": 2,
-      "name": "Ervin Howell",
-      "username": "Antonette",
-      "email": "Shanna@melissa.tv"
-    },
-    {
-      "id": 3,
-      "name": "Clementine Bauch",
-      "username": "Samantha",
-      "email": "Nathan@yesenia.net"
-    },
-    {
-      "id": 4,
-      "name": "Patricia Lebsack",
-      "username": "Karianne",
-      "email": "Julianne.OConner@kory.org"
-    },
-    {
-      "id": 5,
-      "name": "Chelsey Dietrich",
-      "username": "Kamren",
-      "email": "Lucio_Hettinger@annie.ca"
-    }
-  ]
-
+  fileName= 'BaseActivos.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
-    private baseActivosService: BaseActivosService
+    private applicationService: ApplicationService,
+    private teamMemberService: TeamMemberService,
+    private baseActivosService: BaseActivosService,
+    private SimpleModalService: SimpleModalService
   ) {
     this.page.pageSize = 10;
     this.page.currentPage = 0;
@@ -88,8 +66,10 @@ export class BaseActivosComponent implements OnInit {
   modalRef: BsModalRef;
 
   openModalAdd(template: TemplateRef<any>) {  
-    this.cargarApps();
+    this.cargarTeamMember();
+    this.cargarApplication();
     this.total = 0;
+    this.repetido = 0;
     this.mensaje = "";
     this.activo = new IActivo();
     this.activoTable = new IActivoTable();
@@ -120,7 +100,7 @@ export class BaseActivosComponent implements OnInit {
   agregarTeamMember() {
     this.mensaje = "";
     this.total = 0;
-    debugger;
+    this.repetido = 0;
     if(this.activosListTable.length > 0){
       if(this.activoTable.matricula != this.activosListTable[0].matricula){
         this.mensaje = "Estas ingresando la matricula de otro teammember";
@@ -133,10 +113,17 @@ export class BaseActivosComponent implements OnInit {
         return;  
       }
     }
-    
     this.activosListTable.forEach((item,index) => {
       this.total += item.porcentaje;
+      if( item.aplicacion == this.activoTable.aplicacion){
+        this.mensaje = "Estas ingresando la aplicacion "+ this.activoTable.aplicacion +" otra vez";
+        this.repetido=1;
+      }
     });
+    if(this.repetido > 0){
+      this.repetido = 0;
+      return;
+    }
 
     this.total += this.activoTable.porcentaje;
 
@@ -144,15 +131,8 @@ export class BaseActivosComponent implements OnInit {
       this.mensaje = "Estas superando el 100% de la capacidad del teammember";
       return;
     }
-
     this.activosListTable.push(this.activoTable);
     this.matricula = this.activoTable.matricula;
-    
-    this.activo.id = this.activoTable.aplicacion;
-    this.activo.porcentaje = this.activoTable.porcentaje;
-    this.activo.comentario = this.activoTable.comentario;
-    this.listActivos.push(this.activo);
-
     this.activoTable = new IActivoTable();
     this.activoTable.matricula = this.matricula;
   }
@@ -171,8 +151,28 @@ export class BaseActivosComponent implements OnInit {
     this.activosListTable.splice(this.indexBorrar, 1);
   }
 
-  cargarApps(){
+  cargarApplication() {
+    this.applicationService.getAllApplications().subscribe(
+      res => {
+        this.applicationList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
 
+  cargarTeamMember() {
+    this.teamMemberService.getAllTeamMembers().subscribe(
+      res => {
+        this.teamMemberList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
   }
 
   cerrarPeriodo(){
@@ -180,13 +180,20 @@ export class BaseActivosComponent implements OnInit {
   }
 
   registrarBaseActivo() {
-    debugger;
+    this.activosListTable.forEach((item, index) => {
+      this.activo = new IActivo();
+      this.activo.idApplication = item.aplicacion.split("-")[0];
+      this.activo.porcentaje = item.porcentaje;
+      this.activo.comentario = item.comentario;
+      this.listActivos.push(this.activo);
+    });
+
     if(this.listActivos.length <= 0){
       this.mensaje = "Debes agregar al menos 1 registro del teammember";
       return;
     }
     this.total = 0;
-    this.baseActivo.id = this.matricula;
+    this.baseActivo.idUser = this.matricula.split("-")[0];
     this.baseActivo.applications = this.listActivos;
     
     this.baseActivosService.saveBaseActivo(this.baseActivo).subscribe(
@@ -202,14 +209,11 @@ export class BaseActivosComponent implements OnInit {
    
   }
 
-  
-
-
-
   ngOnInit(): void {
     this.setPage({ offset: 0 });
     this.page.currentPage = 1;
     this.cargarBaseActivos(this.page);
+    
   }
 
   cargarBaseActivos(page: Page) {
@@ -219,6 +223,7 @@ export class BaseActivosComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.baseActivoList = res.baseActivos;
         this.page.totalCount = res.totalRows;
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err => {
@@ -226,5 +231,20 @@ export class BaseActivosComponent implements OnInit {
       }
     )
   }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.baseActivosService.getAllBaseActivos().subscribe(
+      res => {
+        this.excelList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  
 
 }

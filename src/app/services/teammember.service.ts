@@ -18,12 +18,10 @@ export class TeamMemberService {
     constructor(private http: HttpClient) { }
   
     getTeamMembers(page: Page): Observable<ITeamMemberResponse> {
-      debugger;
       return this.http.get<ITeamMemberResponse>(environment.apiUrl + 'api/TeamMember?PageSize=' + page.pageSize+ '&PageNumber='+page.currentPage);
         //return this.http.get<ITeamMember[]>(environment.apiUrl + 'api/TeamMember');
     }
     getAllTeamMembers(): Observable<ITeamMember[]> {
-      debugger;
       return this.http.get<ITeamMember[]>(environment.apiUrl + 'api/TeamMember/All');
     }
 

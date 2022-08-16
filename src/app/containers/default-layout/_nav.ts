@@ -2,13 +2,10 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Base de Activos',
+    name: 'Inicio',
     url: '/dashboard',
     iconComponent: { name: 'cil-home' },
-    badge: {
-      color: 'info',
-      text: 'Nuevo'
-    }
+    
   },
   {
     title: true,
@@ -20,14 +17,14 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-people' }
   },
   {
-    name: 'Chapter Area Lead',
-    url: '/mantenimientos/chapterarealead',
-    iconComponent: { name: 'cil-pencil' }
-  },
-  {
     name: 'Chapter Lead',
     url: '/mantenimientos/chapterlead',
     iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Chapter Area Lead',
+    url: '/mantenimientos/chapterarealead',
+    iconComponent: { name: 'cil-pencil' }
   },
   {
     name: 'Application',
@@ -35,14 +32,15 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-code' }
   },
   {
+    name: 'Squad',
+    url: '/mantenimientos/squad',
+    iconComponent: { name: 'cil-cursor' }
+  
+  },
+  {
     name: 'Tribe',
     url: '/mantenimientos/tribe',
     iconComponent: { name: 'cil-notes' }
-  },
-  {
-    name: 'Squad',
-    url: '/mantenimientos/squad',
-    iconComponent: { name: 'cil-check' }
   },
   {
     title: true,
@@ -53,28 +51,20 @@ export const navItems: INavData[] = [
     url: '/reportes/baseactivos',
     iconComponent: { name: 'cil-file' }
   },
-  
   {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
-      },
-      {
-        name: 'Register',
-        url: '/register'
-      },
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
-      }
-    ]
+    title: true,
+    name: 'Configuración'
+  },{
+    name: 'Rol',
+    url: '/configuracion/rol',
+    iconComponent: { name: 'cil-star' }
   },
+  {
+    name: 'Usuario',
+    url: '/configuracion/usuario',
+    iconComponent: { name: 'cil-user' }
+
+  },
+
+  
 ];

@@ -4,29 +4,30 @@
   class="d-print-none sidebar sidebar-fixed"
   id="sidebar"
   visible
+  style="background-color: #184EA9"
 >
   <c-sidebar-brand
     [brandFull]="{
       src: 'assets/koodi.png',
       width: 130,
       height: 100,
-      alt: 'CoreUI Logo'
+      alt: 'Koodi Logo'
     }"
     [brandNarrow]="{
-      src: 'assets/img/brand/coreui-signet-white.svg',
-      width: 46,
-      height: 46,
-      alt: 'CoreUI Logo'
+      src: 'assets/koodi.png',
+      width: 30,
+      height: 30,
+      alt: 'Koodi Logo'
     }"
-    routerLink="./"
+    routerLink="./dashboard"
   >
-  </c-sidebar-brand>
-    <perfect-scrollbar [config]="perfectScrollbarConfig">
+  </c-sidebar-brand >
+    <perfect-scrollbar  style="background-color: #184EA9;font-weight: 500" [config]="perfectScrollbarConfig">
   <!--  [perfectScrollbar]="perfectScrollbarConfig"-->
-  <c-sidebar-nav
+  <c-sidebar-nav style="background-color: #184EA9"
     [navItems]="navItems"
   >
-  </c-sidebar-nav>
+  </c-sidebar-nav> 
     </perfect-scrollbar>
   <c-sidebar-toggler
     *ngIf="!sidebar.narrow"
@@ -36,7 +37,7 @@
 </c-sidebar>
 
 <!--main-->
-<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" style="color: #0004A6">
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" style="color: #184EA9">
   <!--app-header-->
   <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-default-header>
   <!--app-body-->

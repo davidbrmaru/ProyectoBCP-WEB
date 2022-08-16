@@ -1,4 +1,5 @@
-<div class="fade-in">
+
+<div class="fade-in" >
     <c-card class="mb-4">
       <c-card-header>
         Chapter Leads
@@ -11,13 +12,39 @@
                     (click)="openModalNewEdit(templateNewEdit)">
                     Nuevo 
             </button>
-            <button cButton
-                    class="me-1 btn btn-secondary">
-                    Exportar
+            <button cButton style="background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
+                    (click)="exportar()">
+                    <img src="assets/excel.png" width="20" height="20" alt="excel" > 
+                     Exportar
             </button>
           </c-col>
         </c-row>
-        
+
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Codigo Matricula</th>
+                <th>Nombres</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Nombre Chapter</th>
+                <th>id Chapter Area Leader</th>
+                <th>Fecha de Ingreso</th>
+              </tr>
+              <tr *ngFor="let item of excelList">
+                <td>{{item.codMatricula}}</td>
+                <td>{{item.nombres}}</td>
+                <td>{{item.apellidoPaterno}}</td>
+                <td>{{item.apellidoMaterno}}</td>
+                <td>{{item.nombreChapter}}</td>
+                <td>{{item.idChapterAreaLeader}}</td>
+                <td>{{item.fecIngreso}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
+
         <c-row>
           <c-col>
             <div style="overflow-x:auto;">
@@ -37,6 +64,15 @@
                                (page)='setPage($event)'
                                [messages]="{emptyMessage: 'No hay datos disponibles.',totalMessage: 'Chapter Leads encontrados.'}">
 
+                  
+                  <ngx-datatable-column name="Acciones">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div>
+                        <img src="assets/editar.png" width="25" height="25" (click)="openModalNewEdit(templateNewEdit, row);">
+                        <img src="assets/eliminar.png" width="25" height="25" (click)="openModalDelete(templateDelete, row);">
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column name="Matricula">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.codMatricula}}
@@ -63,17 +99,24 @@
                       {{row.nombreChapter}}
                     </ng-template>
                   </ngx-datatable-column>
+                  <ngx-datatable-column name="Total Team Members">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.totalTeamMember}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Members BCP">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.totalTeamMemberBCP}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Members Proveedor">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.totalTeamMemberProveedor}}
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column name="Fecha Ingreso">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{row.fecIngreso}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                  <ngx-datatable-column name="Acciones">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      <div>
-                        <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
-                        <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
-                      </div>
                     </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>
@@ -84,10 +127,10 @@
       </c-card-body>
     </c-card>
   
-    <ng-template #templateNewEdit>
-      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterLead(registerForm)" novalidate>
+    <ng-template #templateNewEdit >
+      <form  cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarChapterLead(registerForm)" novalidate>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">{{NewEdit}} Chapter Lead</h4>
+            <h4 class="modal-title pull-left"  style="color: #00085C" >{{NewEdit}} Chapter Lead</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -96,16 +139,16 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="matricula">Matricula</label>
+                <label cLabel for="matricula" style="color: #002277" >Matrícula</label>
                 <input class="form-control" id="matricula" type="text" [(ngModel)]="chapterLead.codMatricula" name="codMatricula" #codMatricula="ngModel" required />
                 <div *ngIf="codMatricula.invalid && (codMatricula.dirty || codMatricula.touched)" class="alert">
-                  <div *ngIf="codMatricula.errors?.['required']">codMatricula es obligatorio.</div>
+                  <div *ngIf="codMatricula.errors?.['required']">Matrícula es obligatorio.</div>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="ChapterAreaLeader">Chapter Area Lead</label>
+                <label cLabel for="ChapterAreaLeader" style="color: #002277" >Chapter Area Lead</label>
                 <select class="form-select" id="ChapterAreaLeader" [(ngModel)]="chapterLead.idChapterAreaLeader" name="idChapterAreaLeader" #idChapterAreaLeader="ngModel" required>
                   <option value={{chapterAreaLead.id}} *ngFor="let chapterAreaLead of chapterAreaLeadList">{{chapterAreaLead.nombres + ' '+ chapterAreaLead.apellidoPaterno}}</option>
                 </select>
@@ -118,7 +161,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombre">Nombre</label>
+                <label cLabel for="nombre" style="color: #002277">Nombre</label>
                 <input class="form-control" id="nombre" type="text" [(ngModel)]="chapterLead.nombres" name="nombre" #nombre="ngModel" required />
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
                   <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
@@ -127,7 +170,7 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="apellidoPaterno">Apellido Paterno</label>
+                <label cLabel for="apellidoPaterno" style="color: #002277">Apellido Paterno</label>
                 <input class="form-control" id="apellidoPaterno" type="text" [(ngModel)]="chapterLead.apellidoPaterno" name="apellidoPaterno" #apellidoPaterno="ngModel" required />
                 <div *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)" class="alert">
                   <div *ngIf="apellidoPaterno.errors?.['required']">Apellido paterno es obligatorio.</div>
@@ -138,7 +181,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="apellidoMaterno">Apellido Materno</label>
+                <label cLabel for="apellidoMaterno" style="color: #002277">Apellido Materno</label>
                 <input class="form-control" id="apellidoMaterno" type="text" [(ngModel)]="chapterLead.apellidoMaterno" name="apellidoMaterno" #apellidoMaterno="ngModel" required />
                 <div *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)" class="alert">
                   <div *ngIf="apellidoMaterno.errors?.['required']">Apellido materno es obligatorio.</div>
@@ -147,7 +190,7 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombreChapter">Nombre Chapter</label>
+                <label cLabel for="nombreChapter" style="color: #002277">Nombre Chapter</label>
                 <input class="form-control" id="nombreChapter" type="text" [(ngModel)]="chapterLead.nombreChapter" name="nombreChapter" #nombreChapter="ngModel" required />
                 <div *ngIf="nombreChapter.invalid && (nombreChapter.dirty || nombreChapter.touched)" class="alert">
                   <div *ngIf="nombreChapter.errors?.['required']">Nombre Chapter es obligatorio.</div>
@@ -158,7 +201,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+            <button type="submit" class="btn btn-primary" style="  justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
+
         </div>
       </form>
     </ng-template>

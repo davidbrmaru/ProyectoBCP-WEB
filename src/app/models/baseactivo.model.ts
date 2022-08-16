@@ -1,10 +1,11 @@
 export class IBaseActivo {
-    id:string;
+    idUser:string;
+    matricula:string;
     applications : IActivo[];
 }
 
 export class IActivo{
-    id : string;
+    idApplication : string;
     porcentaje: number;
     comentario: string;
 }
@@ -21,23 +22,23 @@ export class IBaseActivosResponse{
 }
 
 export class IBaseActivos{
-    nombreCal: string;
-    matriculaChapter: string;
-    chapterLeader: string;
-    tipo: string;
+    nombre_cal: string;
+    mat_chapter: string;
+    chapter_leader: string;
+    tipo_preper: string;
     empresa: string;
     matricula: string;
-    apellidoPaterno: string;
-    apellidoMaterno: string;
+    apellido_paterno: string;
+    apellido_materno: string;
     nombre: string;
-    rol: string;
-    rolInsourcing: string;
+    sq_rol: string;
+    rol_insourcing: string;
     especialidad: string;
-    tribuCoe: string;
+    tribu: string;
     squad: string;
-    codAppAsignado: string;
-    porcentajeAsignacion: string;
+    codigo_app_asignado: string;
+    porcentaje_asignado: string;
     bb: string;
     chapter: string;
-    comentarios: string;
+    comentario: string;
 }

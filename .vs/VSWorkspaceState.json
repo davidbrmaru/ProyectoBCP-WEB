@@ -6,8 +6,11 @@
     "\\src\\app\\models",
     "\\src\\app\\services",
     "\\src\\app\\views",
+    "\\src\\app\\views\\base",
+    "\\src\\app\\views\\forms",
+    "\\src\\app\\views\\forms\\form-controls",
     "\\src\\app\\views\\mantenimientos"
   ],
-  "SelectedNode": "\\src\\app\\views\\mantenimientos\\teammember.component.ts",
+  "SelectedNode": "\\src\\app\\models\\usuario.model.ts",
   "PreviewInSolutionExplorer": false
 }

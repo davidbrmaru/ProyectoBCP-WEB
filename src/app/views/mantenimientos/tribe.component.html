@@ -1,4 +1,4 @@
-<div class="fade-in">
+<div class="fade-in" >
     <c-card class="mb-4">
       <c-card-header>
         Tribus
@@ -11,13 +11,29 @@
                     (click)="openModalNewEdit(templateNewEdit)">
                     Nuevo 
             </button>
-            <button cButton
-                    class="me-1 btn btn-secondary">
-                    Exportar
+            <button cButton style="background-color: #008F53 ; border-color:#008F53" class="me-1 btn btn-default"  
+                    (click)="exportar()">
+                    <img src="assets/excel.png" width="20" height="20" alt="excel" > 
+                     Exportar
             </button>
           </c-col>
         </c-row>
-        
+        <c-row class="d-none">
+          <c-col>
+            <table id="excel-table">
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Fecha de Ingreso</th>
+              </tr>
+              <tr *ngFor="let item of excelList">
+                <td>{{item.nombre}}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.fecIngreso}}</td>
+              </tr>
+            </table>
+          </c-col>
+        </c-row>
         <c-row>
           <c-col>
             <div style="overflow-x:auto;">
@@ -58,8 +74,8 @@
                   <ngx-datatable-column name="Acciones">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <div>
-                        <label (click)="openModalNewEdit(templateNewEdit, row);">Editar</label>
-                        <label (click)="openModalDelete(templateDelete, row);">Eliminar</label>
+                        <img src="assets/editar.png" width="25" height="25" (click)="openModalNewEdit(templateNewEdit, row);">
+                        <img src="assets/eliminar.png" width="25" height="25" (click)="openModalDelete(templateDelete, row);">
                     </div>
                     </ng-template>
                   </ngx-datatable-column>
@@ -71,10 +87,10 @@
       </c-card-body>
     </c-card>
   
-    <ng-template #templateNewEdit>
-      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate>
+    <ng-template #templateNewEdit >
+      <form cForm class="form" #registerForm="ngForm" (ngSubmit)="agregarTribe(registerForm)" novalidate >
         <div class="modal-header">
-            <h4 class="modal-title pull-left">{{NewEdit}} Tribu</h4>
+            <h4 class="modal-title pull-left" style="color: #00085C">{{NewEdit}} Tribu</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -83,7 +99,7 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="nombre">Nombre</label>
+                <label cLabel for="nombre" style="color: #002277">Nombre</label>
                 <input class="form-control" id="nombre" type="text" [(ngModel)]="tribe.nombre" name="nombre" #nombre="ngModel" required/>
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
                   <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>   
@@ -92,7 +108,7 @@
             </div>
             <div class="col-6">
               <div class="mb-1">
-                <label cLabel for="tipo">Tipo</label>
+                <label cLabel for="tipo" style="color: #002277">Tipo</label>
                 <select class="form-select" id="tipo" [(ngModel)]="tribe.tipo" name="tipo" #tipo="ngModel" required>
                   <option value="TRIBU">TRIBU</option>
                   <option value="COE">COE</option>
@@ -106,13 +122,15 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" (click)="cerrarModal()">Cerrar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+            <button type="submit" class="btn btn-primary" style=" justify-content: center; background-color: #FA7F2C; 
+            border: 2px solid #FA7F2C; color: white;text-align: center;border-radius: 12px; padding: 4px 45px;" [disabled]="!registerForm.valid" >Registrar</button>
+
         </div>
       </form>
     </ng-template>
   
-    <ng-template #templateDelete>
-      <div class="modal-header">
+    <ng-template #templateDelete >
+      <div class="modal-header" >
           <h4 class="modal-title pull-left">Eliminar Tribu</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarModal()">
             <span aria-hidden="true">×</span>

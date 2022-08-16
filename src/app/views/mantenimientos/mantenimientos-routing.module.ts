@@ -8,6 +8,7 @@ import { ApplicationComponent } from './application.component';
 import { TribeComponent } from './tribe.component';
 import { SquadComponent } from './squad.component';
 
+
 const routes: Routes = [
   {
     path: '',

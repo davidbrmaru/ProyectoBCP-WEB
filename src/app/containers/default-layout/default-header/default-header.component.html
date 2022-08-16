@@ -15,7 +15,8 @@
     <c-header-nav class="d-none d-lg-flex me-auto">
       <c-nav-item>
         <a cNavLink routerLink="/dashboard" routerLinkActive="active">
-          Inicio
+          <img src="assets/Base de activos.png" width="290" height="45"
+          alt="bda">
         </a>
       </c-nav-item>
       
@@ -23,16 +24,19 @@
     </c-header-nav>
 
    
-      
+    <h6 >Hola Miluska!</h6>
     <c-header-nav class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+      
     </c-header-nav>
-
+  
   </c-container>
+ 
   <c-header-divider></c-header-divider>
   <c-container [fluid]="true">
     <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
   </c-container>
+
 </ng-container>
 <!--</c-header>-->
 
@@ -49,25 +53,25 @@
         cTextColor="primary"
         shape="rounded-1"
         size="md"
-        src="./assets/img/avatars/8.jpg"
+        src="./assets/img/avatars/miluska.jpg"
         status="success"
       >
       </c-avatar>
     </button>
-    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+    <ul cDropdownMenu class="pt-0 pr-5 w-auto" >
       <li>
        
         <h6 cDropdownHeader class="bg-light fw-semibold py-2">Configuración</h6>
       </li>
       <li></li>
       <li>
-        <a routerLink="./" cDropdownItem>
+        <a routerLink="./dashboard" cDropdownItem>
           <svg cIcon class="me-2" name="cilUser"></svg>
           Perfil
         </a>
       </li>
       <li>
-        <a routerLink="./" cDropdownItem>
+        <a routerLink="./dashboard" cDropdownItem>
           <svg cIcon class="me-2" name="cilSettings"></svg>
           Configuración
         </a>
@@ -77,7 +81,7 @@
         <hr cDropdownDivider/>
       </li>
       <li>
-        <a routerLink="./" cDropdownItem>
+        <a (click)="doLogOut()" cDropdownItem>
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
           Cerrar Sesión
         </a>

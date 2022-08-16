@@ -11,6 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'application.component.html',
@@ -20,6 +21,7 @@ export class ApplicationComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   applicationList : IApplication[] = [];
+  excelList : IApplication[] = [];
   squadList : ISquad[] = [];
   nombre :string;
   application : IApplication;
@@ -27,6 +29,7 @@ export class ApplicationComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'Application.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -56,6 +59,21 @@ export class ApplicationComponent implements OnInit {
     this.modalService.show(template);
   }
 
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
+  }
+
   cargarSquads() {
     this.loadingIndicator = true;
     this.squadService.getAllSquads().subscribe(
@@ -75,7 +93,6 @@ export class ApplicationComponent implements OnInit {
 
   agregarApplication(a: NgForm){ 
     if(this.NewEdit == "Nuevo"){   
-      this.application.usuarioIngresa = "S61121";
       this.applicationService.saveApplication(this.application).subscribe(
         res => {
           this.cerrarModal();
@@ -93,7 +110,6 @@ export class ApplicationComponent implements OnInit {
   }
 
   editarApplication(item: IApplication){
-    this.application.usuarioActualiza = "S61121";
     this.applicationService.updateApplication(item).subscribe(
       res => {
         this.cerrarModal();
@@ -111,7 +127,6 @@ export class ApplicationComponent implements OnInit {
   }
 
   eliminarApplication(){
-    this.application.usuarioActualiza = "T16587";
     this.applicationService.deleteApplication(this.application).subscribe(
       res => {
         this.cerrarModal();
@@ -136,9 +151,23 @@ export class ApplicationComponent implements OnInit {
         this.page.currentPage = this.page.currentPage - 1;
         this.applicationList = res.applications;
         this.page.totalCount = res.totalRows;
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err =>{
+        this.loadingIndicator = false;
+      }
+    )
+  }
+
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.applicationService.getAllApplications().subscribe(
+      res => {
+        this.excelList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
         this.loadingIndicator = false;
       }
     )

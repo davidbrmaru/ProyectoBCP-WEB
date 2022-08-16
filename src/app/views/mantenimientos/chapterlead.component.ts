@@ -11,6 +11,7 @@ import { BasicComponent } from 'src/app/components/modal/basic/basic.component';
 import { NgForm } from '@angular/forms';
 import { IChapterLead } from 'src/app/models/chapterlead.model';
 import { IChapterAreaLead } from 'src/app/models/chapterarealead.model';
+import * as XLSX from 'xlsx';
 
 @Component({
    templateUrl: 'chapterlead.component.html',
@@ -20,6 +21,7 @@ export class ChapterLeadComponent implements OnInit {
   loadingIndicator: boolean;
   reorderable = true;
   chapterLeadList: IChapterLead[] = [];
+  excelList : IChapterLead[] = [];
   chapterAreaLeadList: IChapterAreaLead[] = [];
   nombre :string;
   chapterLead : IChapterLead;
@@ -27,6 +29,7 @@ export class ChapterLeadComponent implements OnInit {
   NewEdit:string;
   @ViewChild('registerForm') registerForm: NgForm;
 
+  fileName= 'ChapterLead.xlsx';
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private renderer: Renderer2,private modalService: BsModalService,
@@ -56,13 +59,27 @@ export class ChapterLeadComponent implements OnInit {
     this.modalService.show(template);
   }
 
+  exportar(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
+  }
+
   cerrarModal(){
     this.modalService.hide();
   }
 
   agregarChapterLead(a: NgForm){ 
     if (this.NewEdit == "Nuevo") {
-      this.chapterLead.usuarioIngresa = "S61121";
       this.chapterLeadService.saveChapterLead(this.chapterLead).subscribe(
         res => {
           this.cerrarModal();
@@ -80,7 +97,6 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   editarChapterLead(item: IChapterLead) {
-    this.chapterLead.usuarioActualiza = "S61121";
     this.chapterLeadService.updateChapterLead(item).subscribe(
       res => {
         this.cerrarModal();
@@ -93,13 +109,11 @@ export class ChapterLeadComponent implements OnInit {
   }
 
   openModalDelete(template: TemplateRef<any>, chapterLead: IChapterLead){
-    debugger;
     this.chapterLead = chapterLead; 
     this.modalService.show(template);
   }
 
   eliminarChapterLead(){
-    this.chapterLead.usuarioActualiza = "S61121";
     this.chapterLeadService.deleteChapterLead(this.chapterLead).subscribe(
       res => {
         this.cerrarModal();
@@ -119,11 +133,16 @@ export class ChapterLeadComponent implements OnInit {
   cargarChapterLeads(page: Page){
     this.loadingIndicator = true;
     this.chapterLeadService.getChapterLeads(this.page).subscribe(
-      res => {
-        debugger;
+      res => {  
         this.page.currentPage = this.page.currentPage - 1;
         this.chapterLeadList = res.chapterLeaders;
         this.page.totalCount = res.totalRows;
+        this.chapterLeadList.forEach((item, index) => {
+          this.chapterLeadList[index].totalTeamMember = item.teamMembers.length;
+          this.chapterLeadList[index].totalTeamMemberBCP= item.teamMembers.filter(x => x.tipoProveedor.includes("ORGÁNICO")).length;
+          this.chapterLeadList[index].totalTeamMemberProveedor = item.teamMembers.filter(x => x.tipoProveedor.includes("PROVEEDOR")).length;
+        })
+        this.cargarExcelList();
         this.loadingIndicator = false;
       },
       err =>{
@@ -131,7 +150,18 @@ export class ChapterLeadComponent implements OnInit {
       }
     )
   }
-
+  cargarExcelList() {
+    this.loadingIndicator = true;
+    this.chapterLeadService.getAllChapterLeads().subscribe(
+      res => {
+        this.excelList = res;
+        this.loadingIndicator = false;
+      },
+      err => {
+        this.loadingIndicator = false;
+      }
+    )
+  }
   cargarChapterAreaLeads() {
     this.loadingIndicator = true;
     this.chapterAreaLeadService.getAllChapterAreaLeads().subscribe(

@@ -1,13 +1,15 @@
-<c-row>
+
+<c-row align="center">
   <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
     <c-widget-stat-d
       [color]="widget.color ?? ''"
       [style]="widget.capBg ?? null"
       [values]="widget.values"
       class="mb-4"
+      
     >
       <svg [name]="widget.icon" cIcon class="my-4 text-white" height="52"></svg>
-      <ng-container *ngIf="withCharts">
+      <ng-container *ngIf="withCharts"  >
         <c-chart
           #chart="cChart"
           [data]="widget.data"
@@ -20,3 +22,4 @@
     </c-widget-stat-d>
   </c-col>
 </c-row>
+
